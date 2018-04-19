@@ -1,36 +1,29 @@
-package com.jiangzhichao.controller.admin;
+package com.jiangzhichao.controller.teacher;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jiangzhichao.enumm.LoginType;
-import com.jiangzhichao.service.admin.AdminLoginService;
 import com.jiangzhichao.shiro.CustomizedToken;
 
 @Controller
 @RequestMapping("/login")
 @Scope("prototype")
-public class AdminLoginController {
+public class TeacherLoginController {
 
-	@RequestMapping("/adminLogin")
+	@RequestMapping("/teacherLogin")
 	@ResponseBody
-	public Map<String,Object> adminLogin(String ausername,String apassword) {
+	public Map<String,Object> teacherLogin(String tno,String tpassword) {
 		Map<String,Object> map = new HashMap<>();
-		//AdminDO admin = adminLoginService.queryAdmin(ausername, apassword);
-		CustomizedToken  token = new CustomizedToken(ausername, apassword, LoginType.ADMIN.toString());
+		CustomizedToken  token = new CustomizedToken(tno, tpassword, LoginType.TEACHER.toString());
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
@@ -54,5 +47,4 @@ public class AdminLoginController {
 		map.put("result", true);
 		return map;
 	}
-
 }

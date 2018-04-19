@@ -8,8 +8,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -28,19 +26,17 @@ public class AdminRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+    	System.out.println("Admin 授权器======");
         String username = (String)super.getAvailablePrincipal(principalCollection);
+        System.out.println(username+"=======");
         if(null != username){
-            //从数据库中获取当前登录用户的详细信息
-        	AdminDO adminDO = adminLoginMapper.selectByUsername(username);
-            if(adminDO == null){
-                throw new AuthorizationException();
-            }
+        	String role = loginType();
             //为当前用户设置角色和权限
             SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
             List<String> roleList = new ArrayList<String>();
-            roleList.add(username);		//暂时这样设置
+            roleList.add(role);		//暂时这样设置
             List<String> permissionList = new ArrayList<String>();
-            permissionList.add(username);	//暂时这样设置
+            permissionList.add(role);	//暂时这样设置
             simpleAuthorInfo.addRoles(roleList);
             simpleAuthorInfo.addStringPermissions(permissionList);
             return simpleAuthorInfo;
@@ -51,10 +47,10 @@ public class AdminRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+    	System.out.println("Admin 认证器=========");
+    	CustomizedToken token = (CustomizedToken) authenticationToken;
         AdminDO adminDO = adminLoginMapper.selectByUsername(token.getUsername());
         if (null != adminDO) {
-            token.setPassword(adminDO.getApassword().toCharArray());
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(adminDO.getAusername(),adminDO.getApassword(),getName());
             this.setSession("admin", adminDO);
             return authcInfo;
@@ -76,5 +72,27 @@ public class AdminRealm extends AuthorizingRealm {
                 session.setAttribute(key, value);
             }
         }
+    }
+    
+    private String loginType() {
+        Subject currentUser = SecurityUtils.getSubject();
+        if(null != currentUser){
+            Session session = currentUser.getSession();
+            if(null != session){
+            	Object object = session.getAttribute("admin");
+                if(null != object) {
+                	return "admin";
+                }
+                object = session.getAttribute("student");
+                if(null != object) {
+                	return "student";
+                }
+                object = session.getAttribute("teacher");
+                if(null != object) {
+                	return "teacher";
+                }
+            }
+        }
+        return null;
     }
 }

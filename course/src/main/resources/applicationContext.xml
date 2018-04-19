@@ -41,4 +41,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 						
 	<import resource="applicationContext-shiro.xml"/>
+	
+	<import resource="classpath:applicationContext-cache.xml"/>
 </beans>
