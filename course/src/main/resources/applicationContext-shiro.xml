@@ -19,7 +19,7 @@
 		<!-- 登录成功后要跳转的连接 -->
 		<property name="successUrl" value="/index.html" />
 		<!-- 没有权限返回的地址 （拒绝访问路径） -->
-		<property name="unauthorizedUrl" value="/meiyouquanxian" /><!-- 暂不设置 -->
+		<property name="unauthorizedUrl" value="/error/permission.html" />
 		<property name="filterChainDefinitions">
 			<value>
 				/admin/**=authc,roles[admin]

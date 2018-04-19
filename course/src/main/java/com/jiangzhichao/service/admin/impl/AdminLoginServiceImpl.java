@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jiangzhichao.dao.AdminDOMapper;
 import com.jiangzhichao.dao.AdminLoginMapper;
 import com.jiangzhichao.entity.AdminDO;
 import com.jiangzhichao.service.admin.AdminLoginService;

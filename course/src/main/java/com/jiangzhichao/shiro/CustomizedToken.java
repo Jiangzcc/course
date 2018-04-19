@@ -4,6 +4,10 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 
 public class CustomizedToken extends UsernamePasswordToken {
 
+	/**
+	 * 自定义Token
+	 */
+	private static final long serialVersionUID = -4553808608648123587L;
 	//登录类型，判断学生登录，教师登录还是管理员登录
 	private String loginType;
 
