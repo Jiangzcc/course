@@ -15,5 +15,7 @@ public interface AdminOpTeacherInfoService {
 	TeacherDO selectTeacherByTno(String tno);
 	
 	List<TeacherDO> selectAllTeacher();
+	
+	void importTeacher(List<TeacherDO> teachers);
 
 }

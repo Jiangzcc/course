@@ -165,4 +165,10 @@ public class TeacherDO {
     public void setTsex(String tsex) {
         this.tsex = tsex == null ? null : tsex.trim();
     }
+
+	@Override
+	public String toString() {
+		return "TeacherDO [tno=" + tno + ", tname=" + tname + ", tpassword=" + tpassword + ", ttitle=" + ttitle
+				+ ", tsex=" + tsex + "]";
+	}
 }

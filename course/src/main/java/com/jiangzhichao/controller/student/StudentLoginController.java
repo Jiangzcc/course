@@ -11,13 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.enumm.LoginType;
 import com.jiangzhichao.shiro.CustomizedToken;
 
 @Controller
 @RequestMapping("/login")
 @Scope("prototype")
-public class StudentLoginController {
+public class StudentLoginController extends BaseController{
 
 	@RequestMapping("/studentLogin")
 	@ResponseBody
@@ -27,18 +28,10 @@ public class StudentLoginController {
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
-		} 
-		/*catch (UnknownAccountException uae) {
-		} catch (IncorrectCredentialsException ice) {
-		} catch (LockedAccountException lae) {
-		} catch (ExcessiveAttemptsException eae) {
-		} */
-		catch (AuthenticationException ae) {
+		} catch (AuthenticationException ae) {
 			map.put("result", false);
 			return map;
-			//通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
 		}
-		//验证是否登录成功
 		if (!subject.isAuthenticated()) {
 			token.clear();
 			map.put("result", false);

@@ -42,4 +42,11 @@ public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService 
 		return teacherDoMapper.select();
 	}
 
+	@Override
+	public void importTeacher(List<TeacherDO> teachers) {
+		for (TeacherDO teacherDO : teachers) {
+			teacherDoMapper.insert(teacherDO);
+		}
+	}
+
 }

@@ -77,9 +77,14 @@
 					<div class="col-md-12">
 						<!-- Advanced Tables -->
 						<div class="panel panel-default">
-							<div style="text-align: right; padding: 15px 65px 0px 0px">
-								<button class="btn btn-warning" data-toggle="modal"
-									data-target="#myModal2">Add Teacher</button>
+							<div style="text-align: right; padding: 15px 15px 0px 0px">
+								<form action="" method="post" enctype="multipart/form-data" id="importTeacher">
+		                            <input type="file" name="file" accept="application/vnd.ms-excel" />
+		                            <button class="btn btn-default" onclick="importTeacher()">Import</button>
+                                	<button class="btn btn-default" onclick="javascript:window.open('/course/admin/exportTeacher','_blank')">Export</button>
+									<button class="btn btn-default" data-toggle="modal"
+										data-target="#myModal2">Add Teacher</button>
+								</form>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -382,6 +387,37 @@
 						}, 1550);
 					} else {
 						layer.msg('修改失败...', {
+							time : 1500
+						});
+					}
+				}
+			});
+		};
+		
+		function importTeacher() {
+			$('#importTeacher').ajaxSubmit(
+			//ajax方式提交表单  
+			{
+				url : '/course/admin/importTeacher',
+				type : 'post',
+				dataType : 'json',
+				beforeSubmit : function() {
+					layer.msg('正在上传...', {
+						time : 1500
+					});
+				},
+				success : function(data) {
+					/* var result = eval("(" + data + ")");
+					console.log(result); */
+					if (data.result) {
+						layer.msg('导入成功...', {
+							time : 1500
+						});
+						setTimeout(function() {
+							location.reload();
+						}, 1550);
+					} else {
+						layer.msg('导入失败...', {
 							time : 1500
 						});
 					}

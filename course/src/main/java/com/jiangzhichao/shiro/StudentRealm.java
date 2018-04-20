@@ -28,6 +28,7 @@ public class StudentRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+		System.out.println("Student ÈÏÖ¤Æ÷=========");
 		CustomizedToken token = (CustomizedToken) authenticationToken;
 		StudentDO studentDO = studentDOMapper.selectByPrimaryKey(token.getUsername());
 		if (null != studentDO) {

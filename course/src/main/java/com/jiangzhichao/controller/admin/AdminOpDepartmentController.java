@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.entity.DepartmentDO;
 import com.jiangzhichao.service.admin.AdminOpDepartmentService;
 
 @Controller
 @RequestMapping("/admin")
 @Scope("prototype")
-public class AdminOpDepartmentController {
+public class AdminOpDepartmentController extends BaseController{
 
 	@Autowired
 	private AdminOpDepartmentService adminOpDepartmentService;

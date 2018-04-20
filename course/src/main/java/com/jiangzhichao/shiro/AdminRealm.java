@@ -31,6 +31,7 @@ public class AdminRealm extends AuthorizingRealm {
         System.out.println(username+"=======");
         if(null != username){
         	String role = loginType();
+        	System.out.println(role);
             //为当前用户设置角色和权限
             SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
             List<String> roleList = new ArrayList<String>();
