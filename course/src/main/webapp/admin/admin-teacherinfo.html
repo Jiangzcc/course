@@ -79,12 +79,13 @@
 						<div class="panel panel-default">
 							<div style="text-align: right; padding: 15px 15px 0px 0px">
 								<form action="" method="post" enctype="multipart/form-data" id="importTeacher">
-		                            <input type="file" name="file" accept="application/vnd.ms-excel" />
+		                            <input type="file" name="file" style="width: 200px;" accept="application/vnd.ms-excel" />
 		                            <button class="btn btn-default" onclick="importTeacher()">Import</button>
                                 	<button class="btn btn-default" onclick="javascript:window.open('/course/admin/exportTeacher','_blank')">Export</button>
-									<button class="btn btn-default" data-toggle="modal"
-										data-target="#myModal2">Add Teacher</button>
 								</form>
+							</div>
+							<div style="text-align: right; padding: 15px 15px 0px 0px">
+								<button class="btn btn-default" data-toggle="modal" data-target="#myModal2">Add Teacher</button>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">

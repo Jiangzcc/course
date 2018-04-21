@@ -15,31 +15,49 @@ import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.enumm.LoginType;
 import com.jiangzhichao.shiro.CustomizedToken;
 
+/**
+ * 管理员登陆Controller
+ * 
+ * @author BornToWin
+ *
+ */
 @Controller
 @RequestMapping("/login")
 @Scope("prototype")
 public class AdminLoginController extends BaseController{
 
+	/**
+	 * 管理员登陆
+	 * @param ausername 账号
+	 * @param apassword 密码
+	 * @return
+	 */
 	@RequestMapping("/adminLogin")
 	@ResponseBody
 	public Map<String,Object> adminLogin(String ausername,String apassword) {
 		Map<String,Object> map = new HashMap<>();
+		//生成token、自定义登陆类型
 		CustomizedToken  token = new CustomizedToken(ausername, apassword, LoginType.ADMIN.toString());
+		//获取当前角色
 		Subject subject = SecurityUtils.getSubject();
-		
 		try {
+			//登陆验证
 			subject.login(token);
-		} /*catch (UnknownAccountException uae) {
+		} 
+		// 简单处理，不再做细化
+		/*catch (UnknownAccountException uae) {
 		} catch (IncorrectCredentialsException ice) {
 		} catch (LockedAccountException lae) {
 		} catch (ExcessiveAttemptsException eae) {
-		}*/ catch (AuthenticationException ae) {
+		}*/ 
+		catch (AuthenticationException ae) {
 			map.put("result", false);
 			return map;
 			//通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
 		}
 		
-		//验证是否登录成功
+		//验证是否登录成功，此判断进不去，因为要和subject.isRemembered()结合使用。
+		//但是我就是不删
 		if (!subject.isAuthenticated()) {
 			token.clear();
 			map.put("result", false);

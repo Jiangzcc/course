@@ -17,28 +17,48 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jiangzhichao.dao.AdminLoginMapper;
+import com.jiangzhichao.dao.RoleDOMapper;
+import com.jiangzhichao.dao.SubjectRoleDOMapper;
 import com.jiangzhichao.entity.AdminDO;
+import com.jiangzhichao.entity.RoleDO;
+import com.jiangzhichao.entity.SubjectRoleDOKey;
+import com.jiangzhichao.util.SessionUtil;
 
 public class AdminRealm extends AuthorizingRealm {
 	
 	@Autowired
 	private AdminLoginMapper adminLoginMapper;
+	
+	@Autowired
+	private SubjectRoleDOMapper subjectRoleDOMapper;
 
+	@Autowired
+	private RoleDOMapper roleDOMapper;
+	
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-    	System.out.println("Admin 授权器======");
+    	//获取用户名
         String username = (String)super.getAvailablePrincipal(principalCollection);
-        System.out.println(username+"=======");
         if(null != username){
-        	String role = loginType();
-        	System.out.println(role);
-            //为当前用户设置角色和权限
+        	//获取角色名--过时
+        	//String role = loginType();
+        	
+        	//为当前用户设置角色和权限
+        	List<SubjectRoleDOKey> list = subjectRoleDOMapper.selectByNo(username);
+        	List<String> roleList = new ArrayList<String>();
+        	List<String> permissionList = new ArrayList<String>();
+        	//循环赋值
+        	for (SubjectRoleDOKey subjectRoleDOKey : list) {
+				RoleDO role = roleDOMapper.selectByPrimaryKey(subjectRoleDOKey.getRoleno());
+				//添加角色
+				roleList.add(role.getRolename());
+				//添加权限
+				permissionList.add(role.getRolename()); //暂时
+			}
             SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
-            List<String> roleList = new ArrayList<String>();
-            roleList.add(role);		//暂时这样设置
-            List<String> permissionList = new ArrayList<String>();
-            permissionList.add(role);	//暂时这样设置
+            //设置角色
             simpleAuthorInfo.addRoles(roleList);
+            //设置权限
             simpleAuthorInfo.addStringPermissions(permissionList);
             return simpleAuthorInfo;
         } else {
@@ -48,36 +68,28 @@ public class AdminRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-    	System.out.println("Admin 认证器=========");
     	CustomizedToken token = (CustomizedToken) authenticationToken;
+    	//获取管理员信息
         AdminDO adminDO = adminLoginMapper.selectByUsername(token.getUsername());
+        //该管理员存在
         if (null != adminDO) {
+        	//认证
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(adminDO.getAusername(),adminDO.getApassword(),getName());
-            this.setSession("admin", adminDO);
+            //存入session
+            SessionUtil.setSession("admin", adminDO);
             return authcInfo;
         } else {
             return null;
         }
         //没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
     }
-
-    /**
-     * 将一些数据放到ShiroSession中,以便于其它地方使用
-     * 比如Controller,使用时直接用HttpSession.getAttribute(key)就可以取到
-     */
-    private void setSession(String key, Object value){
-        Subject currentUser = SecurityUtils.getSubject();
-        if(null != currentUser){
-            Session session = currentUser.getSession();
-            if(null != session){
-                session.setAttribute(key, value);
-            }
-        }
-    }
     
-    private String loginType() {
+    //过时、测试时用
+    @SuppressWarnings("unused")
+	private String loginType() {
         Subject currentUser = SecurityUtils.getSubject();
         if(null != currentUser){
+        	//通过session了解当前用户角色
             Session session = currentUser.getSession();
             if(null != session){
             	Object object = session.getAttribute("admin");

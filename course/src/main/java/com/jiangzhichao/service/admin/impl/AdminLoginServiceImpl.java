@@ -18,7 +18,9 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	@Override
 	public AdminDO queryAdmin(String ausername, String apassword) {
 		AdminDO adminDO = adminLoginMapper.selectByUsername(ausername);
+		//管理员用户名存在
 		if(null != adminDO) {
+			//密码正确
 			if(adminDO.getApassword().equals(apassword)) {
 				return adminDO;
 			}

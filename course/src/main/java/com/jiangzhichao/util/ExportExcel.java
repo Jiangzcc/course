@@ -23,7 +23,14 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.util.CellRangeAddress;
 
+/**
+ * 导出Excel工具类
+ * 
+ * @author BornToWin
+ *
+ */
 public class ExportExcel {
+	
 	/**
 	 * 功能: 导出为Excel工作簿
 	 * 参数: sheetName[工作簿中的一张工作表的名称]

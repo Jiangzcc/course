@@ -30,7 +30,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-<!-- 		<table tableName="admin" domainObjectName="AdminDO"
+ 		<table tableName="admin" domainObjectName="AdminDO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
@@ -40,7 +40,7 @@
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
-		</table> -->
+		</table> 
 		
 		<table tableName="course" domainObjectName="CourseDO"
 			enableCountByExample="false" enableUpdateByExample="false"
@@ -61,6 +61,18 @@
 		</table>
 		
 		<table tableName="stucourse" domainObjectName="StuCourseDO"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table tableName="role" domainObjectName="RoleDO"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table tableName="subjectrole" domainObjectName="SubjectRoleDO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

@@ -22,16 +22,15 @@
 		<property name="unauthorizedUrl" value="/error/permission.html" />
 		<property name="filterChainDefinitions">
 			<value>
-				<!-- /admin/**=authc,roles[admin]
+				/admin/**=authc,roles[admin]
 				/teacher/**=authc,roles[teacher]
-				/student/**=authc,roles[student] -->
+				/student/**=authc,roles[student] 
 				/**=anon
 			</value>
 		</property>
 	</bean>
 	<!-- securityManager -->
-	<bean id="securityManager"
-		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!--调用自定义realm -->
 		<property name="authenticator" ref="authenticator"></property>
 		<!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
@@ -50,12 +49,10 @@
 		<!-- 对认证数据、授权数据 哪些进行缓存 缓存区的名字就是ehcache.xml 自定义cache的name -->
 		<property name="authorizationCacheName" value="bos"></property>
 	</bean>
-	<bean id="studentRealm"
-		class="com.jiangzhichao.shiro.StudentRealm">
+	<bean id="studentRealm" class="com.jiangzhichao.shiro.StudentRealm">
 		<property name="authorizationCacheName" value="bos"></property>
 	</bean>
-	<bean id="teacherRealm"
-		class="com.jiangzhichao.shiro.TeacherRealm">
+	<bean id="teacherRealm" class="com.jiangzhichao.shiro.TeacherRealm">
 		<property name="authorizationCacheName" value="bos"></property>
 	</bean>
 
@@ -64,8 +61,7 @@
 		class="com.jiangzhichao.shiro.CustomizedModularRealmAuthenticator">
 		<!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 -->
 		<property name="authenticationStrategy">
-			<bean
-				class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
+			<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
 		</property>
 	</bean>
 
@@ -73,13 +69,11 @@
 		class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
 	<!-- AOP式方法级权限检查 -->
-	<bean
-		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />
 	</bean>
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 

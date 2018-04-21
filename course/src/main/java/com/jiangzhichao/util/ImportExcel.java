@@ -18,6 +18,12 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+/**
+ * 导入Excel工具类==已针对本项目做相应修改
+ * 
+ * @author BornToWin
+ *
+ */
 public class ImportExcel{
 
 	//正则表达式 用于匹配属性的第一个字母

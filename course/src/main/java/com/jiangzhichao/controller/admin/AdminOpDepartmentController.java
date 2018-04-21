@@ -14,6 +14,12 @@ import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.entity.DepartmentDO;
 import com.jiangzhichao.service.admin.AdminOpDepartmentService;
 
+/**
+ * 管理员操作专业信息Controller
+ * 
+ * @author BornToWin
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 @Scope("prototype")

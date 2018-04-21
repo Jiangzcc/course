@@ -15,6 +15,12 @@ import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.enumm.LoginType;
 import com.jiangzhichao.shiro.CustomizedToken;
 
+/**
+ * 教师登陆Controller--类似AdminLoginController，不过多注释
+ * 
+ * @author BornToWin
+ *
+ */
 @Controller
 @RequestMapping("/login")
 @Scope("prototype")

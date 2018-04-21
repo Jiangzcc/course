@@ -1,5 +1,11 @@
 package com.jiangzhichao.enumm;
 
+/**
+ * µÇÂ½ÀàÐÍ
+ * 
+ * @author BornToWin
+ *
+ */
 public enum LoginType {
 	STUDENT("Student"),  ADMIN("Admin"), TEACHER("Teacher");
 

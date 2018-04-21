@@ -24,7 +24,9 @@ public class AdminOpDepartmentServiceImpl implements AdminOpDepartmentService {
 
 	@Override
 	public int deleteDepartment(String dno) {
-		return departmentDOMapper.deleteByPrimaryKey(dno);
+		//删除前先判断此专业下是否有学生
+		int i = departmentDOMapper.deleteByPrimaryKey(dno);
+		return i;
 	}
 
 	@Override

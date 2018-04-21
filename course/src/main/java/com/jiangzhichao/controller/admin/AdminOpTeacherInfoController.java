@@ -25,6 +25,12 @@ import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
 import com.jiangzhichao.util.ExportExcel;
 import com.jiangzhichao.util.ImportExcel;
 
+/**
+ * 管理员操作教师信息Controller
+ * 
+ * @author BornToWin
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 @Scope("prototype")
@@ -88,30 +94,54 @@ public class AdminOpTeacherInfoController extends BaseController{
 		return map;
 	}
 
+	/**
+	 * 导入教师信息
+	 * 
+	 * @param file	只能是xls文件，否则会失败，暂时只考虑正常情况，不额外处理，上传后不删除。
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("importTeacher")
 	@ResponseBody
 	public Map<String,Object> importTeacher(MultipartFile file,HttpServletRequest request) throws Exception{
+		//获取文件名
 		String filename = file.getOriginalFilename();
+		//获取文件存储绝对路径
 		String realPath = request.getSession().getServletContext().getRealPath("/temporary");
 		String path = realPath + "//" + filename;
 		File f = new File(realPath,filename);
+		//上传文件
 		file.transferTo(f);
 		int startRow=2;
 		int endRow=0;
+		//获取文件中详细信息
 		@SuppressWarnings("unchecked")
 		List<TeacherDO> teacherList = (List<TeacherDO>) ImportExcel.importExcel(path, startRow, endRow, TeacherDO.class);
+		//导入教师信息到DB
 		adminOpTeacherInfoService.importTeacher(teacherList);
 		Map<String,Object> map = new HashMap<>();
 		map.put("result", true);
 		return map;
 	}
 
+	/**
+	 * 导出教师信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping("exportTeacher")
 	public void exportTeacher(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		//查询所有教师信息
 		List<TeacherDO> list = adminOpTeacherInfoService.selectAllTeacher();
+		//使用当前时间作为文件名
 		String filename = System.currentTimeMillis() + ".xls";
+		//获取路径
 		String realPath = request.getSession().getServletContext().getRealPath("/temporary");
 		String path = realPath + "//" + filename;
+		//导出文件
 		String sheetName = "教师列表";
 		String titleName = "教师信息";
 		String[] headers = { "教师工号", "教师姓名", "教师密码", "教师职称", "教师性别" };
