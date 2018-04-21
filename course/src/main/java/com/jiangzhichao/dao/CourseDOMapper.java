@@ -57,4 +57,9 @@ public interface CourseDOMapper {
      * 查询某教师所有授课
      */
     List<CourseDO> selectByTno(String tno);
+    
+    /**
+     * 查询某专业所有课程
+     */
+    List<CourseDO> selectByDno(String dno);
 }

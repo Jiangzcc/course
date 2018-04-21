@@ -1,5 +1,7 @@
 package com.jiangzhichao.dao;
 
+import java.util.List;
+
 import com.jiangzhichao.entity.StudentDO;
 
 public interface StudentDOMapper {
@@ -50,4 +52,9 @@ public interface StudentDOMapper {
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
     int updateByPrimaryKey(StudentDO record);
+    
+    /**
+     * 查询某专业下所有学生
+     */
+    List<StudentDO> selectByDno(String dno);
 }
