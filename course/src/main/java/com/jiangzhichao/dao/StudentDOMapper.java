@@ -57,4 +57,9 @@ public interface StudentDOMapper {
      * 查询某专业下所有学生
      */
     List<StudentDO> selectByDno(String dno);
+    
+    /**
+     * 查询所有学生
+     */
+    List<StudentDO> select();
 }

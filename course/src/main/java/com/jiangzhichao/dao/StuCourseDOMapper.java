@@ -1,5 +1,7 @@
 package com.jiangzhichao.dao;
 
+import java.util.List;
+
 import com.jiangzhichao.entity.StuCourseDO;
 
 public interface StuCourseDOMapper {
@@ -18,4 +20,25 @@ public interface StuCourseDOMapper {
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
     int insertSelective(StuCourseDO record);
+    
+    /**
+     * 查询某学生所有课程
+     * @param sno
+     * @return
+     */
+    List<StuCourseDO> selectBySno(String sno);
+    
+    /**
+     * 查询某课程下所有学生
+     * @param cno
+     * @return
+     */
+    List<StuCourseDO> selectByCno(String cno);
+    
+    /**
+     * 删除某学生所有课程
+     * @param sno
+     * @return
+     */
+    int deleteBySno(String sno);
 }

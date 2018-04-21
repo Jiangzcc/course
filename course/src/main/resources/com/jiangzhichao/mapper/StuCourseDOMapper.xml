@@ -52,4 +52,13 @@
       </if>
     </trim>
   </insert>
+  <select id="selectBySno" resultMap="BaseResultMap">
+  	select sno,cno,score from stucourse where sno = #{sno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCno" resultMap="BaseResultMap">
+  	select sno,cno,score from stucourse where cno = #{cno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteBySno">
+  	delete from stucourse where sno = #{sno,jdbcType=VARCHAR}
+  </delete>
 </mapper>

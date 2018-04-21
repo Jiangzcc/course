@@ -72,7 +72,7 @@ public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService 
 	public void importTeacher(List<TeacherDO> teachers) {
 		//循环插入教师信息
 		for (TeacherDO teacherDO : teachers) {
-			teacherDoMapper.insert(teacherDO);
+			this.insertTeacher(teacherDO);
 		}
 	}
 
