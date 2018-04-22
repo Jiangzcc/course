@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jiangzhichao.dao.CourseDOMapper;
+import com.jiangzhichao.dao.DepartmentDOMapper;
 import com.jiangzhichao.dao.StuCourseDOMapper;
 import com.jiangzhichao.dao.StudentDOMapper;
 import com.jiangzhichao.dao.SubjectRoleDOMapper;
 import com.jiangzhichao.entity.CourseDO;
+import com.jiangzhichao.entity.DepartmentDO;
 import com.jiangzhichao.entity.StuCourseDO;
 import com.jiangzhichao.entity.StudentDO;
 import com.jiangzhichao.entity.SubjectRoleDOKey;
@@ -31,6 +33,9 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 	
 	@Autowired
 	private CourseDOMapper courseDOMapper;
+	
+	@Autowired
+	private DepartmentDOMapper departmentDOMapper;
 	
 	@Override
 	public int insertStudent(StudentDO studentDO) {
@@ -71,7 +76,17 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 
 	@Override
 	public List<StudentDO> selectAllStudent() {
-		return studentDOMapper.select();
+		List<StudentDO> students = studentDOMapper.select();
+		//替换专业编号为专业名称--不考虑性能...
+		List<DepartmentDO> depts = departmentDOMapper.select();
+		for (StudentDO studentDO : students) {
+			for (DepartmentDO departmentDO : depts) {
+				if(departmentDO.getDno().equals(studentDO.getDno())){
+					studentDO.setDno(departmentDO.getDname());
+				}
+			}
+		}
+		return students;
 	}
 
 	@Override

@@ -167,6 +167,9 @@ public class ExportExcel {
 						textValue = sdf.format(date);
 					} else {
 						// 其它数据类型都当作字符串简单处理
+						if (value == null) {
+							value = "";
+						}
 						textValue = value.toString();
 					}
 

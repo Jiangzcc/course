@@ -8,6 +8,6 @@ public class TimedTask {
 
 	@Scheduled(cron="0/10 * *  * * ? ")   //每10秒执行一次      
     public void testTask(){
-		System.out.println(System.currentTimeMillis());
+		// System.out.println(System.currentTimeMillis());
     } 
 }
