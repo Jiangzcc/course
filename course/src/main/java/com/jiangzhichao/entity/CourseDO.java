@@ -1,5 +1,9 @@
 package com.jiangzhichao.entity;
 
+import org.jeecgframework.poi.excel.annotation.Excel;
+import org.jeecgframework.poi.excel.annotation.ExcelTarget;
+
+@ExcelTarget("Course")
 public class CourseDO {
     /**
      *
@@ -8,6 +12,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "编号")
     private String cno;
 
     /**
@@ -17,6 +22,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "名称")
     private String cname;
 
     /**
@@ -26,6 +32,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "学分")
     private Integer credit;
 
     /**
@@ -35,6 +42,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "所属专业编号")
     private String dno;
 
     /**
@@ -44,6 +52,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "当前课程人数")
     private Integer currentnum;
 
     /**
@@ -53,6 +62,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "课程可选总人数")
     private Integer maxnum;
 
     /**
@@ -62,6 +72,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "课程介绍")
     private String cintroduce;
 
     /**
@@ -71,6 +82,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "授课教师")
     private String tno;
 
     /**
@@ -80,6 +92,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "所属学期")
     private String cterm;
 
     /**

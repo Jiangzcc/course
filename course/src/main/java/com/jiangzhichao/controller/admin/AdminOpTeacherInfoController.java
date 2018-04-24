@@ -1,10 +1,6 @@
 package com.jiangzhichao.controller.admin;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.entity.TeacherDO;
 import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
-import com.jiangzhichao.util.ExportExcel;
-import com.jiangzhichao.util.ImportExcel;
+import com.jiangzhichao.util.FileUtil;
 
 /**
  * 管理员操作教师信息Controller
@@ -97,7 +92,7 @@ public class AdminOpTeacherInfoController extends BaseController{
 	/**
 	 * 导入教师信息
 	 * 
-	 * @param file	只能是xls文件，否则会失败，暂时只考虑正常情况，不额外处理，上传后不删除。
+	 * @param file
 	 * @param request
 	 * @return
 	 * @throws Exception
@@ -105,6 +100,15 @@ public class AdminOpTeacherInfoController extends BaseController{
 	@RequestMapping("importTeacher")
 	@ResponseBody
 	public Map<String,Object> importTeacher(MultipartFile file,HttpServletRequest request) throws Exception{
+		//解析Excel
+		List<TeacherDO> teacherList = FileUtil.importExcel(file, 1, 1, TeacherDO.class);
+		//导入教师信息到DB
+		adminOpTeacherInfoService.importTeacher(teacherList);
+		Map<String,Object> map = new HashMap<>();
+		map.put("result", true);
+		return map;
+
+		/*
 		//获取文件名
 		String filename = file.getOriginalFilename();
 		//获取文件存储绝对路径
@@ -118,11 +122,7 @@ public class AdminOpTeacherInfoController extends BaseController{
 		//获取文件中详细信息
 		@SuppressWarnings("unchecked")
 		List<TeacherDO> teacherList = (List<TeacherDO>) ImportExcel.importExcel(path, startRow, endRow, TeacherDO.class);
-		//导入教师信息到DB
-		adminOpTeacherInfoService.importTeacher(teacherList);
-		Map<String,Object> map = new HashMap<>();
-		map.put("result", true);
-		return map;
+		*/
 	}
 
 	/**
@@ -133,8 +133,12 @@ public class AdminOpTeacherInfoController extends BaseController{
 	 * @throws IOException
 	 */
 	@RequestMapping("exportTeacher")
-	public void exportTeacher(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		//查询所有教师信息
+	public void exportTeacher(HttpServletResponse response) throws IOException {
+		List<TeacherDO> list = adminOpTeacherInfoService.selectAllTeacher();
+		//导出操作
+        FileUtil.exportExcel(list,"教师信息","教师信息",TeacherDO.class,"teachers.xls",response);
+		
+		/*//查询所有教师信息
 		List<TeacherDO> list = adminOpTeacherInfoService.selectAllTeacher();
 		//使用当前时间作为文件名
 		String filename = System.currentTimeMillis() + ".xls";
@@ -167,7 +171,7 @@ public class AdminOpTeacherInfoController extends BaseController{
 		} finally {
 			if(null != is)  is.close();
 			if(null != os)  os.close();
-		}
+		}*/
 	}
 
 }

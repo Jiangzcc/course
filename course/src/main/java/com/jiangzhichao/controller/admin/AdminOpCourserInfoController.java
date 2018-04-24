@@ -1,10 +1,6 @@
 package com.jiangzhichao.controller.admin;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jiangzhichao.entity.CourseDO;
-import com.jiangzhichao.entity.StudentDO;
 import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
-import com.jiangzhichao.util.ExportExcel;
-import com.jiangzhichao.util.ImportExcel;
+import com.jiangzhichao.util.FileUtil;
 
 /**
  * 管理员操作课程信息Controller
@@ -107,9 +101,9 @@ public class AdminOpCourserInfoController {
 	}
 	
 	/**
-	 * 导入学生信息
+	 * 导入课程信息
 	 * 
-	 * @param file	只能是xls文件，否则会失败，暂时只考虑正常情况，不额外处理，上传后不删除。
+	 * @param file
 	 * @param request
 	 * @return
 	 * @throws Exception
@@ -117,6 +111,7 @@ public class AdminOpCourserInfoController {
 	@RequestMapping("importCourse")
 	@ResponseBody
 	public Map<String,Object> importCourse(MultipartFile file,HttpServletRequest request) throws Exception{
+		/*
 		//获取文件名
 		String filename = file.getOriginalFilename();
 		//获取文件存储绝对路径
@@ -130,6 +125,9 @@ public class AdminOpCourserInfoController {
 		//获取文件中详细信息
 		@SuppressWarnings("unchecked")
 		List<CourseDO> courseList = (List<CourseDO>) ImportExcel.importExcel(path, startRow, endRow, CourseDO.class);
+		*/
+		//解析Excel
+		List<CourseDO> courseList = FileUtil.importExcel(file, 1, 1, CourseDO.class);
 		//导入教师信息到DB
 		adminOpCourseInfoService.importCourse(courseList);
 		Map<String,Object> map = new HashMap<>();
@@ -147,7 +145,9 @@ public class AdminOpCourserInfoController {
 	@RequestMapping("exportCourse")
 	public void exportCourse(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		List<CourseDO> courses = adminOpCourseInfoService.selectAllCourse();
-		//使用当前时间作为文件名
+		//导出操作
+        FileUtil.exportExcel(courses,"课程信息","课程信息",CourseDO.class,"courses.xls",response);
+		/*//使用当前时间作为文件名
 		String filename = System.currentTimeMillis() + ".xls";
 		//获取路径
 		String realPath = request.getSession().getServletContext().getRealPath("/temporary");
@@ -177,6 +177,6 @@ public class AdminOpCourserInfoController {
 		} finally {
 			if(null != is)  is.close();
 			if(null != os)  os.close();
-		}
+		}*/
 	}
 }

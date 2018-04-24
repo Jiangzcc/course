@@ -1,5 +1,9 @@
 package com.jiangzhichao.entity;
 
+import org.jeecgframework.poi.excel.annotation.Excel;
+import org.jeecgframework.poi.excel.annotation.ExcelTarget;
+
+@ExcelTarget("Student")
 public class StudentDO {
     /**
      *
@@ -8,6 +12,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "学号")
     private String sno;
 
     /**
@@ -17,6 +22,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "姓名")
     private String sname;
 
     /**
@@ -26,6 +32,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "密码")
     private String spassword;
 
     /**
@@ -35,6 +42,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "学期")
     private String sterm;
 
     /**
@@ -44,6 +52,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "专业")
     private String dno;
 
     /**
@@ -53,6 +62,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "性别")
     private String ssex;
 
     /**
@@ -62,6 +72,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
+	@Excel(name = "身份证号")
     private String idcard;
 
     /**
