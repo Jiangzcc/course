@@ -22,7 +22,7 @@ import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
 import com.jiangzhichao.util.FileUtil;
 
 /**
- * ¹ÜÀíÔ±²Ù×÷¿Î³ÌĞÅÏ¢Controller
+ * ç®¡ç†å‘˜æ“ä½œè¯¾ç¨‹ä¿¡æ¯Controller
  * 
  * @author BornToWin
  *
@@ -102,7 +102,7 @@ public class AdminOpCourserInfoController extends BaseController {
 	}
 	
 	/**
-	 * µ¼Èë¿Î³ÌĞÅÏ¢
+	 * å¯¼å…¥è¯¾ç¨‹ä¿¡æ¯
 	 * 
 	 * @param file
 	 * @param request
@@ -113,23 +113,23 @@ public class AdminOpCourserInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> importCourse(MultipartFile file,HttpServletRequest request) throws Exception{
 		/*
-		//»ñÈ¡ÎÄ¼şÃû
+		//è·å–æ–‡ä»¶å
 		String filename = file.getOriginalFilename();
-		//»ñÈ¡ÎÄ¼ş´æ´¢¾ø¶ÔÂ·¾¶
+		//è·å–æ–‡ä»¶å­˜å‚¨ç»å¯¹è·¯å¾„
 		String realPath = request.getSession().getServletContext().getRealPath("/temporary");
 		String path = realPath + "//" + filename;
 		File f = new File(realPath,filename);
-		//ÉÏ´«ÎÄ¼ş
+		//ä¸Šä¼ æ–‡ä»¶
 		file.transferTo(f);
 		int startRow=2;
 		int endRow=0;
-		//»ñÈ¡ÎÄ¼şÖĞÏêÏ¸ĞÅÏ¢
+		//è·å–æ–‡ä»¶ä¸­è¯¦ç»†ä¿¡æ¯
 		@SuppressWarnings("unchecked")
 		List<CourseDO> courseList = (List<CourseDO>) ImportExcel.importExcel(path, startRow, endRow, CourseDO.class);
 		*/
-		//½âÎöExcel
+		//è§£æExcel
 		List<CourseDO> courseList = FileUtil.importExcel(file, 1, 1, CourseDO.class);
-		//µ¼Èë½ÌÊ¦ĞÅÏ¢µ½DB
+		//å¯¼å…¥æ•™å¸ˆä¿¡æ¯åˆ°DB
 		adminOpCourseInfoService.importCourse(courseList);
 		Map<String,Object> map = new HashMap<>();
 		map.put("result", true);
@@ -137,7 +137,7 @@ public class AdminOpCourserInfoController extends BaseController {
 	}
 
 	/**
-	 * µ¼³ö¿Î³ÌĞÅÏ¢
+	 * å¯¼å‡ºè¯¾ç¨‹ä¿¡æ¯
 	 * 
 	 * @param request
 	 * @param response
@@ -146,20 +146,20 @@ public class AdminOpCourserInfoController extends BaseController {
 	@RequestMapping("exportCourse")
 	public void exportCourse(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		List<CourseDO> courses = adminOpCourseInfoService.selectAllCourse();
-		//µ¼³ö²Ù×÷
-        FileUtil.exportExcel(courses,"¿Î³ÌĞÅÏ¢","¿Î³ÌĞÅÏ¢",CourseDO.class,"courses.xls",response);
-		/*//Ê¹ÓÃµ±Ç°Ê±¼ä×÷ÎªÎÄ¼şÃû
+		//å¯¼å‡ºæ“ä½œ
+        FileUtil.exportExcel(courses,"è¯¾ç¨‹ä¿¡æ¯","è¯¾ç¨‹ä¿¡æ¯",CourseDO.class,"courses.xls",response);
+		/*//ä½¿ç”¨å½“å‰æ—¶é—´ä½œä¸ºæ–‡ä»¶å
 		String filename = System.currentTimeMillis() + ".xls";
-		//»ñÈ¡Â·¾¶
+		//è·å–è·¯å¾„
 		String realPath = request.getSession().getServletContext().getRealPath("/temporary");
 		String path = realPath + "//" + filename;
-		//µ¼³öÎÄ¼ş
-		String sheetName = "¿Î³ÌÁĞ±í";
-		String titleName = "¿Î³ÌĞÅÏ¢";
-		String[] headers = { "±àºÅ", "Ãû³Æ", "Ñ§·Ö", "×¨Òµ±àºÅ", "µ±Ç°Ñ¡¿ÎÈËÊı", "×î´óÑ¡¿ÎÈËÊı", "¿Î³Ì½éÉÜ", "ÊÚ¿Î½ÌÊ¦±àºÅ", "ËùÊôÑ§ÆÚ" };
+		//å¯¼å‡ºæ–‡ä»¶
+		String sheetName = "è¯¾ç¨‹åˆ—è¡¨";
+		String titleName = "è¯¾ç¨‹ä¿¡æ¯";
+		String[] headers = { "ç¼–å·", "åç§°", "å­¦åˆ†", "ä¸“ä¸šç¼–å·", "å½“å‰é€‰è¯¾äººæ•°", "æœ€å¤§é€‰è¯¾äººæ•°", "è¯¾ç¨‹ä»‹ç»", "æˆè¯¾æ•™å¸ˆç¼–å·", "æ‰€å±å­¦æœŸ" };
 		String pattern = "yyyy-MM-dd";
 		ExportExcel.exportExcel(sheetName, titleName, headers, courses, path, pattern);
-		// ÉèÖÃÏìÓ¦Í·ºÍ¿Í»§¶Ë±£´æÎÄ¼şÃû
+		// è®¾ç½®å“åº”å¤´å’Œå®¢æˆ·ç«¯ä¿å­˜æ–‡ä»¶å
 		response.setContentType("multipart/form-data");
 		response.setHeader("Content-Disposition", "attachment;fileName=" + filename);
 		InputStream is = null;
@@ -167,7 +167,7 @@ public class AdminOpCourserInfoController extends BaseController {
 		try {
 			is = new FileInputStream(path);
 			os = response.getOutputStream();
-			//Ñ­»·Ğ´ÈëÊä³öÁ÷
+			//å¾ªç¯å†™å…¥è¾“å‡ºæµ
 			byte[] b = new byte[2048];
 			int length;
 			while ((length = is.read(b)) > 0) {

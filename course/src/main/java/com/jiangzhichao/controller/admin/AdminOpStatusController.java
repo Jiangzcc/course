@@ -14,7 +14,7 @@ import com.jiangzhichao.entity.Status;
 import com.jiangzhichao.service.admin.AdminOpStatusService;
 
 /**
- * 管理员管理状态相关Controller
+ * 绠＄悊鍛樼鐞嗙姸鎬佺浉鍏矯ontroller
  * 
  * @author BornToWin
  *

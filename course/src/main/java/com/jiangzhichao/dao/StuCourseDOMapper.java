@@ -22,21 +22,21 @@ public interface StuCourseDOMapper {
     int insertSelective(StuCourseDO record);
     
     /**
-     * ²éÑ¯Ä³Ñ§ÉúËùÓĞ¿Î³Ì
+     * æŸ¥è¯¢æŸå­¦ç”Ÿæ‰€æœ‰è¯¾ç¨‹
      * @param sno
      * @return
      */
     List<StuCourseDO> selectBySno(String sno);
     
     /**
-     * ²éÑ¯Ä³¿Î³ÌÏÂËùÓĞÑ§Éú
+     * æŸ¥è¯¢æŸè¯¾ç¨‹ä¸‹æ‰€æœ‰å­¦ç”Ÿ
      * @param cno
      * @return
      */
     List<StuCourseDO> selectByCno(String cno);
     
     /**
-     * É¾³ıÄ³Ñ§ÉúËùÓĞ¿Î³Ì
+     * åˆ é™¤æŸå­¦ç”Ÿæ‰€æœ‰è¯¾ç¨‹
      * @param sno
      * @return
      */

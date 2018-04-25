@@ -35,13 +35,13 @@ public class AdminOpDepartmentServiceImpl implements AdminOpDepartmentService {
 	@Override
 	public int deleteDepartment(String dno) {
 		int i = 0;
-		//ÅĞ¶Ï´Ë×¨ÒµÏÂÊÇ·ñÓĞ¿Î³Ì
+		//åˆ¤æ–­æ­¤ä¸“ä¸šä¸‹æ˜¯å¦æœ‰è¯¾ç¨‹
 		List<CourseDO> courses = courseDOMapper.selectByDno(dno);
 		if(courses.size() == 0) {
-			//É¾³ıÇ°ÏÈÅĞ¶Ï´Ë×¨ÒµÏÂÊÇ·ñÓĞÑ§Éú
+			//åˆ é™¤å‰å…ˆåˆ¤æ–­æ­¤ä¸“ä¸šä¸‹æ˜¯å¦æœ‰å­¦ç”Ÿ
 			List<StudentDO> students = studentDOMapper.selectByDno(dno);
 			if(students.size() == 0) {
-				//É¾³ı×¨ÒµĞÅÏ¢
+				//åˆ é™¤ä¸“ä¸šä¿¡æ¯
 				i = departmentDOMapper.deleteByPrimaryKey(dno);
 			}
 		}

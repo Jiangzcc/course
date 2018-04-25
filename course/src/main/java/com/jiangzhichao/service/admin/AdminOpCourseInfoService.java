@@ -5,7 +5,7 @@ import java.util.List;
 import com.jiangzhichao.entity.CourseDO;
 
 /**
- * ¹ÜÀíÔ±²Ù×÷¿Î³ÌĞÅÏ¢Service
+ * ç®¡ç†å‘˜æ“ä½œè¯¾ç¨‹ä¿¡æ¯Service
  * 
  * @author BornToWin
  *
@@ -13,41 +13,41 @@ import com.jiangzhichao.entity.CourseDO;
 public interface AdminOpCourseInfoService {
 
 	/**
-	 * ĞÂÔö¿Î³ÌĞÅÏ¢
+	 * æ–°å¢è¯¾ç¨‹ä¿¡æ¯
 	 * @param courseDO
 	 * @return
 	 */
 	int insertCourse(CourseDO courseDO);
 	
 	/**
-	 * É¾³ı¿Î³ÌĞÅÏ¢
+	 * åˆ é™¤è¯¾ç¨‹ä¿¡æ¯
 	 * @param cno
 	 * @return
 	 */
 	int deleteCourse(String cno);
 	
 	/**
-	 * ĞŞ¸Ä¿Î³ÌĞÅÏ¢
+	 * ä¿®æ”¹è¯¾ç¨‹ä¿¡æ¯
 	 * @param courseDO
 	 * @return
 	 */
 	int updateCourse(CourseDO courseDO);
 	
 	/**
-	 * Í¨¹ı¿Î³Ì±àºÅ²éÑ¯¿Î³ÌĞÅÏ¢
+	 * é€šè¿‡è¯¾ç¨‹ç¼–å·æŸ¥è¯¢è¯¾ç¨‹ä¿¡æ¯
 	 * @param cno
 	 * @return
 	 */
 	CourseDO selectCourseByCno(String cno);
 	
 	/**
-	 * ²éÑ¯ËùÓĞ¿Î³ÌĞÅÏ¢
+	 * æŸ¥è¯¢æ‰€æœ‰è¯¾ç¨‹ä¿¡æ¯
 	 * @return
 	 */
 	List<CourseDO> selectAllCourse();
 	
 	/**
-	 * µ¼Èë½ÌÊ¦ĞÅÏ¢
+	 * å¯¼å…¥æ•™å¸ˆä¿¡æ¯
 	 */
 	void importCourse(List<CourseDO> courses);
 }

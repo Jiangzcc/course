@@ -5,7 +5,7 @@ import java.util.List;
 import com.jiangzhichao.entity.DepartmentDO;
 
 /**
- * ����ԱCRUDרҵ��ϢService
+ * 管理员CRUD专业信息Service
  * 
  * @author BornToWin
  *
@@ -13,35 +13,35 @@ import com.jiangzhichao.entity.DepartmentDO;
 public interface AdminOpDepartmentService {
 	
 	/**
-	 * ����רҵ��Ϣ
+	 * 新增专业信息
 	 * @param departmentDO
 	 * @return
 	 */
 	int insertDepartment(DepartmentDO departmentDO);
 	
 	/**
-	 * ɾ��רҵ��Ϣ
+	 * 删除专业信息
 	 * @param dno
 	 * @return
 	 */
 	int deleteDepartment(String dno);
 	
 	/**
-	 * �޸�רҵ��Ϣ
+	 * 修改专业信息
 	 * @param departmentDO
 	 * @return
 	 */
 	int updateDepartment(DepartmentDO departmentDO);
 	
 	/**
-	 * ͨ��רҵ��Ų�ѯרҵ��Ϣ
+	 * 通过专业编号查询专业信息
 	 * @param dno
 	 * @return
 	 */
 	DepartmentDO selectDepartmentByDno(String dno);
 	
 	/**
-	 * ��ѯ����רҵ��Ϣ
+	 * 查询所有专业信息
 	 * @return
 	 */
 	List<DepartmentDO> selectAllDepartment();

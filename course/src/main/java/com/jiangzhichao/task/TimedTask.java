@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimedTask {
 
-	@Scheduled(cron="0/10 * *  * * ? ")   //每10秒执行一次      
+	@Scheduled(cron="0/10 * *  * * ? ")  
     public void testTask(){
 		// System.out.println(System.currentTimeMillis());
     } 

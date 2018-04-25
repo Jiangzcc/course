@@ -3,12 +3,12 @@ package com.jiangzhichao.shiro;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
- * ×Ô¶¨ÒåToken
+ * è‡ªå®šä¹‰Token
  */
 public class CustomizedToken extends UsernamePasswordToken {
 
 	private static final long serialVersionUID = -4553808608648123587L;
-	//µÇÂ¼ÀàĞÍ£¬ÅĞ¶ÏÑ§ÉúµÇÂ¼£¬½ÌÊ¦µÇÂ¼»¹ÊÇ¹ÜÀíÔ±µÇÂ¼
+	//ç™»å½•ç±»å‹ï¼Œåˆ¤æ–­å­¦ç”Ÿç™»å½•ï¼Œæ•™å¸ˆç™»å½•è¿˜æ˜¯ç®¡ç†å‘˜ç™»å½•
 	private String loginType;
 
 	public CustomizedToken(final String username, final String password,String loginType) {

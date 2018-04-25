@@ -5,7 +5,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 /**
- * SessionÏà¹Ø¹¤¾ßÀà
+ * Sessionç›¸å…³å·¥å…·ç±»
  * 
  * @author BornToWin
  *
@@ -13,8 +13,8 @@ import org.apache.shiro.subject.Subject;
 public class SessionUtil {
 
 	/**
-     * ½«Ò»Ğ©Êı¾İ·Åµ½ShiroSessionÖĞ,ÒÔ±ãÓÚÆäËüµØ·½Ê¹ÓÃ
-     * ±ÈÈçController,Ê¹ÓÃÊ±Ö±½ÓÓÃHttpSession.getAttribute(key)¾Í¿ÉÒÔÈ¡µ½
+     * å°†ä¸€äº›æ•°æ®æ”¾åˆ°ShiroSessionä¸­,ä»¥ä¾¿äºå…¶å®ƒåœ°æ–¹ä½¿ç”¨
+     * æ¯”å¦‚Controller,ä½¿ç”¨æ—¶ç›´æ¥ç”¨HttpSession.getAttribute(key)å°±å¯ä»¥å–åˆ°
      */
 	public static void setSession(String key, Object value){
 		Subject currentUser = SecurityUtils.getSubject();

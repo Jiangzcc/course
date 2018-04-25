@@ -3,7 +3,7 @@ package com.jiangzhichao.dao;
 import com.jiangzhichao.entity.AdminDO;
 
 /**
- * ¹ÜÀíÔ±µÇÂ½Mapper
+ * ç®¡ç†å‘˜ç™»é™†Mapper
  * 
  * @author BornToWin
  *
@@ -11,7 +11,7 @@ import com.jiangzhichao.entity.AdminDO;
 public interface AdminLoginMapper {
 
 	/**
-	 * Í¨¹ıusername²éÑ¯¹ÜÀíÔ±ĞÅÏ¢
+	 * é€šè¿‡usernameæŸ¥è¯¢ç®¡ç†å‘˜ä¿¡æ¯
 	 * @param ausername
 	 * @return
 	 */

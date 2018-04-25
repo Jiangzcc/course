@@ -54,17 +54,17 @@ public interface CourseDOMapper {
     int updateByPrimaryKey(CourseDO record);
     
     /**
-     * ²éÑ¯Ä³½ÌÊ¦ËùÓĞÊÚ¿Î
+     * æŸ¥è¯¢æŸæ•™å¸ˆæ‰€æœ‰æˆè¯¾
      */
     List<CourseDO> selectByTno(String tno);
     
     /**
-     * ²éÑ¯Ä³×¨ÒµËùÓĞ¿Î³Ì
+     * æŸ¥è¯¢æŸä¸“ä¸šæ‰€æœ‰è¯¾ç¨‹
      */
     List<CourseDO> selectByDno(String dno);
     
     /**
-     * ²éÑ¯ËùÓĞ¿Î³Ì
+     * æŸ¥è¯¢æ‰€æœ‰è¯¾ç¨‹
      */
     List<CourseDO> select();
 }

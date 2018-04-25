@@ -37,28 +37,28 @@ public class AdminRealm extends AuthorizingRealm {
 	
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-    	//»ñÈ¡ÓÃ»§Ãû
+    	//è·å–ç”¨æˆ·å
         String username = (String)super.getAvailablePrincipal(principalCollection);
         if(null != username){
-        	//»ñÈ¡½ÇÉ«Ãû--¹ıÊ±
+        	//è·å–è§’è‰²å--è¿‡æ—¶
         	//String role = loginType();
         	
-        	//Îªµ±Ç°ÓÃ»§ÉèÖÃ½ÇÉ«ºÍÈ¨ÏŞ
+        	//ä¸ºå½“å‰ç”¨æˆ·è®¾ç½®è§’è‰²å’Œæƒé™
         	List<SubjectRoleDOKey> list = subjectRoleDOMapper.selectByNo(username);
         	List<String> roleList = new ArrayList<String>();
         	List<String> permissionList = new ArrayList<String>();
-        	//Ñ­»·¸³Öµ
+        	//å¾ªç¯èµ‹å€¼
         	for (SubjectRoleDOKey subjectRoleDOKey : list) {
 				RoleDO role = roleDOMapper.selectByPrimaryKey(subjectRoleDOKey.getRoleno());
-				//Ìí¼Ó½ÇÉ«
+				//æ·»åŠ è§’è‰²
 				roleList.add(role.getRolename());
-				//Ìí¼ÓÈ¨ÏŞ
-				permissionList.add(role.getRolename()); //ÔİÊ±
+				//æ·»åŠ æƒé™
+				permissionList.add(role.getRolename()); //æš‚æ—¶
 			}
             SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
-            //ÉèÖÃ½ÇÉ«
+            //è®¾ç½®è§’è‰²
             simpleAuthorInfo.addRoles(roleList);
-            //ÉèÖÃÈ¨ÏŞ
+            //è®¾ç½®æƒé™
             simpleAuthorInfo.addStringPermissions(permissionList);
             return simpleAuthorInfo;
         } else {
@@ -69,27 +69,27 @@ public class AdminRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
     	CustomizedToken token = (CustomizedToken) authenticationToken;
-    	//»ñÈ¡¹ÜÀíÔ±ĞÅÏ¢
+    	//è·å–ç®¡ç†å‘˜ä¿¡æ¯
         AdminDO adminDO = adminLoginMapper.selectByUsername(token.getUsername());
-        //¸Ã¹ÜÀíÔ±´æÔÚ
+        //è¯¥ç®¡ç†å‘˜å­˜åœ¨
         if (null != adminDO) {
-        	//ÈÏÖ¤
+        	//è®¤è¯
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(adminDO.getAusername(),adminDO.getApassword(),getName());
-            //´æÈësession
+            //å­˜å…¥session
             SessionUtil.setSession("admin", adminDO);
             return authcInfo;
         } else {
             return null;
         }
-        //Ã»ÓĞ·µ»ØµÇÂ¼ÓÃ»§Ãû¶ÔÓ¦µÄSimpleAuthenticationInfo¶ÔÏóÊ±,¾Í»áÔÚLoginControllerÖĞÅ×³öUnknownAccountExceptionÒì³£
+        //æ²¡æœ‰è¿”å›ç™»å½•ç”¨æˆ·åå¯¹åº”çš„SimpleAuthenticationInfoå¯¹è±¡æ—¶,å°±ä¼šåœ¨LoginControllerä¸­æŠ›å‡ºUnknownAccountExceptionå¼‚å¸¸
     }
     
-    //¹ıÊ±¡¢²âÊÔÊ±ÓÃ
+    //è¿‡æ—¶ã€æµ‹è¯•æ—¶ç”¨
     @SuppressWarnings("unused")
 	private String loginType() {
         Subject currentUser = SecurityUtils.getSubject();
         if(null != currentUser){
-        	//Í¨¹ısessionÁË½âµ±Ç°ÓÃ»§½ÇÉ«
+        	//é€šè¿‡sessionäº†è§£å½“å‰ç”¨æˆ·è§’è‰²
             Session session = currentUser.getSession();
             if(null != session){
             	Object object = session.getAttribute("admin");

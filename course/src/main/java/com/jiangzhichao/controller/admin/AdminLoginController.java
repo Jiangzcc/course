@@ -16,7 +16,7 @@ import com.jiangzhichao.enumm.LoginType;
 import com.jiangzhichao.shiro.CustomizedToken;
 
 /**
- * ¹ÜÀíÔ±µÇÂ½Controller
+ * ç®¡ç†å‘˜ç™»é™†Controller
  * 
  * @author BornToWin
  *
@@ -27,24 +27,24 @@ import com.jiangzhichao.shiro.CustomizedToken;
 public class AdminLoginController extends BaseController {
 
 	/**
-	 * ¹ÜÀíÔ±µÇÂ½
-	 * @param ausername ÕËºÅ
-	 * @param apassword ÃÜÂë
+	 * ç®¡ç†å‘˜ç™»é™†
+	 * @param ausername è´¦å·
+	 * @param apassword å¯†ç 
 	 * @return
 	 */
 	@RequestMapping("/adminLogin")
 	@ResponseBody
 	public Map<String,Object> adminLogin(String ausername,String apassword) {
 		Map<String,Object> map = new HashMap<>();
-		//Éú³Étoken¡¢×Ô¶¨ÒåµÇÂ½ÀàĞÍ
+		//ç”Ÿæˆtokenã€è‡ªå®šä¹‰ç™»é™†ç±»å‹
 		CustomizedToken  token = new CustomizedToken(ausername, apassword, LoginType.ADMIN.toString());
-		//»ñÈ¡µ±Ç°½ÇÉ«
+		//è·å–å½“å‰è§’è‰²
 		Subject subject = SecurityUtils.getSubject();
 		try {
-			//µÇÂ½ÑéÖ¤
+			//ç™»é™†éªŒè¯
 			subject.login(token);
 		} 
-		// ¼òµ¥´¦Àí£¬²»ÔÙ×öÏ¸»¯
+		// ç®€å•å¤„ç†ï¼Œä¸å†åšç»†åŒ–
 		/*catch (UnknownAccountException uae) {
 		} catch (IncorrectCredentialsException ice) {
 		} catch (LockedAccountException lae) {
@@ -53,11 +53,11 @@ public class AdminLoginController extends BaseController {
 		catch (AuthenticationException ae) {
 			map.put("result", false);
 			return map;
-			//Í¨¹ı´¦ÀíShiroµÄÔËĞĞÊ±AuthenticationException¾Í¿ÉÒÔ¿ØÖÆÓÃ»§µÇÂ¼Ê§°Ü»òÃÜÂë´íÎóÊ±µÄÇé¾°
+			//é€šè¿‡å¤„ç†Shiroçš„è¿è¡Œæ—¶AuthenticationExceptionå°±å¯ä»¥æ§åˆ¶ç”¨æˆ·ç™»å½•å¤±è´¥æˆ–å¯†ç é”™è¯¯æ—¶çš„æƒ…æ™¯
 		}
 		
-		//ÑéÖ¤ÊÇ·ñµÇÂ¼³É¹¦£¬´ËÅĞ¶Ï½ø²»È¥£¬ÒòÎªÒªºÍsubject.isRemembered()½áºÏÊ¹ÓÃ¡£
-		//µ«ÊÇÎÒ¾ÍÊÇ²»É¾
+		//éªŒè¯æ˜¯å¦ç™»å½•æˆåŠŸï¼Œæ­¤åˆ¤æ–­è¿›ä¸å»ï¼Œå› ä¸ºè¦å’Œsubject.isRemembered()ç»“åˆä½¿ç”¨ã€‚
+		//ä½†æ˜¯æˆ‘å°±æ˜¯ä¸åˆ 
 		if (!subject.isAuthenticated()) {
 			token.clear();
 			map.put("result", false);

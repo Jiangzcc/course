@@ -3,7 +3,7 @@ package com.jiangzhichao.dao;
 import com.jiangzhichao.entity.Status;
 
 /**
- * Ñ¡¿Î¿ªÆô¹Ø±Õ-Â¼Èë³É¼¨¿ªÆô¹Ø±Õ×´Ì¬²éÑ¯¡¢ĞŞ¸Ä
+ * é€‰è¯¾å¼€å¯å…³é—­-å½•å…¥æˆç»©å¼€å¯å…³é—­çŠ¶æ€æŸ¥è¯¢ã€ä¿®æ”¹
  * 
  * @author BornToWin
  *
@@ -11,13 +11,13 @@ import com.jiangzhichao.entity.Status;
 public interface StatusMapper {
 
 	/**
-	 * ²éÑ¯×´Ì¬
+	 * æŸ¥è¯¢çŠ¶æ€
 	 * @return
 	 */
 	Status select();
 	
 	/**
-	 * ĞŞ¸Ä×´Ì¬
+	 * ä¿®æ”¹çŠ¶æ€
 	 * @return
 	 */
 	int update(Status status);

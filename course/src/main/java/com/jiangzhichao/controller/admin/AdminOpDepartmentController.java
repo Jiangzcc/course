@@ -15,7 +15,7 @@ import com.jiangzhichao.entity.DepartmentDO;
 import com.jiangzhichao.service.admin.AdminOpDepartmentService;
 
 /**
- * 管理员操作专业信息Controller
+ * 绠＄悊鍛樻搷浣滀笓涓氫俊鎭疌ontroller
  * 
  * @author BornToWin
  *

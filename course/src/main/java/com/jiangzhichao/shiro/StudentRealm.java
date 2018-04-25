@@ -34,7 +34,7 @@ public class StudentRealm extends AuthorizingRealm {
 		} else {
 			return null;
 		}
-		//Ã»ÓĞ·µ»ØµÇÂ¼ÓÃ»§Ãû¶ÔÓ¦µÄSimpleAuthenticationInfo¶ÔÏóÊ±,¾Í»áÔÚLoginControllerÖĞÅ×³öUnknownAccountExceptionÒì³£
+		//æ²¡æœ‰è¿”å›ç™»å½•ç”¨æˆ·åå¯¹åº”çš„SimpleAuthenticationInfoå¯¹è±¡æ—¶,å°±ä¼šåœ¨LoginControllerä¸­æŠ›å‡ºUnknownAccountExceptionå¼‚å¸¸
 	}
 
 }

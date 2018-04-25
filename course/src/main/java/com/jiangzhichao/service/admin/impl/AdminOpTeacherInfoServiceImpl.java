@@ -30,7 +30,7 @@ public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService 
 	@Override
 	public int insertTeacher(TeacherDO teacherDO) {
 		int i = teacherDoMapper.insert(teacherDO);
-		//设置角色
+		//璁剧疆瑙掕壊
 		SubjectRoleDOKey subjectRoleDOKey = new SubjectRoleDOKey();
 		subjectRoleDOKey.setNo(teacherDO.getTno());
 		subjectRoleDOKey.setRoleno("2");
@@ -40,15 +40,15 @@ public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService 
 
 	@Override
 	public int deleteTeacher(String tno) {
-		//删除前先设置课程信息中此教师编号为null
+		//鍒犻櫎鍓嶅厛璁剧疆璇剧▼淇℃伅涓鏁欏笀缂栧彿涓簄ull
 		List<CourseDO> list = courseDOMapper.selectByTno(tno);
 		for (CourseDO courseDO : list) {
 			courseDO.setTno(null);
 			courseDOMapper.updateByPrimaryKey(courseDO);
 		}
-		//删除角色
+		//鍒犻櫎瑙掕壊
 		subjectRoleDOMapper.deleteByNo(tno);
-		//删除用户
+		//鍒犻櫎鐢ㄦ埛
 		int i = teacherDoMapper.deleteByPrimaryKey(tno);
 		return i;
 	}
@@ -70,7 +70,7 @@ public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService 
 
 	@Override
 	public void importTeacher(List<TeacherDO> teachers) {
-		//循环插入教师信息
+		//寰幆鎻掑叆鏁欏笀淇℃伅
 		for (TeacherDO teacherDO : teachers) {
 			this.insertTeacher(teacherDO);
 		}

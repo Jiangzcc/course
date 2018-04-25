@@ -19,62 +19,62 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 /**
- * µ¼ÈëExcel¹¤¾ßÀà==ÒÑÕë¶Ô±¾ÏîÄ¿×öÏàÓ¦ĞŞ¸Ä
+ * å¯¼å…¥Excelå·¥å…·ç±»==å·²é’ˆå¯¹æœ¬é¡¹ç›®åšç›¸åº”ä¿®æ”¹
  * 
  * @author BornToWin
  *
  */
 public class ImportExcel{
 
-	//ÕıÔò±í´ïÊ½ ÓÃÓÚÆ¥ÅäÊôĞÔµÄµÚÒ»¸ö×ÖÄ¸
+	//æ­£åˆ™è¡¨è¾¾å¼ ç”¨äºåŒ¹é…å±æ€§çš„ç¬¬ä¸€ä¸ªå­—æ¯
 	private static final String REGEX = "[a-zA-Z]";
 
 	/**
-	 * ¹¦ÄÜ: ExcelÊı¾İµ¼Èëµ½Êı¾İ¿â
-	 * ²ÎÊı: originUrl[Excel±íµÄËùÔÚÂ·¾¶]
-	 * ²ÎÊı: startRow[´ÓµÚ¼¸ĞĞ¿ªÊ¼]
-	 * ²ÎÊı: endRow[µ½µÚ¼¸ĞĞ½áÊø
-	 *                  (0±íÊ¾ËùÓĞĞĞ;
-	 *                  ÕıÊı±íÊ¾µ½µÚ¼¸ĞĞ½áÊø;
-	 *                  ¸ºÊı±íÊ¾µ½µ¹ÊıµÚ¼¸ĞĞ½áÊø)]
-	 * ²ÎÊı: clazz[Òª·µ»ØµÄ¶ÔÏó¼¯ºÏµÄÀàĞÍ]
+	 * åŠŸèƒ½: Excelæ•°æ®å¯¼å…¥åˆ°æ•°æ®åº“
+	 * å‚æ•°: originUrl[Excelè¡¨çš„æ‰€åœ¨è·¯å¾„]
+	 * å‚æ•°: startRow[ä»ç¬¬å‡ è¡Œå¼€å§‹]
+	 * å‚æ•°: endRow[åˆ°ç¬¬å‡ è¡Œç»“æŸ
+	 *                  (0è¡¨ç¤ºæ‰€æœ‰è¡Œ;
+	 *                  æ­£æ•°è¡¨ç¤ºåˆ°ç¬¬å‡ è¡Œç»“æŸ;
+	 *                  è´Ÿæ•°è¡¨ç¤ºåˆ°å€’æ•°ç¬¬å‡ è¡Œç»“æŸ)]
+	 * å‚æ•°: clazz[è¦è¿”å›çš„å¯¹è±¡é›†åˆçš„ç±»å‹]
 	 */
 	public static List<?> importExcel(String originUrl,int startRow,int endRow,Class<?> clazz) throws IOException {
-		//ÊÇ·ñ´òÓ¡ÌáÊ¾ĞÅÏ¢
+		//æ˜¯å¦æ‰“å°æç¤ºä¿¡æ¯
 		boolean showInfo=true;
 		return doImportExcel(originUrl,startRow,endRow,showInfo,clazz);
 	}
 
 	/**
-	 * ¹¦ÄÜ:ÕæÕıÊµÏÖµ¼Èë
+	 * åŠŸèƒ½:çœŸæ­£å®ç°å¯¼å…¥
 	 */
 	private static List<Object> doImportExcel(String originUrl,int startRow,int endRow,boolean showInfo,Class<?> clazz) throws IOException {
-		// ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+		// åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 		File file = new File(originUrl);
 		if (!file.exists()) {
-			throw new IOException("ÎÄ¼şÃûÎª" + file.getName() + "ExcelÎÄ¼ş²»´æÔÚ£¡");
+			throw new IOException("æ–‡ä»¶åä¸º" + file.getName() + "Excelæ–‡ä»¶ä¸å­˜åœ¨ï¼");
 		}
 		HSSFWorkbook wb = null;
 		FileInputStream fis=null;
 		List<Row> rowList = new ArrayList<Row>();
 		try {
 			fis = new FileInputStream(file);
-			// È¥¶ÁExcel
+			// å»è¯»Excel
 			wb = new HSSFWorkbook(fis);
 			Sheet sheet = wb.getSheetAt(0);
-			// »ñÈ¡×îºóĞĞºÅ
+			// è·å–æœ€åè¡Œå·
 			int lastRowNum = sheet.getLastRowNum();
-			if (lastRowNum > 0) { // Èç¹û>0£¬±íÊ¾ÓĞÊı¾İ
-				out("\n¿ªÊ¼¶ÁÈ¡ÃûÎª¡¾" + sheet.getSheetName() + "¡¿µÄÄÚÈİ£º",showInfo);
+			if (lastRowNum > 0) { // å¦‚æœ>0ï¼Œè¡¨ç¤ºæœ‰æ•°æ®
+				out("\nå¼€å§‹è¯»å–åä¸ºã€" + sheet.getSheetName() + "ã€‘çš„å†…å®¹ï¼š",showInfo);
 			}
 			Row row = null;
-			// Ñ­»·¶ÁÈ¡
+			// å¾ªç¯è¯»å–
 			for (int i = startRow; i <= lastRowNum + endRow; i++) {
 				row = sheet.getRow(i);
 				if (row != null) {
 					rowList.add(row);
-					out("µÚ" + (i + 1) + "ĞĞ£º",showInfo,false);
-					// »ñÈ¡Ã¿Ò»µ¥Ôª¸ñµÄÖµ
+					out("ç¬¬" + (i + 1) + "è¡Œï¼š",showInfo,false);
+					// è·å–æ¯ä¸€å•å…ƒæ ¼çš„å€¼
 					for (int j = 0; j < row.getLastCellNum(); j++) {
 						String value = getCellValue(row.getCell(j));
 						if (!value.equals("")) {
@@ -93,7 +93,7 @@ public class ImportExcel{
 	}
 
 	/**
-	 * ¹¦ÄÜ:»ñÈ¡µ¥Ôª¸ñµÄÖµ
+	 * åŠŸèƒ½:è·å–å•å…ƒæ ¼çš„å€¼
 	 */
 	private static String getCellValue(Cell cell) {
 		Object result = "";
@@ -124,7 +124,7 @@ public class ImportExcel{
 	}
 
 	/**
-	 * ¹¦ÄÜ:·µ»ØÖ¸¶¨µÄ¶ÔÏó¼¯ºÏ
+	 * åŠŸèƒ½:è¿”å›æŒ‡å®šçš„å¯¹è±¡é›†åˆ
 	 */
 	private static List<Object> returnObjectList(List<Row> rowList,Class<?> clazz) {
 		List<Object> objectList=null;
@@ -156,25 +156,25 @@ public class ImportExcel{
 	}
 
 	/**
-	 * ¹¦ÄÜ:¸øÖ¸¶¨¶ÔÏóµÄÖ¸¶¨ÊôĞÔ¸³Öµ
+	 * åŠŸèƒ½:ç»™æŒ‡å®šå¯¹è±¡çš„æŒ‡å®šå±æ€§èµ‹å€¼
 	 */
 	private static void setAttrributeValue(Object obj,String attribute,String value) {
-		//µÃµ½¸ÃÊôĞÔµÄset·½·¨Ãû
+		//å¾—åˆ°è¯¥å±æ€§çš„setæ–¹æ³•å
 		String method_name = convertToMethodName(attribute,obj.getClass(),true);
 		Method[] methods = obj.getClass().getMethods();
 		for (Method method : methods) {
 			/**
-			 * ÒòÎªÕâÀïÖ»ÊÇµ÷ÓÃbeanÖĞÊôĞÔµÄset·½·¨£¬ÊôĞÔÃû³Æ²»ÄÜÖØ¸´
-			 * ËùÒÔset·½·¨Ò²²»»áÖØ¸´£¬ËùÒÔ¾ÍÖ±½ÓÓÃ·½·¨Ãû³ÆÈ¥Ëø¶¨Ò»¸ö·½·¨
-			 * £¨×¢£ºÔÚjavaÖĞ£¬Ëø¶¨Ò»¸ö·½·¨µÄÌõ¼şÊÇ·½·¨Ãû¼°²ÎÊı£©
+			 * å› ä¸ºè¿™é‡Œåªæ˜¯è°ƒç”¨beanä¸­å±æ€§çš„setæ–¹æ³•ï¼Œå±æ€§åç§°ä¸èƒ½é‡å¤
+			 * æ‰€ä»¥setæ–¹æ³•ä¹Ÿä¸ä¼šé‡å¤ï¼Œæ‰€ä»¥å°±ç›´æ¥ç”¨æ–¹æ³•åç§°å»é”å®šä¸€ä¸ªæ–¹æ³•
+			 * ï¼ˆæ³¨ï¼šåœ¨javaä¸­ï¼Œé”å®šä¸€ä¸ªæ–¹æ³•çš„æ¡ä»¶æ˜¯æ–¹æ³•ååŠå‚æ•°ï¼‰
 			 */
 			if(method.getName().equals(method_name))
 			{
 				Class<?>[] parameterC = method.getParameterTypes();
 				try {
-					/**Èç¹ûÊÇ(ÕûĞÍ,¸¡µãĞÍ,²¼¶ûĞÍ,×Ö½ÚĞÍ,Ê±¼äÀàĞÍ),
-					 * °´ÕÕ¸÷×ÔµÄ¹æÔò°ÑvalueÖµ×ª»»³É¸÷×ÔµÄÀàĞÍ
-					 * ·ñÔòÒ»ÂÉ°´ÀàĞÍÇ¿ÖÆ×ª»»(±ÈÈç:StringÀàĞÍ)
+					/**å¦‚æœæ˜¯(æ•´å‹,æµ®ç‚¹å‹,å¸ƒå°”å‹,å­—èŠ‚å‹,æ—¶é—´ç±»å‹),
+					 * æŒ‰ç…§å„è‡ªçš„è§„åˆ™æŠŠvalueå€¼è½¬æ¢æˆå„è‡ªçš„ç±»å‹
+					 * å¦åˆ™ä¸€å¾‹æŒ‰ç±»å‹å¼ºåˆ¶è½¬æ¢(æ¯”å¦‚:Stringç±»å‹)
 					 */
 					if(parameterC[0] == int.class || parameterC[0]==java.lang.Integer.class)
 					{
@@ -226,22 +226,22 @@ public class ImportExcel{
 	}
 
 	/**
-	 * ¹¦ÄÜ:¸ù¾İÊôĞÔÉú³É¶ÔÓ¦µÄset/get·½·¨
+	 * åŠŸèƒ½:æ ¹æ®å±æ€§ç”Ÿæˆå¯¹åº”çš„set/getæ–¹æ³•
 	 */
 	private static String convertToMethodName(String attribute,Class<?> objClass,boolean isSet) {
-		/** Í¨¹ıÕıÔò±í´ïÊ½À´Æ¥ÅäµÚÒ»¸ö×Ö·û **/
+		/** é€šè¿‡æ­£åˆ™è¡¨è¾¾å¼æ¥åŒ¹é…ç¬¬ä¸€ä¸ªå­—ç¬¦ **/
 		Pattern p = Pattern.compile(REGEX);
 		Matcher m = p.matcher(attribute);
 		StringBuilder sb = new StringBuilder();
-		/** Èç¹ûÊÇset·½·¨Ãû³Æ **/
+		/** å¦‚æœæ˜¯setæ–¹æ³•åç§° **/
 		if(isSet)
 		{
 			sb.append("set");
 		}else{
-			/** get·½·¨Ãû³Æ **/
+			/** getæ–¹æ³•åç§° **/
 			try {
 				Field attributeField = objClass.getDeclaredField(attribute);
-				/** Èç¹ûÀàĞÍÎªboolean **/
+				/** å¦‚æœç±»å‹ä¸ºboolean **/
 				if(attributeField.getType() == boolean.class||attributeField.getType() == Boolean.class)
 				{
 					sb.append("is");
@@ -255,7 +255,7 @@ public class ImportExcel{
 				e.printStackTrace();
 			}
 		}
-		/** Õë¶ÔÒÔÏÂ»®Ïß¿ªÍ·µÄÊôĞÔ **/
+		/** é’ˆå¯¹ä»¥ä¸‹åˆ’çº¿å¼€å¤´çš„å±æ€§ **/
 		if(attribute.charAt(0)!='_' && m.find())
 		{
 			sb.append(m.replaceFirst(m.group().toUpperCase()));
@@ -266,7 +266,7 @@ public class ImportExcel{
 	}
 
 	/**
-	 * ¹¦ÄÜ:Êä³öÌáÊ¾ĞÅÏ¢(ÆÕÍ¨ĞÅÏ¢´òÓ¡)
+	 * åŠŸèƒ½:è¾“å‡ºæç¤ºä¿¡æ¯(æ™®é€šä¿¡æ¯æ‰“å°)
 	 */
 	private static void out(String info, boolean showInfo) {
 		if (showInfo) {
@@ -275,7 +275,7 @@ public class ImportExcel{
 	}
 
 	/**
-	 * ¹¦ÄÜ:Êä³öÌáÊ¾ĞÅÏ¢(Í¬Ò»ĞĞµÄ²»Í¬µ¥Ôª¸ñĞÅÏ¢´òÓ¡)
+	 * åŠŸèƒ½:è¾“å‡ºæç¤ºä¿¡æ¯(åŒä¸€è¡Œçš„ä¸åŒå•å…ƒæ ¼ä¿¡æ¯æ‰“å°)
 	 */
 	private static void out(String info, boolean showInfo, boolean nextLine) {
 		if (showInfo) {

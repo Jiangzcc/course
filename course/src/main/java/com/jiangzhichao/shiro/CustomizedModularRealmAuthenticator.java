@@ -10,33 +10,33 @@ import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.realm.Realm;
 
 /**
- * ×Ô¶¨ÒåAuthenticator
+ * è‡ªå®šä¹‰Authenticator
  */
 public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticator {
 
     @Override
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken)
             throws AuthenticationException {
-        // ÅĞ¶ÏgetRealms()ÊÇ·ñ·µ»ØÎª¿Õ
+        // åˆ¤æ–­getRealms()æ˜¯å¦è¿”å›ä¸ºç©º
         assertRealmsConfigured();
-        // Ç¿ÖÆ×ª»»»Ø×Ô¶¨ÒåµÄCustomizedToken
+        // å¼ºåˆ¶è½¬æ¢å›è‡ªå®šä¹‰çš„CustomizedToken
         CustomizedToken customizedToken = (CustomizedToken) authenticationToken;
-        // µÇÂ¼ÀàĞÍ
+        // ç™»å½•ç±»å‹
         String loginType = customizedToken.getLoginType();
-        // ËùÓĞRealm
+        // æ‰€æœ‰Realm
         Collection<Realm> realms = getRealms();
-        // µÇÂ¼ÀàĞÍ¶ÔÓ¦µÄËùÓĞRealm
+        // ç™»å½•ç±»å‹å¯¹åº”çš„æ‰€æœ‰Realm
         Collection<Realm> typeRealms = new ArrayList<>();
         for (Realm realm : realms) {
         	/**
-        	 * ×¢Òâ£¬µ±ĞèÒª·Ö±ğ¶¨Òå´¦ÀíÆÕÍ¨ÓÃ»§ºÍ¹ÜÀíÔ±ÑéÖ¤µÄRealmÊ±£¬¶ÔÓ¦RealmµÄÈ«ÀàÃûÓ¦¸Ã°üº¬×Ö·û´®¡°User¡±£¬»òÕß¡°Admin¡±¡£
-        	 * ²¢ÇÒ£¬ËûÃÇ²»ÄÜÏà»¥°üº¬£¬ÀıÈç£¬´¦ÀíÆÕÍ¨ÓÃ»§ÑéÖ¤µÄRealmµÄÈ«ÀàÃûÖĞ²»Ó¦¸Ã°üº¬×Ö·û´®"Admin"¡£
+        	 * æ³¨æ„ï¼Œå½“éœ€è¦åˆ†åˆ«å®šä¹‰å¤„ç†æ™®é€šç”¨æˆ·å’Œç®¡ç†å‘˜éªŒè¯çš„Realmæ—¶ï¼Œå¯¹åº”Realmçš„å…¨ç±»ååº”è¯¥åŒ…å«å­—ç¬¦ä¸²â€œUserâ€ï¼Œæˆ–è€…â€œAdminâ€ã€‚
+        	 * å¹¶ä¸”ï¼Œä»–ä»¬ä¸èƒ½ç›¸äº’åŒ…å«ï¼Œä¾‹å¦‚ï¼Œå¤„ç†æ™®é€šç”¨æˆ·éªŒè¯çš„Realmçš„å…¨ç±»åä¸­ä¸åº”è¯¥åŒ…å«å­—ç¬¦ä¸²"Admin"ã€‚
         	 */
             if (realm.getName().contains(loginType))
                 typeRealms.add(realm);
         }
 
-        // ÅĞ¶ÏÊÇµ¥Realm»¹ÊÇ¶àRealm
+        // åˆ¤æ–­æ˜¯å•Realmè¿˜æ˜¯å¤šRealm
         if (typeRealms.size() == 1)
             return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);
         else

@@ -1,7 +1,7 @@
 package com.jiangzhichao.enumm;
 
 /**
- * µÇÂ½ÀàÐÍ
+ * ç™»é™†ç±»åž‹
  * 
  * @author BornToWin
  *

@@ -5,7 +5,7 @@ import java.util.List;
 import com.jiangzhichao.entity.StudentDO;
 
 /**
- * ¹ÜÀíÔ±CRUDÑ§ÉúĞÅÏ¢
+ * ç®¡ç†å‘˜CRUDå­¦ç”Ÿä¿¡æ¯
  * 
  * @author BornToWin
  *
@@ -13,41 +13,41 @@ import com.jiangzhichao.entity.StudentDO;
 public interface AdminOpStudentInfoService {
 
 	/**
-	 * ĞÂÔöÑ§ÉúĞÅÏ¢
+	 * æ–°å¢å­¦ç”Ÿä¿¡æ¯
 	 * @param studentDO
 	 * @return
 	 */
 	int insertStudent(StudentDO studentDO);
 	
 	/**
-	 * É¾³ıÑ§ÉúĞÅÏ¢
+	 * åˆ é™¤å­¦ç”Ÿä¿¡æ¯
 	 * @param sno
 	 * @return
 	 */
 	int deleteStudent(String sno);
 	
 	/**
-	 * ĞŞ¸ÄÑ§ÉúĞÅÏ¢
+	 * ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯
 	 * @param studentDO
 	 * @return
 	 */
 	int updateStudent(StudentDO studentDO);
 	
 	/**
-	 * Í¨¹ıÑ§ºÅ²éÑ¯Ñ§Éú
+	 * é€šè¿‡å­¦å·æŸ¥è¯¢å­¦ç”Ÿ
 	 * @param sno
 	 * @return
 	 */
 	StudentDO selectStudentBySno(String sno);
 	
 	/**
-	 * ²éÑ¯ËùÓĞÑ§ÉúĞÅÏ¢
+	 * æŸ¥è¯¢æ‰€æœ‰å­¦ç”Ÿä¿¡æ¯
 	 * @return
 	 */
 	List<StudentDO> selectAllStudent();
 	
 	/**
-	 * µ¼ÈëÑ§ÉúĞÅÏ¢ÁĞ±í
+	 * å¯¼å…¥å­¦ç”Ÿä¿¡æ¯åˆ—è¡¨
 	 * @param students
 	 */
 	void importStudent(List<StudentDO> students);

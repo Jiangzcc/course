@@ -39,7 +39,7 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 	
 	@Override
 	public int insertStudent(StudentDO studentDO) {
-		//ÉèÖÃ½ÇÉ«
+		//è®¾ç½®è§’è‰²
 		SubjectRoleDOKey subjectRoleDOKey = new SubjectRoleDOKey();
 		subjectRoleDOKey.setNo(studentDO.getSno());
 		subjectRoleDOKey.setRoleno("3");
@@ -49,17 +49,17 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 
 	@Override
 	public int deleteStudent(String sno) {
-		//²éÑ¯´ËÑ§ÉúËùÓĞÑ¡¿ÎĞÅÏ¢
+		//æŸ¥è¯¢æ­¤å­¦ç”Ÿæ‰€æœ‰é€‰è¯¾ä¿¡æ¯
 		List<StuCourseDO> list = stuCourseDOMapper.selectBySno(sno);
-		//´ËÑ§ÉúÔøÑ¡Ôñ¿Î³Ì ¿Î³ÌÈËÊı-1
+		//æ­¤å­¦ç”Ÿæ›¾é€‰æ‹©è¯¾ç¨‹ è¯¾ç¨‹äººæ•°-1
 		for (StuCourseDO stuCourseDO : list) {
 			CourseDO courseDO = courseDOMapper.selectByPrimaryKey(stuCourseDO.getCno());
 			courseDO.setCurrentnum(courseDO.getCurrentnum()-1);
 			courseDOMapper.updateByPrimaryKey(courseDO);
 		}
-		//É¾³ı½ÇÉ«
+		//åˆ é™¤è§’è‰²
 		subjectRoleDOMapper.deleteByNo(sno);
-		//É¾³ı´ËÑ§ÉúËùÓĞÑ¡¿ÎĞÅÏ¢
+		//åˆ é™¤æ­¤å­¦ç”Ÿæ‰€æœ‰é€‰è¯¾ä¿¡æ¯
 		stuCourseDOMapper.deleteBySno(sno);
 		return studentDOMapper.deleteByPrimaryKey(sno);
 	}
@@ -77,7 +77,7 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 	@Override
 	public List<StudentDO> selectAllStudent() {
 		List<StudentDO> students = studentDOMapper.select();
-		//Ìæ»»×¨Òµ±àºÅÎª×¨ÒµÃû³Æ--²»¿¼ÂÇĞÔÄÜ...
+		//æ›¿æ¢ä¸“ä¸šç¼–å·ä¸ºä¸“ä¸šåç§°--ä¸è€ƒè™‘æ€§èƒ½...
 		List<DepartmentDO> depts = departmentDOMapper.select();
 		for (StudentDO studentDO : students) {
 			for (DepartmentDO departmentDO : depts) {

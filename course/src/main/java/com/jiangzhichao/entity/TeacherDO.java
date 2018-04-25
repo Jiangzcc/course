@@ -12,7 +12,7 @@ public class TeacherDO {
      *
      * @mbg.generated Tue Apr 17 19:54:22 CST 2018
      */
-	@Excel(name = "工号")
+	@Excel(name = "宸ュ彿")
     private String tno;
 
     /**
@@ -22,7 +22,7 @@ public class TeacherDO {
      *
      * @mbg.generated Tue Apr 17 19:54:22 CST 2018
      */
-	@Excel(name = "名称")
+	@Excel(name = "鍚嶇О")
     private String tname;
 
     /**
@@ -32,7 +32,7 @@ public class TeacherDO {
      *
      * @mbg.generated Tue Apr 17 19:54:22 CST 2018
      */
-	@Excel(name = "密码")
+	@Excel(name = "瀵嗙爜")
     private String tpassword;
 
     /**
@@ -42,7 +42,7 @@ public class TeacherDO {
      *
      * @mbg.generated Tue Apr 17 19:54:22 CST 2018
      */
-	@Excel(name = "职称")
+	@Excel(name = "鑱岀О")
     private String ttitle;
 
     /**
@@ -52,7 +52,7 @@ public class TeacherDO {
      *
      * @mbg.generated Tue Apr 17 19:54:22 CST 2018
      */
-	@Excel(name = "性别")
+	@Excel(name = "鎬у埆")
     private String tsex;
 
     /**

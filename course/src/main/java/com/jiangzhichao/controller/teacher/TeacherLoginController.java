@@ -16,7 +16,7 @@ import com.jiangzhichao.enumm.LoginType;
 import com.jiangzhichao.shiro.CustomizedToken;
 
 /**
- * 教师登陆Controller--类似AdminLoginController，不过多注释
+ * 鏁欏笀鐧婚檰Controller--绫讳技AdminLoginController锛屼笉杩囧娉ㄩ噴
  * 
  * @author BornToWin
  *

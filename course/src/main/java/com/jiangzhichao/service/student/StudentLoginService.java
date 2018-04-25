@@ -3,7 +3,7 @@ package com.jiangzhichao.service.student;
 import com.jiangzhichao.entity.StudentDO;
 
 /**
- * Ñ§ÉúµÇÂ½Service
+ * å­¦ç”Ÿç™»é™†Service
  * 
  * @author BornToWin
  *
@@ -11,7 +11,7 @@ import com.jiangzhichao.entity.StudentDO;
 public interface StudentLoginService {
 
 	/**
-	 * Í¨¹ıÑ§ºÅºÍÃÜÂë²éÑ¯Ñ§ÉúĞÅÏ¢
+	 * é€šè¿‡å­¦å·å’Œå¯†ç æŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯
 	 * @param sno
 	 * @param spassword
 	 * @return

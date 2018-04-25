@@ -12,7 +12,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "±àºÅ")
+	@Excel(name = "ç¼–å·")
     private String cno;
 
     /**
@@ -22,7 +22,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "Ãû³Æ")
+	@Excel(name = "åç§°")
     private String cname;
 
     /**
@@ -32,7 +32,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "Ñ§·Ö")
+	@Excel(name = "å­¦åˆ†")
     private Integer credit;
 
     /**
@@ -42,7 +42,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "ËùÊô×¨Òµ±àºÅ")
+	@Excel(name = "æ‰€å±ä¸“ä¸šç¼–å·")
     private String dno;
 
     /**
@@ -52,7 +52,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "µ±Ç°¿Î³ÌÈËÊı")
+	@Excel(name = "å½“å‰è¯¾ç¨‹äººæ•°")
     private Integer currentnum;
 
     /**
@@ -62,7 +62,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "¿Î³Ì¿ÉÑ¡×ÜÈËÊı")
+	@Excel(name = "è¯¾ç¨‹å¯é€‰æ€»äººæ•°")
     private Integer maxnum;
 
     /**
@@ -72,7 +72,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "¿Î³Ì½éÉÜ")
+	@Excel(name = "è¯¾ç¨‹ä»‹ç»")
     private String cintroduce;
 
     /**
@@ -82,7 +82,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "ÊÚ¿Î½ÌÊ¦")
+	@Excel(name = "æˆè¯¾æ•™å¸ˆ")
     private String tno;
 
     /**
@@ -92,7 +92,7 @@ public class CourseDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "ËùÊôÑ§ÆÚ")
+	@Excel(name = "æ‰€å±å­¦æœŸ")
     private String cterm;
 
     /**

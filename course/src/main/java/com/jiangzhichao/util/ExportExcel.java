@@ -24,7 +24,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
- * µ¼³öExcel¹¤¾ßÀà
+ * å¯¼å‡ºExcelå·¥å…·ç±»
  * 
  * @author BornToWin
  *
@@ -32,13 +32,13 @@ import org.apache.poi.ss.util.CellRangeAddress;
 public class ExportExcel {
 	
 	/**
-	 * ¹¦ÄÜ: µ¼³öÎªExcel¹¤×÷²¾
-	 * ²ÎÊı: sheetName[¹¤×÷²¾ÖĞµÄÒ»ÕÅ¹¤×÷±íµÄÃû³Æ]
-	 * ²ÎÊı: titleName[±í¸ñµÄ±êÌâÃû³Æ]
-	 * ²ÎÊı: headers[±í¸ñÃ¿Ò»ÁĞµÄÁĞÃû]
-	 * ²ÎÊı: dataSet[Òªµ¼³öµÄÊı¾İÔ´]
-	 * ²ÎÊı: resultUrl[µ¼³öµÄexcelÎÄ¼şµØÖ·]
-	 * ²ÎÊı: pattern[Ê±¼äÀàĞÍÊı¾İµÄ¸ñÊ½]
+	 * åŠŸèƒ½: å¯¼å‡ºä¸ºExcelå·¥ä½œç°¿
+	 * å‚æ•°: sheetName[å·¥ä½œç°¿ä¸­çš„ä¸€å¼ å·¥ä½œè¡¨çš„åç§°]
+	 * å‚æ•°: titleName[è¡¨æ ¼çš„æ ‡é¢˜åç§°]
+	 * å‚æ•°: headers[è¡¨æ ¼æ¯ä¸€åˆ—çš„åˆ—å]
+	 * å‚æ•°: dataSet[è¦å¯¼å‡ºçš„æ•°æ®æº]
+	 * å‚æ•°: resultUrl[å¯¼å‡ºçš„excelæ–‡ä»¶åœ°å€]
+	 * å‚æ•°: pattern[æ—¶é—´ç±»å‹æ•°æ®çš„æ ¼å¼]
 	 */
 	public static void exportExcel(String sheetName,String titleName,String[] headers,Collection<?> dataSet,String resultUrl,String pattern) {
 
@@ -47,23 +47,23 @@ public class ExportExcel {
 	}
 
 	/**
-	 * ¹¦ÄÜ:ÕæÕıÊµÏÖµ¼³ö
+	 * åŠŸèƒ½:çœŸæ­£å®ç°å¯¼å‡º
 	 */
 	private static void doExportExcel(String sheetName,String titleName,String[] headers,Collection<?> dataSet,String resultUrl,String pattern) {
 
-		// ÉùÃ÷Ò»¸ö¹¤×÷±¡
+		// å£°æ˜ä¸€ä¸ªå·¥ä½œè–„
 		HSSFWorkbook workbook = new HSSFWorkbook();
 
-		// Éú³ÉÒ»¸ö¹¤×÷±í
+		// ç”Ÿæˆä¸€ä¸ªå·¥ä½œè¡¨
 		HSSFSheet sheet = workbook.createSheet(sheetName);
-		// ÉèÖÃ¹¤×÷±íÄ¬ÈÏÁĞ¿í¶ÈÎª20¸ö×Ö½Ú
+		// è®¾ç½®å·¥ä½œè¡¨é»˜è®¤åˆ—å®½åº¦ä¸º20ä¸ªå­—èŠ‚
 		sheet.setDefaultColumnWidth((short) 20);
-		//ÔÚ¹¤×÷±íÖĞºÏ²¢Ê×ĞĞ²¢¾ÓÖĞ
+		//åœ¨å·¥ä½œè¡¨ä¸­åˆå¹¶é¦–è¡Œå¹¶å±…ä¸­
 		sheet.addMergedRegion(new CellRangeAddress(0,0,0,headers.length-1));
 
-		// ´´½¨[±êÌâ]ÑùÊ½
+		// åˆ›å»º[æ ‡é¢˜]æ ·å¼
 		HSSFCellStyle titleStyle = workbook.createCellStyle();
-		// ÉèÖÃ[±êÌâ]ÑùÊ½
+		// è®¾ç½®[æ ‡é¢˜]æ ·å¼
 		titleStyle.setFillForegroundColor(HSSFColor.LIGHT_BLUE.index);
 		titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		titleStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -71,18 +71,18 @@ public class ExportExcel {
 		titleStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 		titleStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
 		titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		//´´½¨[±êÌâ]×ÖÌå
+		//åˆ›å»º[æ ‡é¢˜]å­—ä½“
 		HSSFFont titleFont = workbook.createFont();
-		//ÉèÖÃ[±êÌâ]×ÖÌå
+		//è®¾ç½®[æ ‡é¢˜]å­—ä½“
 		titleFont.setColor(HSSFColor.WHITE.index);
 		titleFont.setFontHeightInPoints((short) 24);
 		titleFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		// °Ñ[±êÌâ×ÖÌå]Ó¦ÓÃµ½[±êÌâÑùÊ½]
+		// æŠŠ[æ ‡é¢˜å­—ä½“]åº”ç”¨åˆ°[æ ‡é¢˜æ ·å¼]
 		titleStyle.setFont(titleFont);
 
-		// ´´½¨[ÁĞÊ×]ÑùÊ½
+		// åˆ›å»º[åˆ—é¦–]æ ·å¼
 		HSSFCellStyle headersStyle = workbook.createCellStyle();
-		// ÉèÖÃ[ÁĞÊ×]ÑùÊ½
+		// è®¾ç½®[åˆ—é¦–]æ ·å¼
 		headersStyle.setFillForegroundColor(HSSFColor.LIGHT_ORANGE.index);
 		headersStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		headersStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -90,18 +90,18 @@ public class ExportExcel {
 		headersStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 		headersStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
 		headersStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		//´´½¨[ÁĞÊ×]×ÖÌå
+		//åˆ›å»º[åˆ—é¦–]å­—ä½“
 		HSSFFont headersFont = workbook.createFont();
-		//ÉèÖÃ[ÁĞÊ×]×ÖÌå
+		//è®¾ç½®[åˆ—é¦–]å­—ä½“
 		headersFont.setColor(HSSFColor.VIOLET.index);
 		headersFont.setFontHeightInPoints((short) 12);
 		headersFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		// °Ñ[ÁĞÊ××ÖÌå]Ó¦ÓÃµ½[ÁĞÊ×ÑùÊ½]
+		// æŠŠ[åˆ—é¦–å­—ä½“]åº”ç”¨åˆ°[åˆ—é¦–æ ·å¼]
 		headersStyle.setFont(headersFont);
 
-		// ´´½¨[±íÖĞÊı¾İ]ÑùÊ½
+		// åˆ›å»º[è¡¨ä¸­æ•°æ®]æ ·å¼
 		HSSFCellStyle dataSetStyle = workbook.createCellStyle();
-		// ÉèÖÃ[±íÖĞÊı¾İ]ÑùÊ½
+		// è®¾ç½®[è¡¨ä¸­æ•°æ®]æ ·å¼
 		dataSetStyle.setFillForegroundColor(HSSFColor.GOLD.index);
 		dataSetStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		dataSetStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -110,21 +110,21 @@ public class ExportExcel {
 		dataSetStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
 		dataSetStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		dataSetStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-		// ´´½¨[±íÖĞÊı¾İ]×ÖÌå
+		// åˆ›å»º[è¡¨ä¸­æ•°æ®]å­—ä½“
 		HSSFFont dataSetFont = workbook.createFont();
-		// ÉèÖÃ[±íÖĞÊı¾İ]×ÖÌå
+		// è®¾ç½®[è¡¨ä¸­æ•°æ®]å­—ä½“
 		dataSetFont.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
 		dataSetFont.setColor(HSSFColor.BLUE.index);
-		// °Ñ[±íÖĞÊı¾İ×ÖÌå]Ó¦ÓÃµ½[±íÖĞÊı¾İÑùÊ½]
+		// æŠŠ[è¡¨ä¸­æ•°æ®å­—ä½“]åº”ç”¨åˆ°[è¡¨ä¸­æ•°æ®æ ·å¼]
 		dataSetStyle.setFont(dataSetFont);
 
-		//´´½¨±êÌâĞĞ-Ôö¼ÓÑùÊ½-¸³Öµ
+		//åˆ›å»ºæ ‡é¢˜è¡Œ-å¢åŠ æ ·å¼-èµ‹å€¼
 		HSSFRow titleRow = sheet.createRow(0);
 		HSSFCell titleCell = titleRow.createCell(0);
 		titleCell.setCellStyle(titleStyle);
 		titleCell.setCellValue(titleName);
 
-		// ´´½¨ÁĞÊ×-Ôö¼ÓÑùÊ½-¸³Öµ
+		// åˆ›å»ºåˆ—é¦–-å¢åŠ æ ·å¼-èµ‹å€¼
 		HSSFRow row = sheet.createRow(1);
 		for (short i = 0; i < headers.length; i++) {
 
@@ -136,14 +136,14 @@ public class ExportExcel {
 
 		}
 
-		// ´´½¨±íÖĞÊı¾İĞĞ-Ôö¼ÓÑùÊ½-¸³Öµ
+		// åˆ›å»ºè¡¨ä¸­æ•°æ®è¡Œ-å¢åŠ æ ·å¼-èµ‹å€¼
 		Iterator<?> it = dataSet.iterator();
 		int index = 1;
 		while (it.hasNext()) {
 			index++;
 			row = sheet.createRow(index);   
 			Object t = it.next();
-			// ÀûÓÃ·´Éä£¬¸ù¾İjavabeanÊôĞÔµÄÏÈºóË³Ğò£¬¶¯Ì¬µ÷ÓÃgetXxx()·½·¨µÃµ½ÊôĞÔÖµ
+			// åˆ©ç”¨åå°„ï¼Œæ ¹æ®javabeanå±æ€§çš„å…ˆåé¡ºåºï¼ŒåŠ¨æ€è°ƒç”¨getXxx()æ–¹æ³•å¾—åˆ°å±æ€§å€¼
 			Field[] fields = t.getClass().getDeclaredFields();
 			for (short i = 0; i < fields.length; i++) {
 				@SuppressWarnings("deprecation")
@@ -159,29 +159,29 @@ public class ExportExcel {
 					Method getMethod = tCls.getMethod(getMethodName,new Class[] {});
 					Object value = getMethod.invoke(t, new Object[] {});
 
-					// Èç¹ûÊÇÊ±¼äÀàĞÍ,°´ÕÕ¸ñÊ½×ª»»
+					// å¦‚æœæ˜¯æ—¶é—´ç±»å‹,æŒ‰ç…§æ ¼å¼è½¬æ¢
 					String textValue = null;
 					if (value instanceof Date) {
 						Date date = (Date) value;
 						SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 						textValue = sdf.format(date);
 					} else {
-						// ÆäËüÊı¾İÀàĞÍ¶¼µ±×÷×Ö·û´®¼òµ¥´¦Àí
+						// å…¶å®ƒæ•°æ®ç±»å‹éƒ½å½“ä½œå­—ç¬¦ä¸²ç®€å•å¤„ç†
 						if (value == null) {
 							value = "";
 						}
 						textValue = value.toString();
 					}
 
-					// ÀûÓÃÕıÔò±í´ïÊ½ÅĞ¶ÏtextValueÊÇ·ñÈ«²¿ÓÉÊı×Ö×é³É
+					// åˆ©ç”¨æ­£åˆ™è¡¨è¾¾å¼åˆ¤æ–­textValueæ˜¯å¦å…¨éƒ¨ç”±æ•°å­—ç»„æˆ
 					if (textValue != null) {
 						Pattern p = Pattern.compile("^\\d+(\\.\\d+)?$");
 						Matcher matcher = p.matcher(textValue);
 						if (matcher.matches()) {
-							// ÊÇÊı×Öµ±×÷double´¦Àí
+							// æ˜¯æ•°å­—å½“ä½œdoubleå¤„ç†
 							cell.setCellValue(Double.parseDouble(textValue));
 						} else {
-							// ²»ÊÇÊı×Ö×öÆÕÍ¨´¦Àí
+							// ä¸æ˜¯æ•°å­—åšæ™®é€šå¤„ç†
 							cell.setCellValue(textValue);
 						}
 					}
@@ -211,7 +211,7 @@ public class ExportExcel {
 				} catch (InvocationTargetException e) {
 					e.printStackTrace();
 				} finally {
-					//ÇåÀí×ÊÔ´
+					//æ¸…ç†èµ„æº
 					try {
 						workbook.close();
 					} catch (IOException e) {

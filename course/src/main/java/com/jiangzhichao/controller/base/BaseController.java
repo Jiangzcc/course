@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * »ùÀàController£¬ÓÃÓÚÏµÍ³Òì³£Ê±·µ»Ø´íÎóĞÅÏ¢
+ * åŸºç±»Controllerï¼Œç”¨äºç³»ç»Ÿå¼‚å¸¸æ—¶è¿”å›é”™è¯¯ä¿¡æ¯
  * 
  * @author BornToWin
  *
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BaseController {
 	
 	/*
-	 * È«¾ÖÒì³£´¦Àí
+	 * å…¨å±€å¼‚å¸¸å¤„ç†
 	 */
 	@ExceptionHandler
 	@ResponseBody
 	public Map<String,Object> exp(HttpServletRequest request, Exception ex) {
 		Map<String,Object> map = new HashMap<>();
-		//Òª²»Òª´òÓ¡ÄØ£¿
+		//è¦ä¸è¦æ‰“å°å‘¢ï¼Ÿ
 		ex.printStackTrace();
 		map.put("result", false);
 		return map;

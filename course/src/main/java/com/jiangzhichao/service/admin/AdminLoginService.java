@@ -3,7 +3,7 @@ package com.jiangzhichao.service.admin;
 import com.jiangzhichao.entity.AdminDO;
 
 /**
- * ¹ÜÀíÔ±µÇÂ½Service
+ * ç®¡ç†å‘˜ç™»é™†Service
  * 
  * @author BornToWin
  *
@@ -11,7 +11,7 @@ import com.jiangzhichao.entity.AdminDO;
 public interface AdminLoginService {
 	
 	/**
-	 * Í¨¹ıÓÃ»§ÃûºÍÃÜÂë²éÑ¯¹ÜÀíÔ±ĞÅÏ¢
+	 * é€šè¿‡ç”¨æˆ·åå’Œå¯†ç æŸ¥è¯¢ç®¡ç†å‘˜ä¿¡æ¯
 	 * @param username
 	 * @param password
 	 * @return

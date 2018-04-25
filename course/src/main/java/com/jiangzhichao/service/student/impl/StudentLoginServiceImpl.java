@@ -18,9 +18,9 @@ public class StudentLoginServiceImpl implements StudentLoginService {
 	@Override
 	public StudentDO queryStudent(String sno, String spassword) {
 		StudentDO studentDO = studentDOMapper.selectByPrimaryKey(sno);
-		//学号存在
+		//瀛﹀彿瀛樺湪
 		if(null != studentDO) {
-			//密码正确
+			//瀵嗙爜姝ｇ‘
 			if(studentDO.getSpassword().equals(spassword)) {
 				return studentDO;
 			}

@@ -12,7 +12,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "学号")
+	@Excel(name = "瀛﹀彿")
     private String sno;
 
     /**
@@ -22,7 +22,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "姓名")
+	@Excel(name = "濮撳悕")
     private String sname;
 
     /**
@@ -32,7 +32,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "密码")
+	@Excel(name = "瀵嗙爜")
     private String spassword;
 
     /**
@@ -42,7 +42,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "学期")
+	@Excel(name = "瀛︽湡")
     private String sterm;
 
     /**
@@ -52,7 +52,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "专业")
+	@Excel(name = "涓撲笟")
     private String dno;
 
     /**
@@ -62,7 +62,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "性别")
+	@Excel(name = "鎬у埆")
     private String ssex;
 
     /**
@@ -72,7 +72,7 @@ public class StudentDO {
      *
      * @mbg.generated Wed Apr 18 20:00:37 CST 2018
      */
-	@Excel(name = "身份证号")
+	@Excel(name = "韬唤璇佸彿")
     private String idcard;
 
     /**

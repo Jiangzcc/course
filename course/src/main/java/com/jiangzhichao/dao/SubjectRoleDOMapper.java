@@ -30,14 +30,14 @@ public interface SubjectRoleDOMapper {
     int insertSelective(SubjectRoleDOKey record);
     
     /**
-     * É¾³ý½ÇÉ«
+     * åˆ é™¤è§’è‰²
      * @param no
      * @return
      */
     int deleteByNo(String no);
     
     /**
-     * ²éÑ¯½ÇÉ«
+     * æŸ¥è¯¢è§’è‰²
      */
     List<SubjectRoleDOKey> selectByNo(String no); 
 }

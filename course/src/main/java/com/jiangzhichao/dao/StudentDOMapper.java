@@ -54,12 +54,12 @@ public interface StudentDOMapper {
     int updateByPrimaryKey(StudentDO record);
     
     /**
-     * ²éÑ¯Ä³×¨ÒµÏÂËùÓĞÑ§Éú
+     * æŸ¥è¯¢æŸä¸“ä¸šä¸‹æ‰€æœ‰å­¦ç”Ÿ
      */
     List<StudentDO> selectByDno(String dno);
     
     /**
-     * ²éÑ¯ËùÓĞÑ§Éú
+     * æŸ¥è¯¢æ‰€æœ‰å­¦ç”Ÿ
      */
     List<StudentDO> select();
 }

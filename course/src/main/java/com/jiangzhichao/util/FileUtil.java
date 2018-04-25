@@ -18,7 +18,7 @@ import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * Excelµ¼Èëµ¼³ö¹¤¾ßÀà
+ * Excelå¯¼å…¥å¯¼å‡ºå·¥å…·ç±»
  * 
  * @author BornToWin
  *
@@ -71,7 +71,7 @@ public class FileUtil {
 		try {
 			list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
 		}catch (NoSuchElementException e){
-			throw new RuntimeException("Ä£°å²»ÄÜÎª¿Õ");
+			throw new RuntimeException("æ¨¡æ¿ä¸èƒ½ä¸ºç©º");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -89,7 +89,7 @@ public class FileUtil {
 		try {
 			list = ExcelImportUtil.importExcel(file.getInputStream(), pojoClass, params);
 		}catch (NoSuchElementException e){
-			throw new RuntimeException("excelÎÄ¼ş²»ÄÜÎª¿Õ");
+			throw new RuntimeException("excelæ–‡ä»¶ä¸èƒ½ä¸ºç©º");
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}

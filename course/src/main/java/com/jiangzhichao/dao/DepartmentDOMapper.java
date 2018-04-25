@@ -54,9 +54,9 @@ public interface DepartmentDOMapper {
     int updateByPrimaryKey(DepartmentDO record);
     
     /**
-     * ²éÑ¯ËùÓĞ×¨Òµ
+     * æŸ¥è¯¢æ‰€æœ‰ä¸“ä¸š
      * 
-     * @return ×¨Òµ¼¯ºÏ
+     * @return ä¸“ä¸šé›†åˆ
      */
     List<DepartmentDO> select();
 }

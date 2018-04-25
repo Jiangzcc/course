@@ -54,9 +54,9 @@ public interface TeacherDOMapper {
     int updateByPrimaryKey(TeacherDO record);
     
     /**
-     * ²éÑ¯ËùÓĞ½ÌÊ¦ĞÅÏ¢
+     * æŸ¥è¯¢æ‰€æœ‰æ•™å¸ˆä¿¡æ¯
      * 
-     * @return ½ÌÊ¦ĞÅÏ¢¼¯ºÏ
+     * @return æ•™å¸ˆä¿¡æ¯é›†åˆ
      */
     List<TeacherDO> select();
 }

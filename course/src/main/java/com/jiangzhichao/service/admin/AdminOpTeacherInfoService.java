@@ -5,7 +5,7 @@ import java.util.List;
 import com.jiangzhichao.entity.TeacherDO;
 
 /**
- * ¹ÜÀíÔ±CRUD½ÌÊ¦ĞÅÏ¢
+ * ç®¡ç†å‘˜CRUDæ•™å¸ˆä¿¡æ¯
  * 
  * @author BornToWin
  *
@@ -13,41 +13,41 @@ import com.jiangzhichao.entity.TeacherDO;
 public interface AdminOpTeacherInfoService {
 	
 	/**
-	 * ĞÂÔö½ÌÊ¦ĞÅÏ¢
+	 * æ–°å¢æ•™å¸ˆä¿¡æ¯
 	 * @param teacherDO
 	 * @return
 	 */
 	int insertTeacher(TeacherDO teacherDO);
 	
 	/**
-	 * É¾³ı½ÌÊ¦ĞÅÏ¢
+	 * åˆ é™¤æ•™å¸ˆä¿¡æ¯
 	 * @param tno
 	 * @return
 	 */
 	int deleteTeacher(String tno);
 	
 	/**
-	 * ĞŞ¸Ä½ÌÊ¦ĞÅÏ¢
+	 * ä¿®æ”¹æ•™å¸ˆä¿¡æ¯
 	 * @param teacherDO
 	 * @return
 	 */
 	int updateTeacher(TeacherDO teacherDO);
 	
 	/**
-	 * Í¨¹ı½ÌÊ¦±àºÅ²éÑ¯½ÌÊ¦ĞÅÏ¢
+	 * é€šè¿‡æ•™å¸ˆç¼–å·æŸ¥è¯¢æ•™å¸ˆä¿¡æ¯
 	 * @param tno
 	 * @return
 	 */
 	TeacherDO selectTeacherByTno(String tno);
 	
 	/**
-	 * ²éÑ¯ËùÓĞ½ÌÊ¦ĞÅÏ¢
+	 * æŸ¥è¯¢æ‰€æœ‰æ•™å¸ˆä¿¡æ¯
 	 * @return
 	 */
 	List<TeacherDO> selectAllTeacher();
 	
 	/**
-	 * µ¼Èë½ÌÊ¦ĞÅÏ¢ÁĞ±í
+	 * å¯¼å…¥æ•™å¸ˆä¿¡æ¯åˆ—è¡¨
 	 * @param teachers
 	 */
 	void importTeacher(List<TeacherDO> teachers);
