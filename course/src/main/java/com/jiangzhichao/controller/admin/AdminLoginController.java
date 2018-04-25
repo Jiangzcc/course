@@ -24,7 +24,7 @@ import com.jiangzhichao.shiro.CustomizedToken;
 @Controller
 @RequestMapping("/login")
 @Scope("prototype")
-public class AdminLoginController extends BaseController{
+public class AdminLoginController extends BaseController {
 
 	/**
 	 * π‹¿Ì‘±µ«¬Ω

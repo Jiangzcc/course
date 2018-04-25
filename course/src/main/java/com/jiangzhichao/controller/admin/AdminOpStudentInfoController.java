@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.entity.StudentDO;
 import com.jiangzhichao.service.admin.AdminOpStudentInfoService;
 import com.jiangzhichao.util.FileUtil;
@@ -29,7 +30,7 @@ import com.jiangzhichao.util.FileUtil;
 @Controller
 @RequestMapping("/admin")
 @Scope("prototype")
-public class AdminOpStudentInfoController {
+public class AdminOpStudentInfoController extends BaseController {
 	
 	private String sterm;
 	@Value(value = "#{prop.term}")

@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>学生管理系统</title>
+<!-- Bootstrap Styles-->
+<link href="../assets/css/bootstrap.css" rel="stylesheet" />
+<!-- FontAwesome Styles-->
+<link href="../assets/css/font-awesome.css" rel="stylesheet" />
+<!-- Morris Chart Styles-->
+
+<!-- Custom Styles-->
+<link href="../assets/css/custom-styles.css" rel="stylesheet" />
+<link href="../assets/css/bootstrap-switch.css" rel="stylesheet" />
+<!-- Google Fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<!-- TABLE STYLES-->
+<link href="../assets/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />
+</head>
+
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default top-navbar" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html"><strong>学生选课系统</strong></a>
+			</div>
+
+			<ul class="nav navbar-top-links navbar-right">
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="fa fa-sign-out fa-fw"></i>
+								Logout</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+
+				<!-- /.dropdown -->
+			</ul>
+		</nav>
+		<!--/. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li><a href="/course/admin/index.html"><i
+							class="fa fa-dashboard"></i> 首页 </a></li>
+					<li><a href="/course/admin/admin-courseinfo.html"><i
+							class="fa fa-desktop"></i> 课程信息管理</a></li>
+					<li><a href="/course/admin/admin-studentinfo.html"><i
+							class="fa fa-bar-chart-o"></i> 学生信息管理</a></li>
+					<li><a href="/course/admin/admin-teacherinfo.html"><i
+							class="fa fa-qrcode"></i> 教师信息管理</a></li>
+					<li><a href="/course/admin/admin-departmentinfo.html"><i
+							class="fa fa-table"></i> 专业信息管理</a></li>
+					<li><a href="/course/admin/admin-statusinfo.html"
+						class="active-menu"><i class="fa fa-edit"></i> 状态信息管理 </a></li>
+				</ul>
+
+			</div>
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div class="header">
+				<h1 class="page-header">
+					状态信息管理 <small>Status information management</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#">首页</a></li>
+					<li><a href="#">状态</a></li>
+					<li class="active">Data</li>
+				</ol>
+			</div>
+
+			<div id="page-inner">
+				<div class="panel panel-default">
+					<div class="panel-heading">选课状态</div>
+					<div class="panel-body">
+						<div class="bootstrap-switch bootstrap-switch-small">
+							<input type="checkbox" name="choice" />
+						</div>
+					</div>
+
+					<div class="panel-heading">成绩录入状态</div>
+					<div class="panel-body">
+						<div class="bootstrap-switch bootstrap-switch-small">
+							<input type="checkbox" name="entry" />
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- /. PAGE INNER  -->
+	</div>
+
+	<!-- /. PAGE WRAPPER  -->
+	<!-- /. WRAPPER  -->
+	<!-- JS Scripts-->
+	<!-- jQuery Js -->
+	<script src="../assets/js/jquery-1.10.2.js"></script>
+	<!-- Bootstrap Js -->
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<!-- Metis Menu Js -->
+	<script src="../assets/js/jquery.metisMenu.js"></script>
+	<!-- DATA TABLE SCRIPTS -->
+	<script src="../assets/js/dataTables/jquery.dataTables.js"></script>
+	<script src="../assets/js/dataTables/dataTables.bootstrap.js"></script>
+	<!-- Custom Js -->
+	<script src="../assets/plugins/layer/layer.js"></script>
+	<script src="../assets/plugins/Validform_v5.3.2.js"></script>
+	<script src="../assets/plugins/jquery-form.js" type="text/javascript"></script>
+	<script src="../assets/js/bootstrap-switch.js"></script>
+
+	<script>
+		$(document).ready(function() {
+
+			$.post("/course/admin/queryStatus", function(data) {
+				var result = eval("(" + data + ")");
+				if (result.choice) {
+					$('[name="choice"]').bootstrapSwitch('state', true);
+				}
+				;
+				if (result.entry) {
+					$('[name="entry"]').bootstrapSwitch('state', true);
+				}
+				;
+			})
+
+			$('[name="choice"]').bootstrapSwitch({
+				onSwitchChange : function(event, state) {
+					if (state == true) {
+						$.post("/course/admin/updateStatus", {
+							choice : true
+						}, function(data) {
+							var result = eval("(" + data + ")");
+							if (result) {
+							} else {
+								layer.msg('开启失败...', {
+									time : 1500
+								});
+							}
+						})
+					} else {
+						$.post("/course/admin/updateStatus", {
+							choice : false
+						}, function(data) {
+							var result = eval("(" + data + ")");
+							if (result) {
+							} else {
+								layer.msg('关闭失败...', {
+									time : 1500
+								});
+							}
+						})
+					}
+				}
+			});
+
+			$('[name="entry"]').bootstrapSwitch({
+				onSwitchChange : function(event, state) {
+					if (state == true) {
+						$.post("/course/admin/updateStatus", {
+							entry : true
+						}, function(data) {
+							var result = eval("(" + data + ")");
+							if (result) {
+							} else {
+								layer.msg('开启失败...', {
+									time : 1500
+								});
+							}
+						})
+					} else {
+						$.post("/course/admin/updateStatus", {
+							entry : false
+						}, function(data) {
+							var result = eval("(" + data + ")");
+							if (result) {
+							} else {
+								layer.msg('关闭失败...', {
+									time : 1500
+								});
+							}
+						})
+					}
+				}
+			});
+		});
+	</script>
+
+</body>
+
+</html>

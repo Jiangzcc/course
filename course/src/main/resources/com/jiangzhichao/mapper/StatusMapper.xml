@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiangzhichao.dao.StatusMapper">
+	<select id="select" resultType="com.jiangzhichao.entity.Status">
+		select choice,entry from status
+	</select>
+	<update id="update" parameterType="com.jiangzhichao.entity.Status">
+		update status
+		<set>
+			<if test="choice != null">
+				choice = #{choice},
+			</if>
+			<if test="entry != null">
+				entry = #{entry},
+			</if>
+		</set>
+	</update>
+</mapper>

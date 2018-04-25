@@ -29,7 +29,7 @@ import com.jiangzhichao.util.FileUtil;
 @Controller
 @RequestMapping("/admin")
 @Scope("prototype")
-public class AdminOpTeacherInfoController extends BaseController{
+public class AdminOpTeacherInfoController extends BaseController {
 
 	@Autowired
 	private AdminOpTeacherInfoService adminOpTeacherInfoService;
