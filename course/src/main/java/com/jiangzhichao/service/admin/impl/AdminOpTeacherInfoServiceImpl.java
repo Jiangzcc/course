@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jiangzhichao.dao.CourseDOMapper;
-import com.jiangzhichao.dao.SubjectRoleDOMapper;
-import com.jiangzhichao.dao.TeacherDOMapper;
-import com.jiangzhichao.entity.CourseDO;
-import com.jiangzhichao.entity.SubjectRoleDOKey;
-import com.jiangzhichao.entity.TeacherDO;
+import com.jiangzhichao.dao.CourseMapper;
+import com.jiangzhichao.dao.SubjectRoleMapper;
+import com.jiangzhichao.dao.TeacherMapper;
+import com.jiangzhichao.entity.CourseDTO;
+import com.jiangzhichao.entity.SubjectRoleDTOKey;
+import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
 
 @Service
@@ -19,60 +19,60 @@ import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
 public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService {
 
 	@Autowired
-	private TeacherDOMapper teacherDoMapper;
+	private TeacherMapper teacherDoMapper;
 	
 	@Autowired
-	private SubjectRoleDOMapper subjectRoleDOMapper;
+	private SubjectRoleMapper subjectRoleMapper;
 	
 	@Autowired
-	private CourseDOMapper courseDOMapper;
+	private CourseMapper courseMapper;
 	
 	@Override
-	public int insertTeacher(TeacherDO teacherDO) {
-		int i = teacherDoMapper.insert(teacherDO);
+	public int insertTeacher(TeacherDTO teacherDTO) {
+		int i = teacherDoMapper.insert(teacherDTO);
 		//设置角色
-		SubjectRoleDOKey subjectRoleDOKey = new SubjectRoleDOKey();
-		subjectRoleDOKey.setNo(teacherDO.getTno());
-		subjectRoleDOKey.setRoleno("2");
-		subjectRoleDOMapper.insert(subjectRoleDOKey);
+		SubjectRoleDTOKey subjectRoleDTOKey = new SubjectRoleDTOKey();
+		subjectRoleDTOKey.setNo(teacherDTO.getTno());
+		subjectRoleDTOKey.setRoleno("2");
+		subjectRoleMapper.insert(subjectRoleDTOKey);
 		return i;
 	}
 
 	@Override
 	public int deleteTeacher(String tno) {
 		//删除前先设置课程信息中此教师编号为null
-		List<CourseDO> list = courseDOMapper.selectByTno(tno);
-		for (CourseDO courseDO : list) {
-			courseDO.setTno(null);
-			courseDOMapper.updateByPrimaryKey(courseDO);
+		List<CourseDTO> list = courseMapper.selectByTno(tno);
+		for (CourseDTO courseDTO : list) {
+			courseDTO.setTno(null);
+			courseMapper.updateByPrimaryKey(courseDTO);
 		}
 		//删除角色
-		subjectRoleDOMapper.deleteByNo(tno);
+		subjectRoleMapper.deleteByNo(tno);
 		//删除用户
 		int i = teacherDoMapper.deleteByPrimaryKey(tno);
 		return i;
 	}
 
 	@Override
-	public int updateTeacher(TeacherDO teacherDO) {
-		return teacherDoMapper.updateByPrimaryKey(teacherDO);
+	public int updateTeacher(TeacherDTO teacherDTO) {
+		return teacherDoMapper.updateByPrimaryKey(teacherDTO);
 	}
 
 	@Override
-	public TeacherDO selectTeacherByTno(String tno) {
+	public TeacherDTO selectTeacherByTno(String tno) {
 		return teacherDoMapper.selectByPrimaryKey(tno);
 	}
 
 	@Override
-	public List<TeacherDO> selectAllTeacher() {
+	public List<TeacherDTO> selectAllTeacher() {
 		return teacherDoMapper.select();
 	}
 
 	@Override
-	public void importTeacher(List<TeacherDO> teachers) {
+	public void importTeacher(List<TeacherDTO> teachers) {
 		//循环插入教师信息
-		for (TeacherDO teacherDO : teachers) {
-			this.insertTeacher(teacherDO);
+		for (TeacherDTO teacherDTO : teachers) {
+			this.insertTeacher(teacherDTO);
 		}
 	}
 

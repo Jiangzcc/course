@@ -9,14 +9,14 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jiangzhichao.dao.StudentDOMapper;
-import com.jiangzhichao.entity.StudentDO;
+import com.jiangzhichao.dao.StudentMapper;
+import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.util.SessionUtil;
 
 public class StudentRealm extends AuthorizingRealm {
 
 	@Autowired
-	private StudentDOMapper studentDOMapper;
+	private StudentMapper studentMapper;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -26,10 +26,10 @@ public class StudentRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 		CustomizedToken token = (CustomizedToken) authenticationToken;
-		StudentDO studentDO = studentDOMapper.selectByPrimaryKey(token.getUsername());
-		if (null != studentDO) {
-			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(studentDO.getSno(),studentDO.getSpassword(),getName());
-			SessionUtil.setSession("student", studentDO);
+		StudentDTO studentDTO = studentMapper.selectByPrimaryKey(token.getUsername());
+		if (null != studentDTO) {
+			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(studentDTO.getSno(),studentDTO.getSpassword(),getName());
+			SessionUtil.setSession("student", studentDTO);
 			return authcInfo;
 		} else {
 			return null;

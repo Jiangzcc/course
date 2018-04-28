@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jiangzhichao.dao.AdminLoginMapper;
-import com.jiangzhichao.entity.AdminDO;
+import com.jiangzhichao.entity.AdminDTO;
 import com.jiangzhichao.service.admin.AdminLoginService;
 
 @Service
@@ -16,13 +16,13 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	private AdminLoginMapper adminLoginMapper;
 	
 	@Override
-	public AdminDO queryAdmin(String ausername, String apassword) {
-		AdminDO adminDO = adminLoginMapper.selectByUsername(ausername);
+	public AdminDTO queryAdmin(String ausername, String apassword) {
+		AdminDTO adminDTO = adminLoginMapper.selectByUsername(ausername);
 		//管理员用户名存在
-		if(null != adminDO) {
+		if(null != adminDTO) {
 			//密码正确
-			if(adminDO.getApassword().equals(apassword)) {
-				return adminDO;
+			if(adminDTO.getApassword().equals(apassword)) {
+				return adminDTO;
 			}
 		}
 		return null;

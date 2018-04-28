@@ -1,6 +1,6 @@
 package com.jiangzhichao.service.student;
 
-import com.jiangzhichao.entity.StudentDO;
+import com.jiangzhichao.entity.StudentDTO;
 
 /**
  * 学生登陆Service
@@ -16,5 +16,5 @@ public interface StudentLoginService {
 	 * @param spassword
 	 * @return
 	 */
-	StudentDO queryStudent(String sno,String spassword);
+	StudentDTO queryStudent(String sno,String spassword);
 }

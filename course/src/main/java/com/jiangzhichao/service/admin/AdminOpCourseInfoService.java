@@ -2,7 +2,7 @@ package com.jiangzhichao.service.admin;
 
 import java.util.List;
 
-import com.jiangzhichao.entity.CourseDO;
+import com.jiangzhichao.entity.CourseDTO;
 
 /**
  * 管理员操作课程信息Service
@@ -14,10 +14,10 @@ public interface AdminOpCourseInfoService {
 
 	/**
 	 * 新增课程信息
-	 * @param courseDO
+	 * @param courseDTO
 	 * @return
 	 */
-	int insertCourse(CourseDO courseDO);
+	int insertCourse(CourseDTO courseDTO);
 	
 	/**
 	 * 删除课程信息
@@ -28,26 +28,26 @@ public interface AdminOpCourseInfoService {
 	
 	/**
 	 * 修改课程信息
-	 * @param courseDO
+	 * @param courseDTO
 	 * @return
 	 */
-	int updateCourse(CourseDO courseDO);
+	int updateCourse(CourseDTO courseDTO);
 	
 	/**
 	 * 通过课程编号查询课程信息
 	 * @param cno
 	 * @return
 	 */
-	CourseDO selectCourseByCno(String cno);
+	CourseDTO selectCourseByCno(String cno);
 	
 	/**
 	 * 查询所有课程信息
 	 * @return
 	 */
-	List<CourseDO> selectAllCourse();
+	List<CourseDTO> selectAllCourse();
 	
 	/**
 	 * 导入教师信息
 	 */
-	void importCourse(List<CourseDO> courses);
+	void importCourse(List<CourseDTO> courses);
 }

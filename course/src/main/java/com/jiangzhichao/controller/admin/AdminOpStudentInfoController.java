@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jiangzhichao.controller.base.BaseController;
-import com.jiangzhichao.entity.StudentDO;
+import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.service.admin.AdminOpStudentInfoService;
 import com.jiangzhichao.util.FileUtil;
 
@@ -29,7 +28,6 @@ import com.jiangzhichao.util.FileUtil;
  */
 @Controller
 @RequestMapping("/admin")
-@Scope("prototype")
 public class AdminOpStudentInfoController extends BaseController {
 	
 	private String sterm;
@@ -43,9 +41,9 @@ public class AdminOpStudentInfoController extends BaseController {
 
 	@RequestMapping("queryAllStudent")
 	@ResponseBody
-	public Map<String,List<StudentDO>> queryAllStudent(){
-		List<StudentDO> list = adminOpStudentInfoService.selectAllStudent();
-		Map<String,List<StudentDO>> map = new HashMap<String,List<StudentDO>>();
+	public Map<String,List<StudentDTO>> queryAllStudent(){
+		List<StudentDTO> list = adminOpStudentInfoService.selectAllStudent();
+		Map<String,List<StudentDTO>> map = new HashMap<String,List<StudentDTO>>();
 		map.put("data", list);
 		return map;
 	}
@@ -65,14 +63,14 @@ public class AdminOpStudentInfoController extends BaseController {
 
 	@RequestMapping("queryStudent")
 	@ResponseBody
-	public StudentDO queryStudent(String sno){
-		StudentDO teacherDO = adminOpStudentInfoService.selectStudentBySno(sno);
+	public StudentDTO queryStudent(String sno){
+		StudentDTO teacherDO = adminOpStudentInfoService.selectStudentBySno(sno);
 		return teacherDO;
 	}
 
 	@RequestMapping("editStudent")
 	@ResponseBody
-	public Map<String,Object> editStudent(StudentDO studnetDo){
+	public Map<String,Object> editStudent(StudentDTO studnetDo){
 		int i = adminOpStudentInfoService.updateStudent(studnetDo);
 		Map<String,Object> map = new HashMap<>();
 		if(i==0) {
@@ -85,7 +83,7 @@ public class AdminOpStudentInfoController extends BaseController {
 
 	@RequestMapping("addStudent")
 	@ResponseBody
-	public Map<String,Object> addStudent(StudentDO studnetDo) {
+	public Map<String,Object> addStudent(StudentDTO studnetDo) {
 		studnetDo.setSterm(sterm);
 		int i = adminOpStudentInfoService.insertStudent(studnetDo);
 		Map<String,Object> map = new HashMap<>();
@@ -125,7 +123,7 @@ public class AdminOpStudentInfoController extends BaseController {
 		*/
 		
 		//解析Excel
-		List<StudentDO> studentList = FileUtil.importExcel(file, 1, 1, StudentDO.class);
+		List<StudentDTO> studentList = FileUtil.importExcel(file, 1, 1, StudentDTO.class);
 		
 		//导入教师信息到DB
 		adminOpStudentInfoService.importStudent(studentList);
@@ -144,10 +142,10 @@ public class AdminOpStudentInfoController extends BaseController {
 	@RequestMapping("exportStudent")
 	public void exportStudent(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		//查询所有教师信息
-		List<StudentDO> list = adminOpStudentInfoService.selectAllStudent();
+		List<StudentDTO> list = adminOpStudentInfoService.selectAllStudent();
 		
 		//导出操作
-        FileUtil.exportExcel(list,"学生信息","学生信息",StudentDO.class,"students.xls",response);
+        FileUtil.exportExcel(list,"学生信息","学生信息",StudentDTO.class,"students.xls",response);
         
 		/*//使用当前时间作为文件名
 		String filename = System.currentTimeMillis() + ".xls";

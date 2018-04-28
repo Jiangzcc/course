@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jiangzhichao.dao.CourseDOMapper;
-import com.jiangzhichao.dao.StuCourseDOMapper;
-import com.jiangzhichao.entity.CourseDO;
-import com.jiangzhichao.entity.StuCourseDO;
+import com.jiangzhichao.dao.CourseMapper;
+import com.jiangzhichao.dao.StuCourseMapper;
+import com.jiangzhichao.entity.CourseDTO;
+import com.jiangzhichao.entity.StuCourseDTO;
 import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
 
 @Service
@@ -17,45 +17,45 @@ import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
 public class AdminOpCourseInfoServiceImpl implements AdminOpCourseInfoService {
 
 	@Autowired
-	private CourseDOMapper courseDOMapper;
+	private CourseMapper courseMapper;
 	
 	@Autowired
-	private StuCourseDOMapper stuCourseDOMapper;
+	private StuCourseMapper stuCourseMapper;
 	
 	@Override
-	public int insertCourse(CourseDO courseDO) {
-		return courseDOMapper.insert(courseDO);
+	public int insertCourse(CourseDTO courseDTO) {
+		return courseMapper.insert(courseDTO);
 	}
 
 	@Override
 	public int deleteCourse(String cno) {
 		int i = 0;
-		List<StuCourseDO> cnos = stuCourseDOMapper.selectByCno(cno);
+		List<StuCourseDTO> cnos = stuCourseMapper.selectByCno(cno);
 		if(cnos.size() == 0) {
-			i = courseDOMapper.deleteByPrimaryKey(cno);
+			i = courseMapper.deleteByPrimaryKey(cno);
 		}
 		return i;
 	}
 
 	@Override
-	public int updateCourse(CourseDO courseDO) {
-		return courseDOMapper.updateByPrimaryKey(courseDO);
+	public int updateCourse(CourseDTO courseDTO) {
+		return courseMapper.updateByPrimaryKey(courseDTO);
 	}
 
 	@Override
-	public CourseDO selectCourseByCno(String cno) {
-		return courseDOMapper.selectByPrimaryKey(cno);
+	public CourseDTO selectCourseByCno(String cno) {
+		return courseMapper.selectByPrimaryKey(cno);
 	}
 
 	@Override
-	public List<CourseDO> selectAllCourse() {
-		return courseDOMapper.select();
+	public List<CourseDTO> selectAllCourse() {
+		return courseMapper.select();
 	}
 
 	@Override
-	public void importCourse(List<CourseDO> courses) {
-		for (CourseDO courseDO : courses) {
-			courseDOMapper.insertSelective(courseDO);
+	public void importCourse(List<CourseDTO> courses) {
+		for (CourseDTO courseDTO : courses) {
+			courseMapper.insertSelective(courseDTO);
 		}
 	}
 

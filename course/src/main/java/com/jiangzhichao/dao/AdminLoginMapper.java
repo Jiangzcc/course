@@ -1,6 +1,6 @@
 package com.jiangzhichao.dao;
 
-import com.jiangzhichao.entity.AdminDO;
+import com.jiangzhichao.entity.AdminDTO;
 
 /**
  * 管理员登陆Mapper
@@ -15,6 +15,6 @@ public interface AdminLoginMapper {
 	 * @param ausername
 	 * @return
 	 */
-	AdminDO selectByUsername(String ausername);
+	AdminDTO selectByUsername(String ausername);
 	
 }

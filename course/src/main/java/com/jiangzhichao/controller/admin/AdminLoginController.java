@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +22,6 @@ import com.jiangzhichao.shiro.CustomizedToken;
  */
 @Controller
 @RequestMapping("/login")
-@Scope("prototype")
 public class AdminLoginController extends BaseController {
 
 	/**

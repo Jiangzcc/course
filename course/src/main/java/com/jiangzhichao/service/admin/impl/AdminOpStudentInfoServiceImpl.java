@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jiangzhichao.dao.CourseDOMapper;
-import com.jiangzhichao.dao.DepartmentDOMapper;
-import com.jiangzhichao.dao.StuCourseDOMapper;
-import com.jiangzhichao.dao.StudentDOMapper;
-import com.jiangzhichao.dao.SubjectRoleDOMapper;
-import com.jiangzhichao.entity.CourseDO;
-import com.jiangzhichao.entity.DepartmentDO;
-import com.jiangzhichao.entity.StuCourseDO;
-import com.jiangzhichao.entity.StudentDO;
-import com.jiangzhichao.entity.SubjectRoleDOKey;
+import com.jiangzhichao.dao.CourseMapper;
+import com.jiangzhichao.dao.DepartmentMapper;
+import com.jiangzhichao.dao.StuCourseMapper;
+import com.jiangzhichao.dao.StudentMapper;
+import com.jiangzhichao.dao.SubjectRoleMapper;
+import com.jiangzhichao.entity.CourseDTO;
+import com.jiangzhichao.entity.DepartmentDTO;
+import com.jiangzhichao.entity.StuCourseDTO;
+import com.jiangzhichao.entity.StudentDTO;
+import com.jiangzhichao.entity.SubjectRoleDTOKey;
 import com.jiangzhichao.service.admin.AdminOpStudentInfoService;
 
 @Service
@@ -23,66 +23,66 @@ import com.jiangzhichao.service.admin.AdminOpStudentInfoService;
 public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService {
 
 	@Autowired
-	private StudentDOMapper studentDOMapper;
+	private StudentMapper studentMapper;
 	
 	@Autowired
-	private SubjectRoleDOMapper subjectRoleDOMapper;
+	private SubjectRoleMapper subjectRoleMapper;
 	
 	@Autowired
-	private StuCourseDOMapper stuCourseDOMapper;
+	private StuCourseMapper stuCourseMapper;
 	
 	@Autowired
-	private CourseDOMapper courseDOMapper;
+	private CourseMapper courseMapper;
 	
 	@Autowired
-	private DepartmentDOMapper departmentDOMapper;
+	private DepartmentMapper departmentMapper;
 	
 	@Override
-	public int insertStudent(StudentDO studentDO) {
+	public int insertStudent(StudentDTO studentDTO) {
 		//设置角色
-		SubjectRoleDOKey subjectRoleDOKey = new SubjectRoleDOKey();
-		subjectRoleDOKey.setNo(studentDO.getSno());
-		subjectRoleDOKey.setRoleno("3");
-		subjectRoleDOMapper.insert(subjectRoleDOKey);
-		return studentDOMapper.insert(studentDO);
+		SubjectRoleDTOKey subjectRoleDTOKey = new SubjectRoleDTOKey();
+		subjectRoleDTOKey.setNo(studentDTO.getSno());
+		subjectRoleDTOKey.setRoleno("3");
+		subjectRoleMapper.insert(subjectRoleDTOKey);
+		return studentMapper.insert(studentDTO);
 	}
 
 	@Override
 	public int deleteStudent(String sno) {
 		//查询此学生所有选课信息
-		List<StuCourseDO> list = stuCourseDOMapper.selectBySno(sno);
+		List<StuCourseDTO> list = stuCourseMapper.selectBySno(sno);
 		//此学生曾选择课程 课程人数-1
-		for (StuCourseDO stuCourseDO : list) {
-			CourseDO courseDO = courseDOMapper.selectByPrimaryKey(stuCourseDO.getCno());
-			courseDO.setCurrentnum(courseDO.getCurrentnum()-1);
-			courseDOMapper.updateByPrimaryKey(courseDO);
+		for (StuCourseDTO stuCourseDTO : list) {
+			CourseDTO courseDTO = courseMapper.selectByPrimaryKey(stuCourseDTO.getCno());
+			courseDTO.setCurrentnum(courseDTO.getCurrentnum()-1);
+			courseMapper.updateByPrimaryKey(courseDTO);
 		}
 		//删除角色
-		subjectRoleDOMapper.deleteByNo(sno);
+		subjectRoleMapper.deleteByNo(sno);
 		//删除此学生所有选课信息
-		stuCourseDOMapper.deleteBySno(sno);
-		return studentDOMapper.deleteByPrimaryKey(sno);
+		stuCourseMapper.deleteBySno(sno);
+		return studentMapper.deleteByPrimaryKey(sno);
 	}
 
 	@Override
-	public int updateStudent(StudentDO studentDO) {
-		return studentDOMapper.updateByPrimaryKey(studentDO);
+	public int updateStudent(StudentDTO studentDTO) {
+		return studentMapper.updateByPrimaryKey(studentDTO);
 	}
 
 	@Override
-	public StudentDO selectStudentBySno(String sno) {
-		return studentDOMapper.selectByPrimaryKey(sno);
+	public StudentDTO selectStudentBySno(String sno) {
+		return studentMapper.selectByPrimaryKey(sno);
 	}
 
 	@Override
-	public List<StudentDO> selectAllStudent() {
-		List<StudentDO> students = studentDOMapper.select();
+	public List<StudentDTO> selectAllStudent() {
+		List<StudentDTO> students = studentMapper.select();
 		//替换专业编号为专业名称--不考虑性能...
-		List<DepartmentDO> depts = departmentDOMapper.select();
-		for (StudentDO studentDO : students) {
-			for (DepartmentDO departmentDO : depts) {
-				if(departmentDO.getDno().equals(studentDO.getDno())){
-					studentDO.setDno(departmentDO.getDname());
+		List<DepartmentDTO> depts = departmentMapper.select();
+		for (StudentDTO studentDTO : students) {
+			for (DepartmentDTO departmentDTO : depts) {
+				if(departmentDTO.getDno().equals(studentDTO.getDno())){
+					studentDTO.setDno(departmentDTO.getDname());
 				}
 			}
 		}
@@ -90,9 +90,9 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 	}
 
 	@Override
-	public void importStudent(List<StudentDO> students) {
-		for (StudentDO studentDO : students) {
-			this.insertStudent(studentDO);
+	public void importStudent(List<StudentDTO> students) {
+		for (StudentDTO studentDTO : students) {
+			this.insertStudent(studentDTO);
 		}
 	}
 

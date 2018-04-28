@@ -17,11 +17,11 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jiangzhichao.dao.AdminLoginMapper;
-import com.jiangzhichao.dao.RoleDOMapper;
-import com.jiangzhichao.dao.SubjectRoleDOMapper;
-import com.jiangzhichao.entity.AdminDO;
-import com.jiangzhichao.entity.RoleDO;
-import com.jiangzhichao.entity.SubjectRoleDOKey;
+import com.jiangzhichao.dao.RoleMapper;
+import com.jiangzhichao.dao.SubjectRoleMapper;
+import com.jiangzhichao.entity.AdminDTO;
+import com.jiangzhichao.entity.RoleDTO;
+import com.jiangzhichao.entity.SubjectRoleDTOKey;
 import com.jiangzhichao.util.SessionUtil;
 
 public class AdminRealm extends AuthorizingRealm {
@@ -30,10 +30,10 @@ public class AdminRealm extends AuthorizingRealm {
 	private AdminLoginMapper adminLoginMapper;
 	
 	@Autowired
-	private SubjectRoleDOMapper subjectRoleDOMapper;
+	private SubjectRoleMapper subjectRoleMapper;
 
 	@Autowired
-	private RoleDOMapper roleDOMapper;
+	private RoleMapper roleMapper;
 	
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -44,12 +44,12 @@ public class AdminRealm extends AuthorizingRealm {
         	//String role = loginType();
         	
         	//为当前用户设置角色和权限
-        	List<SubjectRoleDOKey> list = subjectRoleDOMapper.selectByNo(username);
+        	List<SubjectRoleDTOKey> list = subjectRoleMapper.selectByNo(username);
         	List<String> roleList = new ArrayList<String>();
         	List<String> permissionList = new ArrayList<String>();
         	//循环赋值
-        	for (SubjectRoleDOKey subjectRoleDOKey : list) {
-				RoleDO role = roleDOMapper.selectByPrimaryKey(subjectRoleDOKey.getRoleno());
+        	for (SubjectRoleDTOKey subjectRoleDTOKey : list) {
+				RoleDTO role = roleMapper.selectByPrimaryKey(subjectRoleDTOKey.getRoleno());
 				//添加角色
 				roleList.add(role.getRolename());
 				//添加权限
@@ -70,13 +70,13 @@ public class AdminRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
     	CustomizedToken token = (CustomizedToken) authenticationToken;
     	//获取管理员信息
-        AdminDO adminDO = adminLoginMapper.selectByUsername(token.getUsername());
+        AdminDTO adminDTO = adminLoginMapper.selectByUsername(token.getUsername());
         //该管理员存在
-        if (null != adminDO) {
+        if (null != adminDTO) {
         	//认证
-            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(adminDO.getAusername(),adminDO.getApassword(),getName());
+            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(adminDTO.getAusername(),adminDTO.getApassword(),getName());
             //存入session
-            SessionUtil.setSession("admin", adminDO);
+            SessionUtil.setSession("admin", adminDTO);
             return authcInfo;
         } else {
             return null;

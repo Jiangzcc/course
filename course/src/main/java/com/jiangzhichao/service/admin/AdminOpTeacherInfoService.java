@@ -2,7 +2,7 @@ package com.jiangzhichao.service.admin;
 
 import java.util.List;
 
-import com.jiangzhichao.entity.TeacherDO;
+import com.jiangzhichao.entity.TeacherDTO;
 
 /**
  * 管理员CRUD教师信息
@@ -14,10 +14,10 @@ public interface AdminOpTeacherInfoService {
 	
 	/**
 	 * 新增教师信息
-	 * @param teacherDO
+	 * @param teacherDTO
 	 * @return
 	 */
-	int insertTeacher(TeacherDO teacherDO);
+	int insertTeacher(TeacherDTO teacherDTO);
 	
 	/**
 	 * 删除教师信息
@@ -28,28 +28,28 @@ public interface AdminOpTeacherInfoService {
 	
 	/**
 	 * 修改教师信息
-	 * @param teacherDO
+	 * @param teacherDTO
 	 * @return
 	 */
-	int updateTeacher(TeacherDO teacherDO);
+	int updateTeacher(TeacherDTO teacherDTO);
 	
 	/**
 	 * 通过教师编号查询教师信息
 	 * @param tno
 	 * @return
 	 */
-	TeacherDO selectTeacherByTno(String tno);
+	TeacherDTO selectTeacherByTno(String tno);
 	
 	/**
 	 * 查询所有教师信息
 	 * @return
 	 */
-	List<TeacherDO> selectAllTeacher();
+	List<TeacherDTO> selectAllTeacher();
 	
 	/**
 	 * 导入教师信息列表
 	 * @param teachers
 	 */
-	void importTeacher(List<TeacherDO> teachers);
+	void importTeacher(List<TeacherDTO> teachers);
 
 }

@@ -2,7 +2,7 @@ package com.jiangzhichao.service.admin;
 
 import java.util.List;
 
-import com.jiangzhichao.entity.DepartmentDO;
+import com.jiangzhichao.entity.DepartmentDTO;
 
 /**
  * 管理员CRUD专业信息Service
@@ -14,10 +14,10 @@ public interface AdminOpDepartmentService {
 	
 	/**
 	 * 新增专业信息
-	 * @param departmentDO
+	 * @param departmentDTO
 	 * @return
 	 */
-	int insertDepartment(DepartmentDO departmentDO);
+	int insertDepartment(DepartmentDTO departmentDTO);
 	
 	/**
 	 * 删除专业信息
@@ -28,22 +28,22 @@ public interface AdminOpDepartmentService {
 	
 	/**
 	 * 修改专业信息
-	 * @param departmentDO
+	 * @param departmentDTO
 	 * @return
 	 */
-	int updateDepartment(DepartmentDO departmentDO);
+	int updateDepartment(DepartmentDTO departmentDTO);
 	
 	/**
 	 * 通过专业编号查询专业信息
 	 * @param dno
 	 * @return
 	 */
-	DepartmentDO selectDepartmentByDno(String dno);
+	DepartmentDTO selectDepartmentByDno(String dno);
 	
 	/**
 	 * 查询所有专业信息
 	 * @return
 	 */
-	List<DepartmentDO> selectAllDepartment();
+	List<DepartmentDTO> selectAllDepartment();
 
 }

@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jiangzhichao.dao.CourseDOMapper;
-import com.jiangzhichao.dao.DepartmentDOMapper;
-import com.jiangzhichao.dao.StudentDOMapper;
-import com.jiangzhichao.entity.CourseDO;
-import com.jiangzhichao.entity.DepartmentDO;
-import com.jiangzhichao.entity.StudentDO;
+import com.jiangzhichao.dao.CourseMapper;
+import com.jiangzhichao.dao.DepartmentMapper;
+import com.jiangzhichao.dao.StudentMapper;
+import com.jiangzhichao.entity.CourseDTO;
+import com.jiangzhichao.entity.DepartmentDTO;
+import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.service.admin.AdminOpDepartmentService;
 
 @Service
@@ -19,48 +19,48 @@ import com.jiangzhichao.service.admin.AdminOpDepartmentService;
 public class AdminOpDepartmentServiceImpl implements AdminOpDepartmentService {
 
 	@Autowired
-	private DepartmentDOMapper departmentDOMapper;
+	private DepartmentMapper departmentMapper;
 	
 	@Autowired
-	private CourseDOMapper courseDOMapper;
+	private CourseMapper courseMapper;
 	
 	@Autowired
-	private StudentDOMapper studentDOMapper;
+	private StudentMapper studentMapper;
 	
 	@Override
-	public int insertDepartment(DepartmentDO departmentDO) {
-		return departmentDOMapper.insert(departmentDO);
+	public int insertDepartment(DepartmentDTO departmentDTO) {
+		return departmentMapper.insert(departmentDTO);
 	}
 
 	@Override
 	public int deleteDepartment(String dno) {
 		int i = 0;
 		//判断此专业下是否有课程
-		List<CourseDO> courses = courseDOMapper.selectByDno(dno);
+		List<CourseDTO> courses = courseMapper.selectByDno(dno);
 		if(courses.size() == 0) {
 			//删除前先判断此专业下是否有学生
-			List<StudentDO> students = studentDOMapper.selectByDno(dno);
+			List<StudentDTO> students = studentMapper.selectByDno(dno);
 			if(students.size() == 0) {
 				//删除专业信息
-				i = departmentDOMapper.deleteByPrimaryKey(dno);
+				i = departmentMapper.deleteByPrimaryKey(dno);
 			}
 		}
 		return i;
 	}
 
 	@Override
-	public int updateDepartment(DepartmentDO departmentDO) {
-		return departmentDOMapper.updateByPrimaryKey(departmentDO);
+	public int updateDepartment(DepartmentDTO departmentDTO) {
+		return departmentMapper.updateByPrimaryKey(departmentDTO);
 	}
 
 	@Override
-	public DepartmentDO selectDepartmentByDno(String dno) {
-		return departmentDOMapper.selectByPrimaryKey(dno);
+	public DepartmentDTO selectDepartmentByDno(String dno) {
+		return departmentMapper.selectByPrimaryKey(dno);
 	}
 
 	@Override
-	public List<DepartmentDO> selectAllDepartment() {
-		return departmentDOMapper.select();
+	public List<DepartmentDTO> selectAllDepartment() {
+		return departmentMapper.select();
 	}
 
 }

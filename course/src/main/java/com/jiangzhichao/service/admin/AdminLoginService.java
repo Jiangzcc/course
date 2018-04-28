@@ -1,6 +1,6 @@
 package com.jiangzhichao.service.admin;
 
-import com.jiangzhichao.entity.AdminDO;
+import com.jiangzhichao.entity.AdminDTO;
 
 /**
  * 管理员登陆Service
@@ -16,6 +16,6 @@ public interface AdminLoginService {
 	 * @param password
 	 * @return
 	 */
-	AdminDO queryAdmin(String username,String password);
+	AdminDTO queryAdmin(String username,String password);
 
 }

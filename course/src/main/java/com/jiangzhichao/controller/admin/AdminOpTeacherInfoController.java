@@ -9,14 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jiangzhichao.controller.base.BaseController;
-import com.jiangzhichao.entity.TeacherDO;
+import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
 import com.jiangzhichao.util.FileUtil;
 
@@ -28,7 +27,6 @@ import com.jiangzhichao.util.FileUtil;
  */
 @Controller
 @RequestMapping("/admin")
-@Scope("prototype")
 public class AdminOpTeacherInfoController extends BaseController {
 
 	@Autowired
@@ -36,9 +34,9 @@ public class AdminOpTeacherInfoController extends BaseController {
 
 	@RequestMapping("queryAllTeacher")
 	@ResponseBody
-	public Map<String,List<TeacherDO>> queryAllTeacher(){
-		List<TeacherDO> list = adminOpTeacherInfoService.selectAllTeacher();
-		Map<String,List<TeacherDO>> map = new HashMap<String,List<TeacherDO>>();
+	public Map<String,List<TeacherDTO>> queryAllTeacher(){
+		List<TeacherDTO> list = adminOpTeacherInfoService.selectAllTeacher();
+		Map<String,List<TeacherDTO>> map = new HashMap<String,List<TeacherDTO>>();
 		map.put("data", list);
 		return map;
 	}
@@ -58,15 +56,15 @@ public class AdminOpTeacherInfoController extends BaseController {
 
 	@RequestMapping("queryTeacher")
 	@ResponseBody
-	public TeacherDO queryTeacher(String tno){
-		TeacherDO teacherDO = adminOpTeacherInfoService.selectTeacherByTno(tno);
-		return teacherDO;
+	public TeacherDTO queryTeacher(String tno){
+		TeacherDTO teacherDTO = adminOpTeacherInfoService.selectTeacherByTno(tno);
+		return teacherDTO;
 	}
 
 	@RequestMapping("editTeacher")
 	@ResponseBody
-	public Map<String,Object> editTeacher(TeacherDO teacherDO){
-		int i = adminOpTeacherInfoService.updateTeacher(teacherDO);
+	public Map<String,Object> editTeacher(TeacherDTO teacherDTO){
+		int i = adminOpTeacherInfoService.updateTeacher(teacherDTO);
 		Map<String,Object> map = new HashMap<>();
 		if(i==0) {
 			map.put("result", false);
@@ -78,8 +76,8 @@ public class AdminOpTeacherInfoController extends BaseController {
 
 	@RequestMapping("addTeacher")
 	@ResponseBody
-	public Map<String,Object> addTeacher(TeacherDO teacherDO) {
-		int i = adminOpTeacherInfoService.insertTeacher(teacherDO);
+	public Map<String,Object> addTeacher(TeacherDTO teacherDTO) {
+		int i = adminOpTeacherInfoService.insertTeacher(teacherDTO);
 		Map<String,Object> map = new HashMap<>();
 		if(i==0) {
 			map.put("result", false);
@@ -101,7 +99,7 @@ public class AdminOpTeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> importTeacher(MultipartFile file,HttpServletRequest request) throws Exception{
 		//解析Excel
-		List<TeacherDO> teacherList = FileUtil.importExcel(file, 1, 1, TeacherDO.class);
+		List<TeacherDTO> teacherList = FileUtil.importExcel(file, 1, 1, TeacherDTO.class);
 		//导入教师信息到DB
 		adminOpTeacherInfoService.importTeacher(teacherList);
 		Map<String,Object> map = new HashMap<>();
@@ -134,9 +132,9 @@ public class AdminOpTeacherInfoController extends BaseController {
 	 */
 	@RequestMapping("exportTeacher")
 	public void exportTeacher(HttpServletResponse response) throws IOException {
-		List<TeacherDO> list = adminOpTeacherInfoService.selectAllTeacher();
+		List<TeacherDTO> list = adminOpTeacherInfoService.selectAllTeacher();
 		//导出操作
-        FileUtil.exportExcel(list,"教师信息","教师信息",TeacherDO.class,"teachers.xls",response);
+        FileUtil.exportExcel(list,"教师信息","教师信息",TeacherDTO.class,"teachers.xls",response);
 		
 		/*//查询所有教师信息
 		List<TeacherDO> list = adminOpTeacherInfoService.selectAllTeacher();

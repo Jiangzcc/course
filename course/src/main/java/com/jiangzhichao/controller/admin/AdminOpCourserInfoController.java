@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jiangzhichao.controller.base.BaseController;
-import com.jiangzhichao.entity.CourseDO;
+import com.jiangzhichao.entity.CourseDTO;
 import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
 import com.jiangzhichao.util.FileUtil;
 
@@ -29,7 +28,6 @@ import com.jiangzhichao.util.FileUtil;
  */
 @Controller
 @RequestMapping("/admin")
-@Scope("prototype")
 public class AdminOpCourserInfoController extends BaseController {
 
 	private String cterm;
@@ -43,9 +41,9 @@ public class AdminOpCourserInfoController extends BaseController {
 
 	@RequestMapping("queryAllCourse")
 	@ResponseBody
-	public Map<String,List<CourseDO>> queryAllCourse(){
-		List<CourseDO> list = adminOpCourseInfoService.selectAllCourse();
-		Map<String,List<CourseDO>> map = new HashMap<String,List<CourseDO>>();
+	public Map<String,List<CourseDTO>> queryAllCourse(){
+		List<CourseDTO> list = adminOpCourseInfoService.selectAllCourse();
+		Map<String,List<CourseDTO>> map = new HashMap<String,List<CourseDTO>>();
 		map.put("data", list);
 		return map;
 	}
@@ -65,18 +63,18 @@ public class AdminOpCourserInfoController extends BaseController {
 
 	@RequestMapping("queryCourse")
 	@ResponseBody
-	public CourseDO queryCourse(String cno){
-		CourseDO teacherDO = adminOpCourseInfoService.selectCourseByCno(cno);
-		return teacherDO;
+	public CourseDTO queryCourse(String cno){
+		CourseDTO courseDTO = adminOpCourseInfoService.selectCourseByCno(cno);
+		return courseDTO;
 	}
 
 	@RequestMapping("editCourse")
 	@ResponseBody
-	public Map<String,Object> editCourse(CourseDO courseDO){
-		if(courseDO.getDno().equals("")) {
-			courseDO.setDno(null);
+	public Map<String,Object> editCourse(CourseDTO courseDTO){
+		if(courseDTO.getDno().equals("")) {
+			courseDTO.setDno(null);
 		}
-		int i = adminOpCourseInfoService.updateCourse(courseDO);
+		int i = adminOpCourseInfoService.updateCourse(courseDTO);
 		Map<String,Object> map = new HashMap<>();
 		if(i==0) {
 			map.put("result", false);
@@ -88,10 +86,10 @@ public class AdminOpCourserInfoController extends BaseController {
 
 	@RequestMapping("addCourse")
 	@ResponseBody
-	public Map<String,Object> addCourse(CourseDO courseDO) {
-		courseDO.setCterm(cterm);
-		courseDO.setCurrentnum(0);
-		int i = adminOpCourseInfoService.insertCourse(courseDO);
+	public Map<String,Object> addCourse(CourseDTO courseDTO) {
+		courseDTO.setCterm(cterm);
+		courseDTO.setCurrentnum(0);
+		int i = adminOpCourseInfoService.insertCourse(courseDTO);
 		Map<String,Object> map = new HashMap<>();
 		if(i==0) {
 			map.put("result", false);
@@ -128,7 +126,7 @@ public class AdminOpCourserInfoController extends BaseController {
 		List<CourseDO> courseList = (List<CourseDO>) ImportExcel.importExcel(path, startRow, endRow, CourseDO.class);
 		*/
 		//解析Excel
-		List<CourseDO> courseList = FileUtil.importExcel(file, 1, 1, CourseDO.class);
+		List<CourseDTO> courseList = FileUtil.importExcel(file, 1, 1, CourseDTO.class);
 		//导入教师信息到DB
 		adminOpCourseInfoService.importCourse(courseList);
 		Map<String,Object> map = new HashMap<>();
@@ -145,9 +143,9 @@ public class AdminOpCourserInfoController extends BaseController {
 	 */
 	@RequestMapping("exportCourse")
 	public void exportCourse(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		List<CourseDO> courses = adminOpCourseInfoService.selectAllCourse();
+		List<CourseDTO> courses = adminOpCourseInfoService.selectAllCourse();
 		//导出操作
-        FileUtil.exportExcel(courses,"课程信息","课程信息",CourseDO.class,"courses.xls",response);
+        FileUtil.exportExcel(courses,"课程信息","课程信息",CourseDTO.class,"courses.xls",response);
 		/*//使用当前时间作为文件名
 		String filename = System.currentTimeMillis() + ".xls";
 		//获取路径
