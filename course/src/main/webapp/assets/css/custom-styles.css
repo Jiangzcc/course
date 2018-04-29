@@ -414,7 +414,7 @@ color: #319DB5 !important;
 background: transparent;
 }
 .top-navbar .dropdown-menu{
-min-width: 230px;
+/* min-width: 230px; */
 border-radius: 0 0 4px 4px;
 border: 0;}
 .top-navbar .dropdown-menu > li > a:hover, .top-navbar .dropdown-menu > li > a:focus{

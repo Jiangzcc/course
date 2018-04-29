@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jiangzhichao.controller.base.BaseController;
-import com.jiangzhichao.enumm.LoginType;
+import com.jiangzhichao.enums.LoginType;
 import com.jiangzhichao.shiro.CustomizedToken;
 
 /**

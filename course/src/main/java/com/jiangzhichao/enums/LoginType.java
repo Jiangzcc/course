@@ -1,4 +1,4 @@
-package com.jiangzhichao.enumm;
+package com.jiangzhichao.enums;
 
 /**
  * 登陆类型
