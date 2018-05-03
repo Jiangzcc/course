@@ -68,6 +68,42 @@
     <include refid="Base_Column_List" />
     from course
   </select>
+  
+  <select id="selectByTnoAndTerm" resultType="com.jiangzhichao.entity.CourseVO">
+	SELECT
+		c.cno,
+		c.cname,
+		c.credit,
+		d.dname,
+		c.currentnum,
+		c.maxnum,
+		c.cintroduce,
+		c.cterm
+	FROM
+		course c
+	LEFT JOIN teacher t ON c.tno = t.tno
+	LEFT JOIN department d ON d.dno = c.dno
+	WHERE
+		t.tno = #{0,jdbcType=VARCHAR} AND c.cterm = #{1,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectOldByTnoAndTerm" resultType="com.jiangzhichao.entity.CourseVO">
+	SELECT
+		c.cno,
+		c.cname,
+		c.credit,
+		d.dname,
+		c.currentnum,
+		c.maxnum,
+		c.cintroduce,
+		c.cterm
+	FROM
+		course c
+	LEFT JOIN teacher t ON c.tno = t.tno
+	LEFT JOIN department d ON d.dno = c.dno
+	WHERE
+		t.tno = #{0,jdbcType=VARCHAR} AND c.cterm != #{1,jdbcType=VARCHAR}
+  </select>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

@@ -3,6 +3,7 @@ package com.jiangzhichao.dao;
 import java.util.List;
 
 import com.jiangzhichao.entity.StudentDTO;
+import com.jiangzhichao.entity.StudentVO;
 
 public interface StudentMapper {
     /**
@@ -62,4 +63,9 @@ public interface StudentMapper {
      * 查询所有学生
      */
     List<StudentDTO> select();
+    
+    /**
+     * 查询某课程下所有学生
+     */
+    List<StudentVO> selectByCno(String cno);
 }

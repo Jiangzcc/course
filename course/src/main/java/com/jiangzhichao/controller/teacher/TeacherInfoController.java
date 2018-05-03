@@ -1,4 +1,4 @@
-package com.jiangzhichao.controller.admin;
+package com.jiangzhichao.controller.teacher;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,29 +10,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jiangzhichao.controller.base.BaseController;
-import com.jiangzhichao.entity.AdminDTO;
-import com.jiangzhichao.service.admin.AdminInfoService;
+import com.jiangzhichao.entity.TeacherDTO;
+import com.jiangzhichao.service.teacher.TeacherInfoService;
 
 /**
- * 管理员信息Controller
+ * 教师信息Controller
  * 
  * @author BornToWin
  *
  */
 @Controller
-@RequestMapping("/admin")
-public class AdminInfoController extends BaseController {
+@RequestMapping("/teacher")
+public class TeacherInfoController {
 	
 	@Autowired
-	private AdminInfoService adminInfoService;
-
+	private TeacherInfoService teacherInfoService;
+	
 	@RequestMapping("/confirmPassword")
 	@ResponseBody
 	public Map<String,Object> confirmPassword(HttpSession session,String password) {
-		AdminDTO admin = (AdminDTO) session.getAttribute("admin");
+		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
 		Map<String,Object> map = new HashMap<>();
-		if(admin.getApassword().equals(password)) {
+		if(teacher.getTpassword().equals(password)) {
 			map.put("result", true);
 			return map;
 		}
@@ -43,12 +42,12 @@ public class AdminInfoController extends BaseController {
 	@RequestMapping("/changePassword")
 	@ResponseBody
 	public Map<String,Object> changePassword(String oldPassword,String newPassword,HttpSession session) {
-		AdminDTO admin = (AdminDTO) session.getAttribute("admin");
+		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
 		Map<String,Object> map = new HashMap<>();
 		//防止用户直接通过url访问、跳过输入旧密码验证，再次验证一遍
-		if(admin.getApassword().equals(oldPassword)) {
-			admin.setApassword(newPassword);
-			int i = adminInfoService.updatePassword(admin);
+		if(teacher.getTpassword().equals(oldPassword)) {
+			teacher.setTpassword(newPassword);
+			int i = teacherInfoService.updatePassword(teacher);
 			if(i!=0) {
 				map.put("result", true);
 				return map;
@@ -58,9 +57,10 @@ public class AdminInfoController extends BaseController {
 		return map;
 	}
 	
-	@RequestMapping("/adminInfo")
+	@RequestMapping("/teacherInfo")
 	@ResponseBody
-	public AdminDTO adminInfo(HttpSession session) {
-		return (AdminDTO) session.getAttribute("admin");
+	public TeacherDTO teacherInfo(HttpSession session) {
+		return (TeacherDTO) session.getAttribute("teacher");
 	}
+
 }

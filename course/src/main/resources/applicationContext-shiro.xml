@@ -9,6 +9,42 @@
 
 	<description>Shiro Configuration</description>
 
+	<!-- 配置使用自定义认证器，可以实现多Realm认证，并且可以指定特定Realm处理特定类型的验证 -->
+	<bean id="authenticator"
+		class="com.jiangzhichao.shiro.CustomizedModularRealmAuthenticator">
+		<!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 -->
+		<property name="authenticationStrategy">
+			<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
+		</property>
+	</bean>
+	
+	<bean id="adminRealm" class="com.jiangzhichao.shiro.AdminRealm">
+		<!-- 对认证数据、授权数据 哪些进行缓存 缓存区的名字就是ehcache.xml 自定义cache的name -->
+		<property name="authorizationCacheName" value="bos"></property>
+	</bean>
+	<bean id="studentRealm" class="com.jiangzhichao.shiro.StudentRealm">
+		<property name="authorizationCacheName" value="bos"></property>
+	</bean>
+	<bean id="teacherRealm" class="com.jiangzhichao.shiro.TeacherRealm">
+		<property name="authorizationCacheName" value="bos"></property>
+	</bean>
+
+	<!-- securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!--调用自定义realm -->
+		<property name="authenticator" ref="authenticator"></property>
+		<!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
+		<property name="realms">
+			<list>
+				<ref bean="studentRealm" />
+				<ref bean="teacherRealm" />
+				<ref bean="adminRealm" />
+			</list>
+		</property>
+		<!-- 将shiro的缓存管理器，注入到安全管理器中 要想在Realm中将查询的数据放置到缓存中， 需要在Realm之前创建动态代理对象，通过缓存代理控制Realm -->
+		<property name="cacheManager" ref="shiroCacheManager"></property>
+	</bean>
+
 	<!-- shiroFilter工厂 -->
 	<bean id="shiroFilter"
 		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -27,41 +63,6 @@
 				/student/**=authc,roles[student] 
 				/**=anon
 			</value>
-		</property>
-	</bean>
-	<!-- securityManager -->
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<!--调用自定义realm -->
-		<property name="authenticator" ref="authenticator"></property>
-		<!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->
-		<property name="realms">
-			<list>
-				<ref bean="studentRealm" />
-				<ref bean="teacherRealm" />
-				<ref bean="adminRealm" />
-			</list>
-		</property>
-		<!-- 将shiro的缓存管理器，注入到安全管理器中 要想在Realm中将查询的数据放置到缓存中， 需要在Realm之前创建动态代理对象，通过缓存代理控制Realm -->
-		<property name="cacheManager" ref="shiroCacheManager"></property>
-	</bean>
-
-	<bean id="adminRealm" class="com.jiangzhichao.shiro.AdminRealm">
-		<!-- 对认证数据、授权数据 哪些进行缓存 缓存区的名字就是ehcache.xml 自定义cache的name -->
-		<property name="authorizationCacheName" value="bos"></property>
-	</bean>
-	<bean id="studentRealm" class="com.jiangzhichao.shiro.StudentRealm">
-		<property name="authorizationCacheName" value="bos"></property>
-	</bean>
-	<bean id="teacherRealm" class="com.jiangzhichao.shiro.TeacherRealm">
-		<property name="authorizationCacheName" value="bos"></property>
-	</bean>
-
-	<!-- 配置使用自定义认证器，可以实现多Realm认证，并且可以指定特定Realm处理特定类型的验证 -->
-	<bean id="authenticator"
-		class="com.jiangzhichao.shiro.CustomizedModularRealmAuthenticator">
-		<!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 -->
-		<property name="authenticationStrategy">
-			<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
 		</property>
 	</bean>
 

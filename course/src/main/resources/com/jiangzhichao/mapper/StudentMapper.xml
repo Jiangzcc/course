@@ -55,6 +55,23 @@
     <include refid="Base_Column_List" />
     from student
   </select>
+  <select id="selectByCno" parameterType="java.lang.String" resultType="com.jiangzhichao.entity.StudentVO">
+	SELECT
+		s.sno,
+		s.sname,
+		s.sterm,
+		s.ssex,
+		s.idcard,
+		d.dname,
+		sc.score
+	FROM
+		course c
+	LEFT JOIN stucourse sc ON sc.cno = c.cno
+	LEFT JOIN student s ON s.sno = sc.sno
+	LEFT JOIN department d ON d.dno = s.dno
+	WHERE
+		c.cno = #{cno,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

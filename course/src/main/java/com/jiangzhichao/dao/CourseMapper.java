@@ -3,6 +3,7 @@ package com.jiangzhichao.dao;
 import java.util.List;
 
 import com.jiangzhichao.entity.CourseDTO;
+import com.jiangzhichao.entity.CourseVO;
 
 public interface CourseMapper {
     /**
@@ -67,4 +68,14 @@ public interface CourseMapper {
      * 查询所有课程
      */
     List<CourseDTO> select();
+    
+    /**
+     * 查询某教师本学期所有授课
+     */
+    List<CourseVO> selectByTnoAndTerm(String tno,String term);
+    
+    /**
+     * 查询某教师过往学期所有授课
+     */
+    List<CourseVO> selectOldByTnoAndTerm(String tno,String term);
 }

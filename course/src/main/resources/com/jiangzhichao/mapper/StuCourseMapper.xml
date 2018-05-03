@@ -61,4 +61,8 @@
   <delete id="deleteBySno">
   	delete from stucourse where sno = #{sno,jdbcType=VARCHAR}
   </delete>
+  
+  <update id="updateScore" parameterType="com.jiangzhichao.entity.StuCourseDTO">
+  	update stucourse set score = #{score} where sno = #{sno} and cno = #{cno} 
+  </update>
 </mapper>

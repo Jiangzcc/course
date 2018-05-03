@@ -113,7 +113,7 @@
 													<th width=200>操作</th>
 												</tr>
 											</thead>
-											<tbody id="teacherInfo">
+											<tbody>
 											</tbody>
 										</table>
 									</div>
@@ -341,7 +341,7 @@
 					}, function(data) {
 						var result = eval("(" + data + ")");
 						console.log(result);
-						if(result) {
+						if(result.result) {
 							layer.msg('删除成功...', {
 								time: 1500
 							});

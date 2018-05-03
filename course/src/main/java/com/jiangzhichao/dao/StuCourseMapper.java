@@ -41,4 +41,11 @@ public interface StuCourseMapper {
      * @return
      */
     int deleteBySno(String sno);
+    
+    /**
+     * 修改某个学生成绩
+     * @param record
+     * @return
+     */
+    int updateScore(StuCourseDTO record);
 }

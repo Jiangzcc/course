@@ -13,7 +13,6 @@
 
 		<!-- Custom Styles-->
 		<link href="../assets/css/custom-styles.css" rel="stylesheet" />
-		<link href="../assets/css/bootstrap-switch.css" rel="stylesheet" />
 		<!-- Google Fonts-->
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 		<!-- TABLE STYLES-->
@@ -34,7 +33,7 @@
 						</a>
 						<ul class="dropdown-menu dropdown-user">
 							<li>
-								<a href="#" onclick="adminInfo()"><i class="fa fa-user fa-fw"></i> 用户信息
+								<a href="#" onclick="teacherInfo()"><i class="fa fa-user fa-fw"></i> 用户信息
 								</a>
 							</li>
 							<li>
@@ -42,7 +41,7 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="/course/login/adminLogout"><i class="fa fa-sign-out fa-fw"></i> 登出
+								<a href="/course/login/teacherLogout"><i class="fa fa-sign-out fa-fw"></i> 登出
 								</a>
 							</li>
 						</ul>
@@ -57,61 +56,67 @@
 				<div class="sidebar-collapse">
 					<ul class="nav" id="main-menu">
 						<li>
-							<a href="/course/admin/index.html"><i class="fa fa-dashboard"></i> 首页 </a>
+							<a href="/course/teacher/index.html"><i class="fa fa-dashboard"></i> 首页 </a>
 						</li>
 						<li>
-							<a href="/course/admin/admin-courseinfo.html"><i class="fa fa-desktop"></i> 课程信息管理</a>
+							<a href="/course/teacher/teacher-courseinfo.html"><i class="fa fa-desktop"></i> 我的课程---本学期</a>
 						</li>
 						<li>
-							<a href="/course/admin/admin-studentinfo.html"><i class="fa fa-bar-chart-o"></i> 学生信息管理</a>
-						</li>
-						<li>
-							<a href="/course/admin/admin-teacherinfo.html"><i class="fa fa-qrcode"></i> 教师信息管理</a>
-						</li>
-						<li>
-							<a href="/course/admin/admin-departmentinfo.html"><i class="fa fa-table"></i> 专业信息管理</a>
-						</li>
-						<li>
-							<a href="/course/admin/admin-statusinfo.html" class="active-menu"><i class="fa fa-edit"></i> 状态信息管理 </a>
+							<a href="/course/teacher/teacher-oldcourseinfo.html" class="active-menu"><i class="fa fa-bar-chart-o"></i> 我的课程---过往学期</a>
 						</li>
 					</ul>
 
 				</div>
 			</nav>
 			<!-- /. NAV SIDE  -->
+
 			<div id="page-wrapper">
 				<div class="header">
 					<h1 class="page-header">
-					状态信息管理 <small>Status information management</small>
+					此课程的学生信息 <small>Student information in this course</small>
 				</h1>
 					<ol class="breadcrumb">
 						<li>
 							<a href="#">首页</a>
 						</li>
 						<li>
-							<a href="#">状态</a>
+							<a href="#">此课程的学生信息</a>
 						</li>
 						<li class="active">Data</li>
 					</ol>
 				</div>
 
 				<div id="page-inner">
-					<div class="panel panel-default">
-						<div class="panel-heading">选课状态</div>
-						<div class="panel-body">
-							<div class="bootstrap-switch bootstrap-switch-small">
-								<input type="checkbox" name="choice" />
-							</div>
-						</div>
 
-						<div class="panel-heading">成绩录入状态</div>
-						<div class="panel-body">
-							<div class="bootstrap-switch bootstrap-switch-small">
-								<input type="checkbox" name="entry" />
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Advanced Tables -->
+							<div class="panel panel-default">
+
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th>学号</th>
+													<th>姓名</th>
+													<th>性别</th>
+													<th>身份证号</th>
+													<th>专业</th>
+													<th>学期</th>
+													<th>分数</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
+							<!--End Advanced Tables -->
 						</div>
 					</div>
-
+					<!-- /. ROW  -->
 				</div>
 			</div>
 			<!-- /. PAGE INNER  -->
@@ -133,79 +138,90 @@
 		<script src="../assets/plugins/layer/layer.js"></script>
 		<script src="../assets/plugins/Validform_v5.3.2.js"></script>
 		<script src="../assets/plugins/jquery-form.js" type="text/javascript"></script>
-		<script src="../assets/js/bootstrap-switch.js"></script>
 
 		<script>
+			
 			$(document).ready(function() {
-
-				$.post("/course/admin/queryStatus", function(data) {
-					var result = eval("(" + data + ")");
-					if(result.choice) {
-						$('[name="choice"]').bootstrapSwitch('state', true);
-					};
-					if(result.entry) {
-						$('[name="entry"]').bootstrapSwitch('state', true);
-					};
-				})
-
-				$('[name="choice"]').bootstrapSwitch({
-					onSwitchChange: function(event, state) {
-						if(state == true) {
-							$.post("/course/admin/updateStatus", {
-								choice: true
-							}, function(data) {
-								var result = eval("(" + data + ")");
-								if(result.result) {} else {
-									layer.msg('开启失败...', {
-										time: 1500
-									});
-								}
-							})
-						} else {
-							$.post("/course/admin/updateStatus", {
-								choice: false
-							}, function(data) {
-								var result = eval("(" + data + ")");
-								if(result.result) {} else {
-									layer.msg('关闭失败...', {
-										time: 1500
-									});
-								}
-							})
-						}
-					}
-				});
-
-				$('[name="entry"]').bootstrapSwitch({
-					onSwitchChange: function(event, state) {
-						if(state == true) {
-							$.post("/course/admin/updateStatus", {
-								entry: true
-							}, function(data) {
-								var result = eval("(" + data + ")");
-								if(result.result) {} else {
-									layer.msg('开启失败...', {
-										time: 1500
-									});
-								}
-							})
-						} else {
-							$.post("/course/admin/updateStatus", {
-								entry: false
-							}, function(data) {
-								var result = eval("(" + data + ")");
-								if(result.result) {} else {
-									layer.msg('关闭失败...', {
-										time: 1500
-									});
-								}
-							})
-						}
-					}
-				});
+				var cno = getQueryVariable("cno");
+				$('#dataTables-example').dataTable(
+					{
+						"sAjaxSource" : "/course/teacher/queryStudentsByCno?cno="+cno,
+						//列表表头字段
+						"columns" : [ {
+							"data" : "sno"
+						}, {
+							"data" : "sname"
+						}, {
+							"data" : "ssex"
+						}, {
+							"data" : "idcard"
+						}, {
+							"data" : "dname"
+						}, {
+							"data" : "sterm"
+						}, {
+							"data" : "score"
+						}, ]
+					});
 			});
+			
+			
+			function getQueryVariable(variable){
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i=0;i<vars.length;i++) {
+			        var pair = vars[i].split("=");
+			        if(pair[0] == variable){return pair[1];}
+				}
+				return(false);
+			}
+			
+			function batch(){
+				var cno = getQueryVariable("cno");
+				var data = "";
+				
+				$("input[name='score']").each(function(index,element){
+					var score = $(element).val();
+					var sno = $(element).parent().siblings().first().text();
+					if(index != 0){
+						data = data + "&" + sno + "_" + score;
+					} else {
+						data = sno + "_" + score;
+					}
+				}); 
+				console.log(data);
+				$.post("/course/teacher/bulkEditing", {
+					sno_score: data,
+					cno: cno
+				}, function(data) {
+					var result = eval("(" + data + ")");
+					if(result.result){
+						layer.msg('成绩录入成功...');
+					} else {
+						layer.msg('成绩录入失败...');
+					}
+				});
+			}
+			
+			function scoreRegistration(data) {
+				var cno = getQueryVariable("cno");
+				var score = $(data).parent().prev().children().val();
+				var sno = $(data).parent().siblings().first().text();
+				$.post("/course/teacher/scoreRegistration", {
+					score: score,
+					cno: cno,
+					sno: sno
+				}, function(data) {
+					var result = eval("(" + data + ")");
+					if(result.result){
+						layer.msg('成绩录入成功...');
+					} else {
+						layer.msg('成绩录入失败...');
+					}
+				});
+			}
 		</script>
-
+		
 		<script>
 			
 			function changePassword() {
@@ -214,7 +230,7 @@
 					title : '输入旧密码，并确认',
 					formType : 1
 				}, function(oldPassword, index) {
-					$.post("/course/admin/confirmPassword", {
+					$.post("/course/teacher/confirmPassword", {
 						password: oldPassword
 					}, function(data) {
 						var result = eval("(" + data + ")");
@@ -231,7 +247,7 @@
 								}, function(rePassword, index) {
 									layer.close(index);
 									if(newPassword == rePassword){
-										$.post("/course/admin/changePassword", {
+										$.post("/course/teacher/changePassword", {
 											oldPassword: oldPassword,
 											newPassword: newPassword
 										}, function(data) {
@@ -255,13 +271,15 @@
 				});
 			}
 			
-			function adminInfo(){
-				$.post("/course/admin/adminInfo", function(data) {
-					var admin = eval("(" + data + ")");
-					layer.msg("当前用户："+admin.ausername);
+			function teacherInfo(){
+				$.post("/course/teacher/teacherInfo", function(data) {
+					var teacher = eval("(" + data + ")");
+					var msg = "工号："+teacher.tno+"<br>姓名："+teacher.tname+"<br>性别："+teacher.tsex+"<br>职称："+teacher.ttitle;
+					layer.msg(msg);
 				});
 			}
 		</script>
+
 	</body>
 
 </html>
