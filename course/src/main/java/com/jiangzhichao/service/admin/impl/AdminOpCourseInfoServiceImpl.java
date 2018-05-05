@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jiangzhichao.dao.CourseMapper;
+import com.jiangzhichao.dao.DepartmentMapper;
 import com.jiangzhichao.dao.StuCourseMapper;
+import com.jiangzhichao.dao.TeacherMapper;
 import com.jiangzhichao.entity.CourseDTO;
+import com.jiangzhichao.entity.DepartmentDTO;
 import com.jiangzhichao.entity.StuCourseDTO;
+import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
 
 @Service
@@ -21,6 +25,12 @@ public class AdminOpCourseInfoServiceImpl implements AdminOpCourseInfoService {
 	
 	@Autowired
 	private StuCourseMapper stuCourseMapper;
+	
+	@Autowired
+	private DepartmentMapper departmentMapper;
+	
+	@Autowired
+	private TeacherMapper teacherMapper;
 	
 	@Override
 	public int insertCourse(CourseDTO courseDTO) {
@@ -49,7 +59,29 @@ public class AdminOpCourseInfoServiceImpl implements AdminOpCourseInfoService {
 
 	@Override
 	public List<CourseDTO> selectAllCourse() {
-		return courseMapper.select();
+		// 懒得改Sql
+		List<CourseDTO> courses = courseMapper.select();
+		List<DepartmentDTO> departs = departmentMapper.select();
+		List<TeacherDTO> teachers = teacherMapper.select();
+		for (CourseDTO course : courses) {
+			for (DepartmentDTO department : departs) {
+				if(course.getDno() != null && course.getDno().equals(department.getDno())) {
+					course.setDno(department.getDname());
+				}
+				if(course.getDno() == null) {
+					course.setDno("公共课");
+				}
+			}
+			for (TeacherDTO teacher : teachers) {
+				if(course.getTno() != null && course.getTno().equals(teacher.getTno())) {
+					course.setTno(teacher.getTname());
+				}
+				if(course.getTno() == null) {
+					course.setTno("空");
+				}
+			}
+		}
+		return courses;
 	}
 
 	@Override

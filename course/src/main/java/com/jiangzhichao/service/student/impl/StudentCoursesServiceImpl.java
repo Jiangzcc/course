@@ -31,22 +31,30 @@ public class StudentCoursesServiceImpl implements StudentCoursesService {
 	
 	@Override
 	public List<CourseVO> queryAllCourseByDnoAndTerm(String dno, String term) {
-		return courseMapper.selectByDnoAndTerm(dno, term);
+		List<CourseVO> courses = courseMapper.selectByDnoAndTerm(dno, term);
+		tran(courses);
+		return courses;
 	}
 
 	@Override
 	public List<CourseVO> queryOptionsBySno(StudentDTO student) {
-		return courseMapper.selectBySno(student);
+		List<CourseVO> courses = courseMapper.selectBySno(student);
+		tran(courses);
+		return courses;
 	}
-
+	
 	@Override
 	public List<CourseVO> querySelectedBySno(String sno) {
-		return courseMapper.selectedBySno(sno);
+		List<CourseVO> courses = courseMapper.selectedBySno(sno);
+		tran(courses);
+		return courses;
 	}
 
 	@Override
 	public List<CourseVO> querySelectedOldBySno(String sno) {
-		return courseMapper.selectedOldBySno(sno);
+		List<CourseVO> courses = courseMapper.selectedOldBySno(sno);
+		tran(courses);
+		return courses;
 	}
 
 	@Override
@@ -57,7 +65,7 @@ public class StudentCoursesServiceImpl implements StudentCoursesService {
 		if(status.getChoice()) {
 			Integer credits = courseMapper.totalCredits(stuCourseDTO.getSno());
 			//学分
-			if(credits < 25) {
+			if(credits == null || credits < 25) {
 				CourseDTO courseDTO = courseMapper.selectByPrimaryKey(stuCourseDTO.getCno());
 				//选课人数未满
 				if(courseDTO.getCurrentnum()<courseDTO.getMaxnum()) {
@@ -82,6 +90,18 @@ public class StudentCoursesServiceImpl implements StudentCoursesService {
 			i = stuCourseMapper.deleteBySnoAndCno(stuCourseDTO);
 		}
 		return i;
+	}
+	
+	private List<CourseVO> tran(List<CourseVO> courses){
+		for (CourseVO courseVO : courses) {
+			if(courseVO.getDname() == null) {
+				courseVO.setDname("公共课");
+			}
+			if(courseVO.getTname() == null) {
+				courseVO.setTname("空");
+			}
+		}
+		return courses;
 	}
 
 }

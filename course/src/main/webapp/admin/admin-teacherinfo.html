@@ -56,25 +56,24 @@
 				<div class="sidebar-collapse">
 					<ul class="nav" id="main-menu">
 						<li>
-							<a href="/course/admin/index.html"><i class="fa fa-dashboard"></i> 首页 </a>
+							<a href="/course/admin/index.html"><i class="fa fa-home"></i> 首页 </a>
 						</li>
 						<li>
 							<a href="/course/admin/admin-courseinfo.html"><i class="fa fa-desktop"></i> 课程信息管理</a>
 						</li>
 						<li>
-							<a href="/course/admin/admin-studentinfo.html"><i class="fa fa-bar-chart-o"></i> 学生信息管理</a>
+							<a href="/course/admin/admin-studentinfo.html"><i class="fa fa-user"></i> 学生信息管理</a>
 						</li>
 						<li>
-							<a href="/course/admin/admin-teacherinfo.html" class="active-menu"><i class="fa fa-qrcode"></i> 教师信息管理</a>
+							<a href="/course/admin/admin-teacherinfo.html" class="active-menu"><i class="fa fa-user"></i> 教师信息管理</a>
 						</li>
 						<li>
 							<a href="/course/admin/admin-departmentinfo.html"><i class="fa fa-table"></i> 专业信息管理</a>
 						</li>
 						<li>
-							<a href="/course/admin/admin-statusinfo.html"><i class="fa fa-edit"></i> 状态信息管理 </a>
+							<a href="/course/admin/admin-statusinfo.html"><i class="fa fa-flag"></i> 状态信息管理 </a>
 						</li>
 					</ul>
-
 				</div>
 			</nav>
 			<!-- /. NAV SIDE  -->
@@ -105,10 +104,10 @@
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 											<thead>
 												<tr>
-													<th>工号</th>
-													<th>姓名</th>
-													<th>职称</th>
-													<th>性别</th>
+													<th width=200>工号</th>
+													<th width=200>姓名</th>
+													<th width=200>职称</th>
+													<th width=200>性别</th>
 													<th width=200>操作</th>
 												</tr>
 											</thead>
@@ -339,85 +338,86 @@
 				$("#addTeacher").Validform({
 					tiptype: function(msg) {
 						layer.msg(msg);
-					}
-					/* ,
-							    	beforeSubmit:function(curform){
-							    		layer.msg('正在添加...', {
-											time : 1500
-										});
-							    		$.delay(1500);
-							    		//在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
-							    		//这里明确return false的话表单将不会提交;	
-							    	}, */
+					} ,
+			    	beforeSubmit:function(curform){
+			    		$('#addTeacher').ajaxSubmit({
+							url: '/course/admin/addTeacher',
+							type: 'post',
+							dataType: 'json',
+							beforeSubmit: function() {
+								layer.msg('正在添加...', {
+									time: 1500
+								});
+							},
+							success: function(data) {
+								/* console.log(data);
+								var result = eval("(" + data + ")");
+								console.log(result); */
+								if(data.result) {
+									layer.msg('添加成功...', {
+										time: 1500
+									});
+									setTimeout(function() {
+										location.reload();
+									}, 1550);
+								} else {
+									layer.msg('添加失败...', {
+										time: 1500
+									});
+									setTimeout(function() {
+										location.reload();
+									}, 1550);
+								}
+							}
+						});
+			    		return false;
+			    	}
 				});
 				$("#editTeacher").Validform({
 					tiptype: function(msg) {
 						layer.msg(msg);
-					}
+					}, 
+					beforeSubmit:function(curform){
+						$('#editTeacher').ajaxSubmit({
+							url: '/course/admin/editTeacher',
+							type: 'post',
+							dataType: 'json',
+							beforeSubmit: function() {
+								layer.msg('正在修改...', {
+									time: 1500
+								});
+							},
+							success: function(data) {
+								/* var result = eval("(" + data + ")");
+								console.log(result); */
+								if(data.result) {
+									layer.msg('修改成功...', {
+										time: 1500
+									});
+									setTimeout(function() {
+										location.reload();
+									}, 1550);
+								} else {
+									layer.msg('修改失败...', {
+										time: 1500
+									});
+									setTimeout(function() {
+										location.reload();
+									}, 1550);
+								}
+							}
+						});
+			    		return false;
+			    	}
 				});
 			})
 
 			function addTeacher() {
-				$('#addTeacher').ajaxSubmit(
-					//ajax方式提交表单  
-					{
-						url: '/course/admin/addTeacher',
-						type: 'post',
-						dataType: 'json',
-						beforeSubmit: function() {
-							layer.msg('正在添加...', {
-								time: 1500
-							});
-						},
-						success: function(data) {
-							/* console.log(data);
-							var result = eval("(" + data + ")");
-							console.log(result); */
-							if(data.result) {
-								layer.msg('添加成功...', {
-									time: 1500
-								});
-								setTimeout(function() {
-									location.reload();
-								}, 1550);
-							} else {
-								layer.msg('添加失败...', {
-									time: 1500
-								});
-							}
-						}
-					});
+				$('#addTeacher').submit();
 			};
 
 			function updateTeacher() {
-				$('#editTeacher').ajaxSubmit(
-					//ajax方式提交表单  
-					{
-						url: '/course/admin/editTeacher',
-						type: 'post',
-						dataType: 'json',
-						beforeSubmit: function() {
-							layer.msg('正在修改...', {
-								time: 1500
-							});
-						},
-						success: function(data) {
-							/* var result = eval("(" + data + ")");
-							console.log(result); */
-							if(data.result) {
-								layer.msg('修改成功...', {
-									time: 1500
-								});
-								setTimeout(function() {
-									location.reload();
-								}, 1550);
-							} else {
-								layer.msg('修改失败...', {
-									time: 1500
-								});
-							}
-						}
-					});
+				$('#editTeacher').submit();
 			};
 
 			function importTeacher() {

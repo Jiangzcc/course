@@ -61,6 +61,7 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 		subjectRoleMapper.deleteByNo(sno);
 		//删除此学生所有选课信息
 		stuCourseMapper.deleteBySno(sno);
+		//删除学生
 		return studentMapper.deleteByPrimaryKey(sno);
 	}
 
@@ -77,7 +78,7 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 	@Override
 	public List<StudentDTO> selectAllStudent() {
 		List<StudentDTO> students = studentMapper.select();
-		//替换专业编号为专业名称--不考虑性能...
+		//替换专业编号为专业名称--懒得改SQL
 		List<DepartmentDTO> depts = departmentMapper.select();
 		for (StudentDTO studentDTO : students) {
 			for (DepartmentDTO departmentDTO : depts) {

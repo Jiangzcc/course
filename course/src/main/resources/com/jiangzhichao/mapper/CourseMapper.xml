@@ -113,6 +113,7 @@
 		c.currentnum,
 		c.maxnum,
 		c.cterm,
+		c.cintroduce,
 		d.dno,
 		d.dname,
 		t.tno,

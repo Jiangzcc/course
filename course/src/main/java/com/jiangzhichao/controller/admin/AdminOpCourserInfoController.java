@@ -87,6 +87,9 @@ public class AdminOpCourserInfoController extends BaseController {
 	@RequestMapping("addCourse")
 	@ResponseBody
 	public Map<String,Object> addCourse(CourseDTO courseDTO) {
+		if(courseDTO.getDno().equals("")) {
+			courseDTO.setDno(null);
+		}
 		courseDTO.setCterm(cterm);
 		courseDTO.setCurrentnum(0);
 		int i = adminOpCourseInfoService.insertCourse(courseDTO);
