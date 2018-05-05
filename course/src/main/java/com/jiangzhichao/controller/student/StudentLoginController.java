@@ -3,6 +3,8 @@ package com.jiangzhichao.controller.student;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
@@ -45,5 +47,17 @@ public class StudentLoginController extends BaseController{
 		}
 		map.put("result", true);
 		return map;
+	}
+	
+	/**
+	 * 登出
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/studentLogout")
+	public String adminLogout(HttpSession session) {
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		return "redirect:/login/student/index.html";
 	}
 }

@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>学生管理系统</title>
+		<!-- Bootstrap Styles-->
+		<link href="../assets/css/bootstrap.css" rel="stylesheet" />
+		<!-- FontAwesome Styles-->
+		<link href="../assets/css/font-awesome.css" rel="stylesheet" />
+		<!-- Morris Chart Styles-->
+
+		<!-- Custom Styles-->
+		<link href="../assets/css/custom-styles.css" rel="stylesheet" />
+		<!-- Google Fonts-->
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+		<!-- TABLE STYLES-->
+		<link href="../assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-default top-navbar" role="navigation">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html"><strong>学生选课系统</strong></a>
+				</div>
+
+				<ul class="nav navbar-top-links navbar-right">
+					<!-- /.dropdown -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"> <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>　　　
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li>
+								<a href="#" onclick="studentInfo()"><i class="fa fa-user fa-fw"></i> 用户信息
+								</a>
+							</li>
+							<li>
+								<a href="#" onclick="changePassword()"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="/course/login/studentLogout"><i class="fa fa-sign-out fa-fw"></i> 登出
+								</a>
+							</li>
+						</ul>
+						<!-- /.dropdown-user -->
+					</li>
+
+					<!-- /.dropdown -->
+				</ul>
+			</nav>
+			<!--/. NAV TOP  -->
+			<nav class="navbar-default navbar-side" role="navigation">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="main-menu">
+						<li>
+							<a href="/course/student/index.html"><i class="fa fa-dashboard"></i> 首页 </a>
+						</li>
+						<li>
+							<a href="/course/student/student-courseinfo.html"><i class="fa fa-desktop"></i> 本学期所有可选课程</a>
+						</li>
+						<li>
+							<a href="/course/student/student-courseinfo2.html"><i class="fa fa-bar-chart-o"></i> 我的当前可选课程</a>
+						</li>
+						<li>
+							<a href="/course/student/student-selectedcourse.html"><i class="fa fa-qrcode"></i> 本学期已选课程信息</a>
+						</li>
+						<li>
+							<a href="/course/student/student-selectedoldcourse.html" class="active-menu"><i class="fa fa-table"></i> 过往学期已选课程信息</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- /. NAV SIDE  -->
+
+			<div id="page-wrapper">
+				<div class="header">
+					<h1 class="page-header">
+					过往学期已选课程信息 <small>The course information has been selected for the past semester</small>
+				</h1>
+					<ol class="breadcrumb">
+						<li>
+							<a href="#">首页</a>
+						</li>
+						<li>
+							<a href="#">课程</a>
+						</li>
+						<li class="active">Data</li>
+					</ol>
+				</div>
+
+				<div id="page-inner">
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Advanced Tables -->
+							<div class="panel panel-default">
+
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th>编号</th>
+													<th>名称</th>
+													<th>学期</th>
+													<th>学分</th>
+													<th>所属专业</th>
+													<th>当前选课人数</th>
+													<th>最大选课人数</th>
+													<th>课程介绍</th>
+													<th>授课教师</th>
+													<th>成绩</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!--End Advanced Tables -->
+						</div>
+					</div>
+					<!-- /. ROW  -->
+				</div>
+			</div>
+			<!-- /. PAGE INNER  -->
+		</div>
+
+		<!-- /. PAGE WRAPPER  -->
+		<!-- /. WRAPPER  -->
+		<!-- JS Scripts-->
+		<!-- jQuery Js -->
+		<script src="../assets/js/jquery-1.10.2.js"></script>
+		<!-- Bootstrap Js -->
+		<script src="../assets/js/bootstrap.min.js"></script>
+		<!-- Metis Menu Js -->
+		<script src="../assets/js/jquery.metisMenu.js"></script>
+		<!-- DATA TABLE SCRIPTS -->
+		<script src="../assets/js/dataTables/jquery.dataTables.js"></script>
+		<script src="../assets/js/dataTables/dataTables.bootstrap.js"></script>
+		<!-- Custom Js -->
+		<script src="../assets/plugins/layer/layer.js"></script>
+		<script src="../assets/plugins/Validform_v5.3.2.js"></script>
+		<script src="../assets/plugins/jquery-form.js" type="text/javascript"></script>
+
+		<script>
+			
+			$(document).ready(function() {
+				$('#dataTables-example').dataTable(
+					{
+						"sAjaxSource" : "/course/student/selectedOldCourses",
+						//列表表头字段
+						"columns" : [ {
+							"data" : "cno"
+						}, {
+							"data" : "cname"
+						}, {
+							"data" : "cterm"
+						}, {
+							"data" : "credit"
+						}, {
+							"data" : "dname"
+						}, {
+							"data" : "currentnum"
+						}, {
+							"data" : "maxnum"
+						}, {
+							"data" : "cintroduce"
+						}, {
+							"data" : "tname"
+						}, {
+							"data" : "score"
+						}, ]
+					});
+			});
+		</script>
+		
+		<script>
+			
+			function changePassword() {
+				//prompt层
+				layer.prompt({
+					title : '输入旧密码，并确认',
+					formType : 1
+				}, function(oldPassword, index) {
+					$.post("/course/student/confirmPassword", {
+						password: oldPassword
+					}, function(data) {
+						var result = eval("(" + data + ")");
+						if(result.result){
+							layer.close(index);
+							layer.prompt({
+								title : '请输入新密码...',
+								formType : 1
+							}, function(newPassword, index) {
+								layer.close(index);
+								layer.prompt({
+									title : '请确认新密码...',
+									formType : 1
+								}, function(rePassword, index) {
+									layer.close(index);
+									if(newPassword == rePassword){
+										$.post("/course/student/changePassword", {
+											oldPassword: oldPassword,
+											newPassword: newPassword
+										}, function(data) {
+											var result = eval("(" + data + ")");
+											if(result.result){
+												layer.msg('修改成功...');
+											} else {
+												layer.msg('修改失败...');
+											}
+										});
+									} else {
+										layer.msg('两次密码不一致！');
+									}
+								});
+							});
+						} else {
+							layer.close(index);
+							layer.msg('密码输入错误！');
+						}
+					});
+				});
+			}
+			
+			function studentInfo(){
+				$.post("/course/student/studentInfo", function(data) {
+					var student = eval("(" + data + ")");
+					var msg = "学号："+student.sno+"<br>姓名："+student.sname+"<br>性别："+student.ssex+"<br>专业："+student.dno+"<br>身份证号："+student.idcard;
+					layer.msg(msg);
+				});
+			}
+		</script>
+
+	</body>
+
+</html>

@@ -11,13 +11,14 @@ public class CourseVO {
 	private String cintroduce;
 	private String cterm;
 	private String tname;
+	private Integer score;
 	
 	public CourseVO() {
 		super();
 	}
 
 	public CourseVO(String cno, String cname, Integer credit, String dname, Integer currentnum, Integer maxnum,
-			String cintroduce, String cterm, String tname) {
+			String cintroduce, String cterm, String tname, Integer score) {
 		super();
 		this.cno = cno;
 		this.cname = cname;
@@ -28,6 +29,7 @@ public class CourseVO {
 		this.cintroduce = cintroduce;
 		this.cterm = cterm;
 		this.tname = tname;
+		this.score = score;
 	}
 
 	public String getCno() {
@@ -102,11 +104,19 @@ public class CourseVO {
 		this.tname = tname;
 	}
 
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseVO [cno=" + cno + ", cname=" + cname + ", credit=" + credit + ", dname=" + dname + ", currentnum="
 				+ currentnum + ", maxnum=" + maxnum + ", cintroduce=" + cintroduce + ", cterm=" + cterm + ", tname="
-				+ tname + "]";
+				+ tname + ", score=" + score + "]";
 	}
 
 }

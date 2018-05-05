@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jiangzhichao.controller.base.BaseController;
 import com.jiangzhichao.entity.CourseVO;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.teacher.TeacherCoursesService;
@@ -24,7 +25,7 @@ import com.jiangzhichao.service.teacher.TeacherCoursesService;
  */
 @Controller
 @RequestMapping("/teacher")
-public class TeacherCoursesController {
+public class TeacherCoursesController extends BaseController {
 
 	@Autowired
 	private TeacherCoursesService teacherCoursesService;

@@ -103,7 +103,122 @@
 	LEFT JOIN department d ON d.dno = c.dno
 	WHERE
 		t.tno = #{0,jdbcType=VARCHAR} AND c.cterm != #{1,jdbcType=VARCHAR}
-  </select>  
+  </select>
+  
+  <select id="selectByDnoAndTerm" resultType="com.jiangzhichao.entity.CourseVO">
+	SELECT DISTINCT
+		c.cno,
+		c.cname,
+		credit,
+		c.currentnum,
+		c.maxnum,
+		c.cterm,
+		d.dno,
+		d.dname,
+		t.tno,
+		t.tname
+	FROM
+		course c
+	LEFT JOIN department d ON c.dno = d.dno
+	LEFT JOIN teacher t ON t.tno = c.tno
+	WHERE
+		(d.dno = #{0,jdbcType=VARCHAR} OR d.dno IS NULL)
+	AND c.cterm = #{1,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectBySno" resultType="com.jiangzhichao.entity.CourseVO">
+	SELECT distinct 
+		c.cno,
+		c.cname,
+		credit,
+		c.currentnum,
+		c.maxnum,
+		c.cintroduce,
+		c.cterm,
+		d.dno,
+		d.dname,
+		t.tno,
+		t.tname
+	FROM
+		course c
+	LEFT JOIN department d ON c.dno = d.dno
+	LEFT JOIN teacher t ON c.tno = t.tno
+	WHERE
+		(d.dno = #{dno,jdbcType=VARCHAR} OR d.dno IS NULL)
+	AND c.cno NOT IN (
+		SELECT
+			c.cno
+		FROM
+			student s
+		JOIN stucourse sc ON s.sno = sc.sno
+		JOIN course c ON sc.cno = c.cno
+		LEFT JOIN department d ON d.dno = c.dno
+		WHERE
+			s.sno = #{sno,jdbcType=VARCHAR}
+	)
+	AND c.cterm = #{sterm,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectedBySno" resultType="com.jiangzhichao.entity.CourseVO">
+	SELECT
+		c.cno,
+		c.cname,
+		c.credit,
+		c.currentnum,
+		c.maxnum,
+		c.cintroduce,
+		c.cterm,
+		d.dname,
+		d.dintroduce,
+		t.tname,
+		sc.score
+	FROM
+		student s
+	JOIN stucourse sc ON s.sno = sc.sno
+	JOIN course c ON sc.cno = c.cno
+	LEFT JOIN teacher t ON t.tno = c.tno
+	LEFT JOIN department d ON d.dno = c.dno
+	WHERE
+		s.sno = #{sno,jdbcType=VARCHAR}
+	AND c.cterm = s.sterm
+  </select>
+  
+  <select id="selectedOldBySno" resultType="com.jiangzhichao.entity.CourseVO">
+	SELECT
+		c.cno,
+		c.cname,
+		c.credit,
+		c.currentnum,
+		c.maxnum,
+		c.cintroduce,
+		c.cterm,
+		d.dname,
+		d.dintroduce,
+		t.tname,
+		sc.score
+	FROM
+		student s
+	JOIN stucourse sc ON s.sno = sc.sno
+	JOIN course c ON sc.cno = c.cno
+	LEFT JOIN teacher t ON t.tno = c.tno
+	LEFT JOIN department d ON d.dno = c.dno
+	WHERE
+		s.sno = #{sno,jdbcType=VARCHAR}
+	AND c.cterm != s.sterm
+  </select>
+  
+  <select id="totalCredits" resultType="java.lang.Integer">
+	SELECT
+		sum(c.credit) AS credit
+	FROM
+		student s
+	JOIN stucourse sc ON s.sno = sc.sno
+	JOIN course c ON sc.cno = c.cno
+	WHERE
+		s.sno = #{sno,jdbcType=VARCHAR}
+	AND c.cterm = s.sterm
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

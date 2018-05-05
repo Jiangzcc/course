@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jiangzhichao.entity.CourseDTO;
 import com.jiangzhichao.entity.CourseVO;
+import com.jiangzhichao.entity.StudentDTO;
 
 public interface CourseMapper {
     /**
@@ -78,4 +79,29 @@ public interface CourseMapper {
      * 查询某教师过往学期所有授课
      */
     List<CourseVO> selectOldByTnoAndTerm(String tno,String term);
+    
+    /**
+     * 查询本学期本专业所有可选课程
+     */
+    List<CourseVO> selectByDnoAndTerm(String dno,String term);
+    
+    /**
+     * 查询某学生可选课程
+     */
+    List<CourseVO> selectBySno(StudentDTO student);
+    
+    /**
+     * 查询某学生本学期课程信息和成绩
+     */
+    List<CourseVO> selectedBySno(String sno);
+    
+    /**
+     * 查询某学生过往学期课程信息和成绩
+     */
+    List<CourseVO> selectedOldBySno(String sno);
+    
+    /**
+     * 查询某学生总学分
+     */
+    Integer totalCredits(String sno);
 }

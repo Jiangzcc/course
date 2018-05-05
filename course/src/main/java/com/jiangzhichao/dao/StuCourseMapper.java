@@ -48,4 +48,11 @@ public interface StuCourseMapper {
      * @return
      */
     int updateScore(StuCourseDTO record);
+    
+    /**
+     * 退课
+     * @param record
+     * @return
+     */
+    int deleteBySnoAndCno(StuCourseDTO record);
 }
