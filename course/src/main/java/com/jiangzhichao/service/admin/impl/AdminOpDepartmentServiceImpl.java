@@ -14,8 +14,14 @@ import com.jiangzhichao.entity.DepartmentDTO;
 import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.service.admin.AdminOpDepartmentService;
 
+/**
+ * 管理员CRUD专业信息Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class AdminOpDepartmentServiceImpl implements AdminOpDepartmentService {
 
 	@Autowired

@@ -18,6 +18,7 @@ public interface TeacherStudentsService {
 	/**
 	 * 教师所授专业下所有学生信息
 	 * @param cno
+	 * @param session
 	 * @return
 	 */
 	List<StudentVO> queryStudentByCno(String cno,HttpSession session);
@@ -25,15 +26,16 @@ public interface TeacherStudentsService {
 	/**
 	 * 修改某学生成绩
 	 * @param stuCourseDTO
+	 * @param session
 	 * @return
 	 */
 	int updateScore(StuCourseDTO stuCourseDTO,HttpSession session);
 	
 	/**
 	 * 批量修改成绩
-	 * @param sno_score 学号与成绩拼接而成的字符串
+	 * @param snoScore 学号与成绩拼接而成的字符串
 	 * @param cno
 	 * @param session
 	 */
-	void bulkEditing(String sno_score,String cno,HttpSession session);
+	void bulkEditing(String snoScore,String cno,HttpSession session);
 }

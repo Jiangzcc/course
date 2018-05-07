@@ -8,8 +8,14 @@ import com.jiangzhichao.dao.StudentMapper;
 import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.service.student.StudentLoginService;
 
+/**
+ * 学生登陆Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class StudentLoginServiceImpl implements StudentLoginService {
 	
 	@Autowired

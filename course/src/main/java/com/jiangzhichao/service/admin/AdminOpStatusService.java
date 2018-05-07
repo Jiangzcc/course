@@ -18,6 +18,7 @@ public interface AdminOpStatusService {
 	
 	/**
 	 * 修改状态
+	 * @param status
 	 * @return
 	 */
 	int update(Status status);

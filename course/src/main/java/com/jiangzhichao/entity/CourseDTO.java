@@ -3,6 +3,12 @@ package com.jiangzhichao.entity;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecgframework.poi.excel.annotation.ExcelTarget;
 
+/**
+ * 课程Bean
+ * 
+ * @author BornToWin
+ *
+ */
 @ExcelTarget("Course")
 public class CourseDTO {
     /**
@@ -310,4 +316,13 @@ public class CourseDTO {
     public void setCterm(String cterm) {
         this.cterm = cterm == null ? null : cterm.trim();
     }
+
+	@Override
+	public String toString() {
+		return "CourseDTO [cno=" + cno + ", cname=" + cname + ", credit=" + credit + ", dno=" + dno + ", currentnum="
+				+ currentnum + ", maxnum=" + maxnum + ", cintroduce=" + cintroduce + ", tno=" + tno + ", cterm=" + cterm
+				+ "]";
+	}
+    
+    
 }

@@ -8,8 +8,14 @@ import com.jiangzhichao.dao.StatusMapper;
 import com.jiangzhichao.entity.Status;
 import com.jiangzhichao.service.admin.AdminOpStatusService;
 
+/**
+ * 选课开启关闭-录入成绩开启关闭状态查询、修改Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class AdminOpStatusServiceImpl implements AdminOpStatusService {
 	
 	@Autowired

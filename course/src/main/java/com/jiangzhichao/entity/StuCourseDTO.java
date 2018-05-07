@@ -1,5 +1,11 @@
 package com.jiangzhichao.entity;
 
+/**
+ * 学生选课信息Bean
+ * 
+ * @author BornToWin
+ *
+ */
 public class StuCourseDTO {
     /**
      *
@@ -99,4 +105,10 @@ public class StuCourseDTO {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+	@Override
+	public String toString() {
+		return "StuCourseDTO [sno=" + sno + ", cno=" + cno + ", score=" + score + "]";
+	}
+    
 }

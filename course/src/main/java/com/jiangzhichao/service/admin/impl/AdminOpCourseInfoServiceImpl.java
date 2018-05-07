@@ -16,8 +16,14 @@ import com.jiangzhichao.entity.StuCourseDTO;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.admin.AdminOpCourseInfoService;
 
+/**
+ * 管理员操作课程信息Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class AdminOpCourseInfoServiceImpl implements AdminOpCourseInfoService {
 
 	@Autowired

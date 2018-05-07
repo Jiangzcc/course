@@ -21,9 +21,15 @@ import com.jiangzhichao.dao.RoleMapper;
 import com.jiangzhichao.dao.SubjectRoleMapper;
 import com.jiangzhichao.entity.AdminDTO;
 import com.jiangzhichao.entity.RoleDTO;
-import com.jiangzhichao.entity.SubjectRoleDTOKey;
+import com.jiangzhichao.entity.SubjectRoleDTO;
 import com.jiangzhichao.util.SessionUtil;
 
+/**
+ * 自定义管理员Realm
+ * 
+ * @author BornToWin
+ *
+ */
 public class AdminRealm extends AuthorizingRealm {
 	
 	@Autowired
@@ -44,16 +50,16 @@ public class AdminRealm extends AuthorizingRealm {
         	//String role = loginType();
         	
         	//为当前用户设置角色和权限
-        	List<SubjectRoleDTOKey> list = subjectRoleMapper.selectByNo(username);
+        	List<SubjectRoleDTO> list = subjectRoleMapper.selectByNo(username);
         	List<String> roleList = new ArrayList<String>();
         	List<String> permissionList = new ArrayList<String>();
         	//循环赋值
-        	for (SubjectRoleDTOKey subjectRoleDTOKey : list) {
-				RoleDTO role = roleMapper.selectByPrimaryKey(subjectRoleDTOKey.getRoleno());
+        	for (SubjectRoleDTO subjectRoleDTO : list) {
+				RoleDTO role = roleMapper.selectByPrimaryKey(subjectRoleDTO.getRoleno());
 				//添加角色
 				roleList.add(role.getRolename());
 				//添加权限
-				permissionList.add(role.getRolename()); //暂时
+				permissionList.add(role.getRolename());
 			}
             SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
             //设置角色
@@ -84,7 +90,10 @@ public class AdminRealm extends AuthorizingRealm {
         //没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
     }
     
-    //过时、测试时用
+    /**
+     * 过时、测试时用
+     * @return
+     */
     @SuppressWarnings("unused")
 	private String loginType() {
         Subject currentUser = SecurityUtils.getSubject();

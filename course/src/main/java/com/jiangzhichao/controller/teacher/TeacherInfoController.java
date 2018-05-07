@@ -31,7 +31,7 @@ public class TeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> confirmPassword(HttpSession session,String password) {
 		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(teacher.getTpassword().equals(password)) {
 			map.put("result", true);
 			return map;
@@ -44,7 +44,7 @@ public class TeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> changePassword(String oldPassword,String newPassword,HttpSession session) {
 		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		//防止用户直接通过url访问、跳过输入旧密码验证，再次验证一遍
 		if(teacher.getTpassword().equals(oldPassword)) {
 			teacher.setTpassword(newPassword);

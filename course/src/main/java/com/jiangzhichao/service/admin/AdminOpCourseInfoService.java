@@ -48,6 +48,7 @@ public interface AdminOpCourseInfoService {
 	
 	/**
 	 * 导入教师信息
+	 * @param courses
 	 */
 	void importCourse(List<CourseDTO> courses);
 }

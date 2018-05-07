@@ -1,5 +1,11 @@
 package com.jiangzhichao.entity;
 
+/**
+ * 管理员Bean
+ * 
+ * @author BornToWin
+ *
+ */
 public class AdminDTO {
     /**
      *
@@ -99,4 +105,10 @@ public class AdminDTO {
     public void setApassword(String apassword) {
         this.apassword = apassword == null ? null : apassword.trim();
     }
+
+	@Override
+	public String toString() {
+		return "AdminDTO [ano=" + ano + ", ausername=" + ausername + ", apassword=" + apassword + "]";
+	}
+    
 }

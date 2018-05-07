@@ -13,6 +13,12 @@ import com.jiangzhichao.dao.TeacherMapper;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.util.SessionUtil;
 
+/**
+ * 自定义教师Realm
+ * 
+ * @author BornToWin
+ *
+ */
 public class TeacherRealm extends AuthorizingRealm {
 
 	@Autowired

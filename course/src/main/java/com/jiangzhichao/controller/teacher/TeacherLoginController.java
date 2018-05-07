@@ -31,7 +31,7 @@ public class TeacherLoginController extends BaseController{
 	@RequestMapping("/teacherLogin")
 	@ResponseBody
 	public Map<String,Object> teacherLogin(String tno,String tpassword) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		CustomizedToken  token = new CustomizedToken(tno, tpassword, LoginType.TEACHER.toString());
 		Subject subject = SecurityUtils.getSubject();
 		try {

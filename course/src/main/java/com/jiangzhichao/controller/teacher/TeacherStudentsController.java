@@ -32,7 +32,7 @@ public class TeacherStudentsController extends BaseController {
 	@RequestMapping("queryStudentsByCno")
 	@ResponseBody
 	public Map<String,Object> queryStudentsByCno(String cno,HttpSession session){
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		List<StudentVO> list = teacherStudentsService.queryStudentByCno(cno,session);
 		if(list == null) {
 			map.put("data", "");
@@ -52,7 +52,7 @@ public class TeacherStudentsController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> scoreRegistration(StuCourseDTO stuCourseDTO,HttpSession session){
 		int i = teacherStudentsService.updateScore(stuCourseDTO, session);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -63,9 +63,9 @@ public class TeacherStudentsController extends BaseController {
 	
 	@RequestMapping("bulkEditing")
 	@ResponseBody
-	public Map<String,Object> bulkEditing(String sno_score,String cno,HttpSession session){
-		teacherStudentsService.bulkEditing(sno_score, cno, session);
-		Map<String,Object> map = new HashMap<>();
+	public Map<String,Object> bulkEditing(String snoScore,String cno,HttpSession session){
+		teacherStudentsService.bulkEditing(snoScore, cno, session);
+		Map<String,Object> map = new HashMap<>(2);
 		map.put("result", true);
 		return map;
 	}

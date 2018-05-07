@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class BaseController {
 	
-	/*
+	/**
 	 * 全局异常处理
+	 * @param request
+	 * @param ex
+	 * @return
 	 */
 	@ExceptionHandler
 	@ResponseBody
 	public Map<String,Object> exp(HttpServletRequest request, Exception ex) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		//要不要打印呢？
 		ex.printStackTrace();
 		map.put("result", false);

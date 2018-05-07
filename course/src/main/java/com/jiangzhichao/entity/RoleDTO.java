@@ -1,5 +1,11 @@
 package com.jiangzhichao.entity;
 
+/**
+ * 角色Bean
+ * 
+ * @author BornToWin
+ *
+ */
 public class RoleDTO {
     /**
      *
@@ -99,4 +105,11 @@ public class RoleDTO {
     public void setRoleintroduce(String roleintroduce) {
         this.roleintroduce = roleintroduce == null ? null : roleintroduce.trim();
     }
+
+	@Override
+	public String toString() {
+		return "RoleDTO [roleno=" + roleno + ", rolename=" + rolename + ", roleintroduce=" + roleintroduce + "]";
+	}
+    
+    
 }

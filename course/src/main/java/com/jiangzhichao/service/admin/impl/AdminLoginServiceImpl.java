@@ -8,8 +8,14 @@ import com.jiangzhichao.dao.AdminLoginMapper;
 import com.jiangzhichao.entity.AdminDTO;
 import com.jiangzhichao.service.admin.AdminLoginService;
 
+/**
+ * 管理员登陆Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class AdminLoginServiceImpl implements AdminLoginService {
 
 	@Autowired

@@ -43,7 +43,7 @@ public class AdminOpStudentInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,List<StudentDTO>> queryAllStudent(){
 		List<StudentDTO> list = adminOpStudentInfoService.selectAllStudent();
-		Map<String,List<StudentDTO>> map = new HashMap<String,List<StudentDTO>>();
+		Map<String,List<StudentDTO>> map = new HashMap<String,List<StudentDTO>>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -52,7 +52,7 @@ public class AdminOpStudentInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> deleteStudent(String sno){
 		int i = adminOpStudentInfoService.deleteStudent(sno);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -72,7 +72,7 @@ public class AdminOpStudentInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> editStudent(StudentDTO studnetDo){
 		int i = adminOpStudentInfoService.updateStudent(studnetDo);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -86,7 +86,7 @@ public class AdminOpStudentInfoController extends BaseController {
 	public Map<String,Object> addStudent(StudentDTO studnetDo) {
 		studnetDo.setSterm(sterm);
 		int i = adminOpStudentInfoService.insertStudent(studnetDo);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -127,7 +127,7 @@ public class AdminOpStudentInfoController extends BaseController {
 		
 		//导入教师信息到DB
 		adminOpStudentInfoService.importStudent(studentList);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		map.put("result", true);
 		return map;
 	}

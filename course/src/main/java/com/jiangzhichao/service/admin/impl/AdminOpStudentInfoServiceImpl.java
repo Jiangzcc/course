@@ -15,11 +15,17 @@ import com.jiangzhichao.entity.CourseDTO;
 import com.jiangzhichao.entity.DepartmentDTO;
 import com.jiangzhichao.entity.StuCourseDTO;
 import com.jiangzhichao.entity.StudentDTO;
-import com.jiangzhichao.entity.SubjectRoleDTOKey;
+import com.jiangzhichao.entity.SubjectRoleDTO;
 import com.jiangzhichao.service.admin.AdminOpStudentInfoService;
 
+/**
+ * 管理员CRUD学生信息
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService {
 
 	@Autowired
@@ -40,10 +46,10 @@ public class AdminOpStudentInfoServiceImpl implements AdminOpStudentInfoService 
 	@Override
 	public int insertStudent(StudentDTO studentDTO) {
 		//设置角色
-		SubjectRoleDTOKey subjectRoleDTOKey = new SubjectRoleDTOKey();
-		subjectRoleDTOKey.setNo(studentDTO.getSno());
-		subjectRoleDTOKey.setRoleno("3");
-		subjectRoleMapper.insert(subjectRoleDTOKey);
+		SubjectRoleDTO subjectRoleDTO = new SubjectRoleDTO();
+		subjectRoleDTO.setNo(studentDTO.getSno());
+		subjectRoleDTO.setRoleno("3");
+		subjectRoleMapper.insert(subjectRoleDTO);
 		return studentMapper.insert(studentDTO);
 	}
 

@@ -1,5 +1,11 @@
 package com.jiangzhichao.entity;
 
+/**
+ * 学生VO
+ * 
+ * @author BornToWin
+ *
+ */
 public class StudentVO {
 	
 	private String sno;

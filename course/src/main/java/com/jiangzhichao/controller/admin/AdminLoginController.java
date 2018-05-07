@@ -35,7 +35,7 @@ public class AdminLoginController extends BaseController {
 	@RequestMapping("/adminLogin")
 	@ResponseBody
 	public Map<String,Object> adminLogin(String ausername,String apassword) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		//生成token、自定义登陆类型
 		CustomizedToken  token = new CustomizedToken(ausername, apassword, LoginType.ADMIN.toString());
 		//获取当前角色

@@ -8,8 +8,14 @@ import com.jiangzhichao.dao.TeacherMapper;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.teacher.TeacherInfoService;
 
+/**
+ * 教师信息Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class TeacherInfoServiceImpl implements TeacherInfoService {
 
 	@Autowired

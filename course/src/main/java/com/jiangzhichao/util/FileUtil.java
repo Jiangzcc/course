@@ -40,7 +40,7 @@ public class FileUtil {
 
 	private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName, HttpServletResponse response, ExportParams exportParams) {
 		Workbook workbook = ExcelExportUtil.exportExcel(exportParams,pojoClass,list);
-		if (workbook != null);
+		if (workbook != null) {};
 		downLoadExcel(fileName, response, workbook);
 	}
 
@@ -56,7 +56,7 @@ public class FileUtil {
 	}
 	private static void defaultExport(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
 		Workbook workbook = ExcelExportUtil.exportExcel(list, "HSSF");
-		if (workbook != null);
+		if (workbook != null) {};
 		downLoadExcel(fileName, response, workbook);
 	}
 

@@ -3,6 +3,12 @@ package com.jiangzhichao.entity;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecgframework.poi.excel.annotation.ExcelTarget;
 
+/**
+ * 学生Bean
+ * 
+ * @author BornToWin
+ *
+ */
 @ExcelTarget("Student")
 public class StudentDTO {
     /**
@@ -242,4 +248,10 @@ public class StudentDTO {
     public void setIdcard(String idcard) {
         this.idcard = idcard == null ? null : idcard.trim();
     }
+
+	@Override
+	public String toString() {
+		return "StudentDTO [sno=" + sno + ", sname=" + sname + ", spassword=" + spassword + ", sterm=" + sterm
+				+ ", dno=" + dno + ", ssex=" + ssex + ", idcard=" + idcard + "]";
+	}
 }

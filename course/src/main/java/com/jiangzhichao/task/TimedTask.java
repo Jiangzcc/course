@@ -3,6 +3,12 @@ package com.jiangzhichao.task;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * 定时任务
+ * 
+ * @author BornToWin
+ *
+ */
 @Component
 public class TimedTask {
 

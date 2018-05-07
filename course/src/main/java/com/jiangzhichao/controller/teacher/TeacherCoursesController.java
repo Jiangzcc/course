@@ -41,7 +41,7 @@ public class TeacherCoursesController extends BaseController {
 	public Map<String,List<CourseVO>> queryCourses(HttpSession session){
 		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
 		List<CourseVO> list = teacherCoursesService.queryCourseByTnoAndTerm(teacher.getTno(), term);
-		Map<String,List<CourseVO>> map = new HashMap<String,List<CourseVO>>();
+		Map<String,List<CourseVO>> map = new HashMap<String,List<CourseVO>>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -51,7 +51,7 @@ public class TeacherCoursesController extends BaseController {
 	public Map<String,List<CourseVO>> queryOldCourses(HttpSession session){
 		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
 		List<CourseVO> list = teacherCoursesService.queryOldCourseByTnoAndTerm(teacher.getTno(), term);
-		Map<String,List<CourseVO>> map = new HashMap<String,List<CourseVO>>();
+		Map<String,List<CourseVO>> map = new HashMap<String,List<CourseVO>>(2);
 		map.put("data", list);
 		return map;
 	}

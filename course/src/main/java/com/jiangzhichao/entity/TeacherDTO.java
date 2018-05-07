@@ -3,6 +3,12 @@ package com.jiangzhichao.entity;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecgframework.poi.excel.annotation.ExcelTarget;
 
+/**
+ * 教师Bean
+ * 
+ * @author BornToWin
+ *
+ */
 @ExcelTarget("Teacher")
 public class TeacherDTO {
     /**
@@ -177,7 +183,8 @@ public class TeacherDTO {
 
 	@Override
 	public String toString() {
-		return "TeacherDO [tno=" + tno + ", tname=" + tname + ", tpassword=" + tpassword + ", ttitle=" + ttitle
+		return "TeacherDTO [tno=" + tno + ", tname=" + tname + ", tpassword=" + tpassword + ", ttitle=" + ttitle
 				+ ", tsex=" + tsex + "]";
 	}
+	
 }

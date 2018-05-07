@@ -36,7 +36,7 @@ public class AdminOpTeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,List<TeacherDTO>> queryAllTeacher(){
 		List<TeacherDTO> list = adminOpTeacherInfoService.selectAllTeacher();
-		Map<String,List<TeacherDTO>> map = new HashMap<String,List<TeacherDTO>>();
+		Map<String,List<TeacherDTO>> map = new HashMap<String,List<TeacherDTO>>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -45,7 +45,7 @@ public class AdminOpTeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> deleteTeacher(String tno){
 		int i = adminOpTeacherInfoService.deleteTeacher(tno);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -65,7 +65,7 @@ public class AdminOpTeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> editTeacher(TeacherDTO teacherDTO){
 		int i = adminOpTeacherInfoService.updateTeacher(teacherDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -78,7 +78,7 @@ public class AdminOpTeacherInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> addTeacher(TeacherDTO teacherDTO) {
 		int i = adminOpTeacherInfoService.insertTeacher(teacherDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -102,7 +102,7 @@ public class AdminOpTeacherInfoController extends BaseController {
 		List<TeacherDTO> teacherList = FileUtil.importExcel(file, 1, 1, TeacherDTO.class);
 		//导入教师信息到DB
 		adminOpTeacherInfoService.importTeacher(teacherList);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		map.put("result", true);
 		return map;
 

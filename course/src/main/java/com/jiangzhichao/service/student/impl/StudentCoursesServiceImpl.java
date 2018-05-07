@@ -16,8 +16,14 @@ import com.jiangzhichao.entity.StuCourseDTO;
 import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.service.student.StudentCoursesService;
 
+/**
+ * 学生选课信息Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class StudentCoursesServiceImpl implements StudentCoursesService {
 
 	@Autowired
@@ -65,7 +71,8 @@ public class StudentCoursesServiceImpl implements StudentCoursesService {
 		if(status.getChoice()) {
 			Integer credits = courseMapper.totalCredits(stuCourseDTO.getSno());
 			//学分
-			if(credits == null || credits < 25) {
+			int j = 25;
+			if(credits == null || credits < j) {
 				CourseDTO courseDTO = courseMapper.selectByPrimaryKey(stuCourseDTO.getCno());
 				//选课人数未满
 				if(courseDTO.getCurrentnum()<courseDTO.getMaxnum()) {

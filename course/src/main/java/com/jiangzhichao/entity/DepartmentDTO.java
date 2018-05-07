@@ -1,5 +1,11 @@
 package com.jiangzhichao.entity;
 
+/**
+ * 专业Bean
+ * 
+ * @author BornToWin
+ *
+ */
 public class DepartmentDTO {
     /**
      *
@@ -99,4 +105,11 @@ public class DepartmentDTO {
     public void setDintroduce(String dintroduce) {
         this.dintroduce = dintroduce == null ? null : dintroduce.trim();
     }
+
+	@Override
+	public String toString() {
+		return "DepartmentDTO [dno=" + dno + ", dname=" + dname + ", dintroduce=" + dintroduce + "]";
+	}
+    
+    
 }

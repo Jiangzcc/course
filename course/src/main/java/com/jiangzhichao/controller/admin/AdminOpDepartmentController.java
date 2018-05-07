@@ -30,7 +30,7 @@ public class AdminOpDepartmentController extends BaseController{
 	@ResponseBody
 	public Map<String,List<DepartmentDTO>> queryAllDepartment(){
 		List<DepartmentDTO> list = adminOpDepartmentService.selectAllDepartment();
-		Map<String,List<DepartmentDTO>> map = new HashMap<String,List<DepartmentDTO>>();
+		Map<String,List<DepartmentDTO>> map = new HashMap<String,List<DepartmentDTO>>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -39,7 +39,7 @@ public class AdminOpDepartmentController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> deleteDepartment(String dno){
 		int i = adminOpDepartmentService.deleteDepartment(dno);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -58,7 +58,7 @@ public class AdminOpDepartmentController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> editDepartment(DepartmentDTO departmentDTO){
 		int i = adminOpDepartmentService.updateDepartment(departmentDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -71,7 +71,7 @@ public class AdminOpDepartmentController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> addDepartment(DepartmentDTO departmentDTO) {
 		int i = adminOpDepartmentService.insertDepartment(departmentDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;

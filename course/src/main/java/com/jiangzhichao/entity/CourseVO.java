@@ -1,5 +1,11 @@
 package com.jiangzhichao.entity;
 
+/**
+ * 课程VO
+ * 
+ * @author BornToWin
+ *
+ */
 public class CourseVO {
 
 	private String cno;

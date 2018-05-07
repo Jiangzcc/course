@@ -35,7 +35,7 @@ public class AdminOpStatusController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> updateStatus(Status status){
 		int i = adminOpStatusService.update(status);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;

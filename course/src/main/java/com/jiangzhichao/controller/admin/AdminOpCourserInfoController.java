@@ -43,7 +43,7 @@ public class AdminOpCourserInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,List<CourseDTO>> queryAllCourse(){
 		List<CourseDTO> list = adminOpCourseInfoService.selectAllCourse();
-		Map<String,List<CourseDTO>> map = new HashMap<String,List<CourseDTO>>();
+		Map<String,List<CourseDTO>> map = new HashMap<String,List<CourseDTO>>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -52,7 +52,7 @@ public class AdminOpCourserInfoController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> deleteCourse(String cno){
 		int i = adminOpCourseInfoService.deleteCourse(cno);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -71,11 +71,11 @@ public class AdminOpCourserInfoController extends BaseController {
 	@RequestMapping("editCourse")
 	@ResponseBody
 	public Map<String,Object> editCourse(CourseDTO courseDTO){
-		if(courseDTO.getDno().equals("")) {
+		if("".equals(courseDTO.getDno())) {
 			courseDTO.setDno(null);
 		}
 		int i = adminOpCourseInfoService.updateCourse(courseDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -93,7 +93,7 @@ public class AdminOpCourserInfoController extends BaseController {
 		courseDTO.setCterm(cterm);
 		courseDTO.setCurrentnum(0);
 		int i = adminOpCourseInfoService.insertCourse(courseDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -132,7 +132,7 @@ public class AdminOpCourserInfoController extends BaseController {
 		List<CourseDTO> courseList = FileUtil.importExcel(file, 1, 1, CourseDTO.class);
 		//导入教师信息到DB
 		adminOpCourseInfoService.importCourse(courseList);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		map.put("result", true);
 		return map;
 	}

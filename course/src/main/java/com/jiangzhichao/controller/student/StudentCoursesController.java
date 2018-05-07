@@ -42,7 +42,7 @@ public class StudentCoursesController extends BaseController {
 	public Map<String,List<CourseVO>> queryAllCourses(HttpSession session){
 		StudentDTO student = (StudentDTO) session.getAttribute("student");
 		List<CourseVO> list = studentCoursesService.queryAllCourseByDnoAndTerm(student.getDno(), term);
-		Map<String,List<CourseVO>> map = new HashMap<>();
+		Map<String,List<CourseVO>> map = new HashMap<>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -52,7 +52,7 @@ public class StudentCoursesController extends BaseController {
 	public Map<String,List<CourseVO>> queryOptions(HttpSession session){
 		StudentDTO student = (StudentDTO) session.getAttribute("student");
 		List<CourseVO> list = studentCoursesService.queryOptionsBySno(student);
-		Map<String,List<CourseVO>> map = new HashMap<>();
+		Map<String,List<CourseVO>> map = new HashMap<>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -62,7 +62,7 @@ public class StudentCoursesController extends BaseController {
 	public Map<String,List<CourseVO>> selectedCourses(HttpSession session){
 		StudentDTO student = (StudentDTO) session.getAttribute("student");
 		List<CourseVO> list = studentCoursesService.querySelectedBySno(student.getSno());
-		Map<String,List<CourseVO>> map = new HashMap<>();
+		Map<String,List<CourseVO>> map = new HashMap<>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -72,7 +72,7 @@ public class StudentCoursesController extends BaseController {
 	public Map<String,List<CourseVO>> selectedOldCourses(HttpSession session){
 		StudentDTO student = (StudentDTO) session.getAttribute("student");
 		List<CourseVO> list = studentCoursesService.querySelectedOldBySno(student.getSno());
-		Map<String,List<CourseVO>> map = new HashMap<>();
+		Map<String,List<CourseVO>> map = new HashMap<>(2);
 		map.put("data", list);
 		return map;
 	}
@@ -83,7 +83,7 @@ public class StudentCoursesController extends BaseController {
 		StudentDTO student = (StudentDTO) session.getAttribute("student");
 		stuCourseDTO.setSno(student.getSno());
 		int i = studentCoursesService.takeCourse(stuCourseDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;
@@ -98,7 +98,7 @@ public class StudentCoursesController extends BaseController {
 		StudentDTO student = (StudentDTO) session.getAttribute("student");
 		stuCourseDTO.setSno(student.getSno());
 		int i = studentCoursesService.dropCourse(stuCourseDTO);
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>(2);
 		if(i==0) {
 			map.put("result", false);
 			return map;

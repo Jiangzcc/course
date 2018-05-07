@@ -10,8 +10,14 @@ import com.jiangzhichao.dao.CourseMapper;
 import com.jiangzhichao.entity.CourseVO;
 import com.jiangzhichao.service.teacher.TeacherCoursesService;
 
+/**
+ * 教师教授课程Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class TeacherCoursesServiceImpl implements TeacherCoursesService {
 
 	@Autowired

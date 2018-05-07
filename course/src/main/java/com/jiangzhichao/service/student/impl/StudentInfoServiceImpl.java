@@ -10,8 +10,14 @@ import com.jiangzhichao.entity.DepartmentDTO;
 import com.jiangzhichao.entity.StudentDTO;
 import com.jiangzhichao.service.student.StudentInfoService;
 
+/**
+ * 学生信息Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class StudentInfoServiceImpl implements StudentInfoService {
 
 	@Autowired

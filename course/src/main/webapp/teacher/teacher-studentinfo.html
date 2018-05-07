@@ -210,7 +210,7 @@
 				}); 
 				console.log(data);
 				$.post("/course/teacher/bulkEditing", {
-					sno_score: data,
+					snoScore: data,
 					cno: cno
 				}, function(data) {
 					var result = eval("(" + data + ")");

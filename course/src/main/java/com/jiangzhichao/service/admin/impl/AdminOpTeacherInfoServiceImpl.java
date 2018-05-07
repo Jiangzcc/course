@@ -10,12 +10,18 @@ import com.jiangzhichao.dao.CourseMapper;
 import com.jiangzhichao.dao.SubjectRoleMapper;
 import com.jiangzhichao.dao.TeacherMapper;
 import com.jiangzhichao.entity.CourseDTO;
-import com.jiangzhichao.entity.SubjectRoleDTOKey;
+import com.jiangzhichao.entity.SubjectRoleDTO;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
 
+/**
+ * 管理员CRUD教师信息
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService {
 
 	@Autowired
@@ -31,10 +37,10 @@ public class AdminOpTeacherInfoServiceImpl implements AdminOpTeacherInfoService 
 	public int insertTeacher(TeacherDTO teacherDTO) {
 		int i = teacherDoMapper.insert(teacherDTO);
 		//设置角色
-		SubjectRoleDTOKey subjectRoleDTOKey = new SubjectRoleDTOKey();
-		subjectRoleDTOKey.setNo(teacherDTO.getTno());
-		subjectRoleDTOKey.setRoleno("2");
-		subjectRoleMapper.insert(subjectRoleDTOKey);
+		SubjectRoleDTO subjectRoleDTO = new SubjectRoleDTO();
+		subjectRoleDTO.setNo(teacherDTO.getTno());
+		subjectRoleDTO.setRoleno("2");
+		subjectRoleMapper.insert(subjectRoleDTO);
 		return i;
 	}
 

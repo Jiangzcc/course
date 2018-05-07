@@ -7,7 +7,18 @@ package com.jiangzhichao.enums;
  *
  */
 public enum LoginType {
-	STUDENT("Student"),  ADMIN("Admin"), TEACHER("Teacher");
+	/**
+	 * 学生
+	 */
+	STUDENT("Student"),
+	/**
+	 * 管理员
+	 */
+	ADMIN("Admin"),
+	/**
+	 * 教师
+	 */
+	TEACHER("Teacher");
 
 	private String type;
 

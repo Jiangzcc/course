@@ -19,8 +19,15 @@ import com.jiangzhichao.entity.StudentVO;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.teacher.TeacherStudentsService;
 
+
+/**
+ * 教师所授学生信息Service
+ * 
+ * @author BornToWin
+ *
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class TeacherStudentsServiceImpl implements TeacherStudentsService {
 
 	@Autowired
@@ -71,7 +78,7 @@ public class TeacherStudentsServiceImpl implements TeacherStudentsService {
 	}
 
 	@Override
-	public void bulkEditing(String sno_score, String cno, HttpSession session) {
+	public void bulkEditing(String snoScore, String cno, HttpSession session) {
 		TeacherDTO teacher = (TeacherDTO) session.getAttribute("teacher");
 		CourseDTO courseDTO = courseMapper.selectByPrimaryKey(cno);
 		// 自己只能修改自己所授课程中的学生成绩
@@ -82,7 +89,7 @@ public class TeacherStudentsServiceImpl implements TeacherStudentsService {
 			if(status.getEntry()) {
 				StuCourseDTO stuCourseDTO = new StuCourseDTO();
 				stuCourseDTO.setCno(cno);
-				String[] scs = sno_score.split("&");
+				String[] scs = snoScore.split("&");
 				for (String sc : scs) {
 					String[] split = sc.split("_");
 					if(split.length == 2) {

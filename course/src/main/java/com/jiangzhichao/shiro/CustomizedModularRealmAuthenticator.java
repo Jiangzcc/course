@@ -11,6 +11,9 @@ import org.apache.shiro.realm.Realm;
 
 /**
  * 自定义Authenticator
+ * 
+ * @author BornToWin
+ *
  */
 public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticator {
 
@@ -32,15 +35,18 @@ public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticat
         	 * 注意，当需要分别定义处理普通用户和管理员验证的Realm时，对应Realm的全类名应该包含字符串“User”，或者“Admin”。
         	 * 并且，他们不能相互包含，例如，处理普通用户验证的Realm的全类名中不应该包含字符串"Admin"。
         	 */
-            if (realm.getName().contains(loginType))
+            if (realm.getName().contains(loginType)) {
                 typeRealms.add(realm);
+            }
         }
 
         // 判断是单Realm还是多Realm
-        if (typeRealms.size() == 1)
+        if (typeRealms.size() == 1) {
             return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);
-        else
+        }
+        else {
             return doMultiRealmAuthentication(typeRealms, customizedToken);
+        }
     }
 
 }
