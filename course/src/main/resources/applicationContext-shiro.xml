@@ -51,7 +51,7 @@
 		<!-- 构建securityManager环境 -->
 		<property name="securityManager" ref="securityManager" />
 		<!-- 要求登录时的链接(可根据项目的URL进行替换),非必须的属性,默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
-		<property name="loginUrl" value="/login/admin/index.html" />
+		<property name="loginUrl" value="/index.html" />
 		<!-- 登录成功后要跳转的连接 -->
 		<!-- <property name="successUrl" value="/index.html" /> -->
 		<!-- 没有权限返回的地址 （拒绝访问路径） -->

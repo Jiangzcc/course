@@ -30,49 +30,49 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
- 		<table tableName="admin" domainObjectName="AdminDO"
+ 		<table tableName="admin" domainObjectName="AdminDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
 
-		<table tableName="teacher" domainObjectName="TeacherDO"
+		<table tableName="teacher" domainObjectName="TeacherDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table> 
 		
-		<table tableName="course" domainObjectName="CourseDO"
+		<table tableName="course" domainObjectName="CourseDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
 		
-		<table tableName="student" domainObjectName="StudentDO"
+		<table tableName="student" domainObjectName="StudentDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
 		
-		<table tableName="department" domainObjectName="DepartmentDO"
+		<table tableName="department" domainObjectName="DepartmentDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
 		
-		<table tableName="stucourse" domainObjectName="StuCourseDO"
+		<table tableName="stucourse" domainObjectName="StuCourseDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
 		
-		<table tableName="role" domainObjectName="RoleDO"
+		<table tableName="role" domainObjectName="RoleDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
 		
-		<table tableName="subjectrole" domainObjectName="SubjectRoleDO"
+		<table tableName="subjectrole" domainObjectName="SubjectRoleDTO"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
