@@ -2,6 +2,7 @@ package com.jiangzhichao.service.admin;
 
 import java.util.List;
 
+import com.jiangzhichao.entity.CourseDTO;
 import com.jiangzhichao.entity.TeacherDTO;
 
 /**
@@ -51,5 +52,12 @@ public interface AdminOpTeacherInfoService {
 	 * @param teachers
 	 */
 	void importTeacher(List<TeacherDTO> teachers);
+	
+	/**
+	 * 通过教师工号查询所有课程
+	 * @param tno
+	 * @return
+	 */
+	List<CourseDTO> coursesByTno(String tno);
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jiangzhichao.controller.base.BaseController;
+import com.jiangzhichao.entity.CourseDTO;
 import com.jiangzhichao.entity.TeacherDTO;
 import com.jiangzhichao.service.admin.AdminOpTeacherInfoService;
 import com.jiangzhichao.util.FileUtil;
@@ -170,6 +171,15 @@ public class AdminOpTeacherInfoController extends BaseController {
 			if(null != is)  is.close();
 			if(null != os)  os.close();
 		}*/
+	}
+	
+	@RequestMapping("coursesByTeacher")
+	@ResponseBody
+	public Map<String,List<CourseDTO>> coursesByTeacher(String tno){
+		List<CourseDTO> list = adminOpTeacherInfoService.coursesByTno(tno);
+		Map<String,List<CourseDTO>> map = new HashMap<String,List<CourseDTO>>(2);
+		map.put("data", list);
+		return map;
 	}
 
 }

@@ -273,13 +273,17 @@
 								}, ],
 								"columnDefs": [{
 									"targets": 4,
-									"render": function(data,
-										type, row, meta) {
+									"render": function(data, type, row, meta) {
 										return '<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="editTeacher(' +
 											data +
 											');"><i class="fa fa-edit "></i> Edit</button> <button class="btn btn-danger" onclick="deleteTeacher(' +
 											data +
 											');"><i class="fa fa-pencil"></i> Delete</button>';
+									}
+								},{
+									"targets": 1,
+									"render": function(data, type, row, meta) {
+										return '<a href="/course/admin/admin-coursesbyteacher.html?tno='+row.tno+'" class="btn btn-default">'+data+'</a>';
 									}
 								}]
 							});
